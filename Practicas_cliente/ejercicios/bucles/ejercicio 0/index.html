@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const user=prompt("Usuario:");
+        if (user==null || user=="") {
+            console.log("Cancelado");
+        }
+        else if(user!=="Admin"){
+            console.log("No te conozco");
+        }
+        else{
+            let contraseña=prompt("Escribe contraseña");
+            while (contraseña!=="TheMaster" ||contraseña!=null) {
+                contraseña=prompt("Escribe contraseña");
+            }
+            console.log("Contraseña Valida");
+        }
+        /*
+        let usuario="Admin";
+        let contra="TheMaster";
+        let user;
+        let password;
+        */
+        /*
+        do {
+            user=prompt("Introduce tu usuario");
+            if (user==usuario) {
+                password=prompt("Introduce la contraseña");
+                if (contra==password) {
+                    console.log("Bienvenido....");
+                    break;
+                }
+                else{
+                    if (password=="") {
+                        console.log("Cancelado");
+                    }
+                    console.log("Contraseña Incorrecta");
+                }
+            } else {
+                console.log("No te conozco");
+            }
+        } while (contra=!password);
+         */
+    </script>
+</body>
+</html>
