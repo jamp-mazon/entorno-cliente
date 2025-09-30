@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +7,7 @@
 </head>
 <body>
     <script>
+        //ejercicio 1 con while
         const user=prompt("Usuario:");
         if (user==null || user=="") {
             console.log("Cancelado");
@@ -16,7 +17,7 @@
         }
         else{
             let contraseña=prompt("Escribe contraseña");
-            while (contraseña!=="TheMaster" ||contraseña!=null) {
+            while (contraseña!=="TheMaster" && contraseña!=null) {
                 contraseña=prompt("Escribe contraseña");
             }
             console.log("Contraseña Valida");

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +7,7 @@
 </head>
 <body>
     <script>
+        //Ejercicio 2 con 3 intentos.
         const user=prompt("Usuario:");
         if (user==null || user=="") {
             console.log("Cancelado");
@@ -16,10 +17,16 @@
         }
         else{
             let contraseña=prompt("Escribe contraseña");
-            while (contraseña!=="TheMaster" ||contraseña!=null) {
-                contraseña=prompt("Escribe contraseña");
+            let intentos=3;
+            while (contraseña!=="TheMaster" && contraseña!=null && intentos>1) {
+                intentos--;
+                contraseña=prompt("Escribe contraseña, te quedan "+intentos+" intentos");
             }
-            console.log("Contraseña Valida");
+            if (contraseña==="TheMaster") {
+                console.log("Bienvenido");
+            } else {
+                console.log("Demasiados intentos. Acceso bloqueado");
+            }
         }
     </script>
 </body>

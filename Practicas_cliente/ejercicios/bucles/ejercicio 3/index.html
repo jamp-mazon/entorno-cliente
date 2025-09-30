@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>   
+        //Ejercicio 3 con contraseñas multiples
+        const user=prompt("Usuario:");
+        if (user===null|| user==="") {
+            console.log("CANCELADO");
+        }
+        else if(user!=="Admin"){
+            console.log("No te conozco");
+        }
+        else{
+            let password;
+            do {
+                password=prompt("Contraseña");
+            } while (password!="TheMaster" && password!="Admin123" && password!="Invitado" && password!=null);
+            if (password===null) {
+                console.log("Cancelado");
+            } else {
+                console.log("Bienvenido!!");
+            }
+        }
+    </script>
+</body>
+</html>
