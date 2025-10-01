@@ -8,7 +8,7 @@
 <body>
     <script>
         usuarios=["Admin","Profesor","Alumno"];
-
+        intentos=0;
         do {
             user=prompt("Usuario:");
             if (usuarios.includes(user)) {
@@ -18,16 +18,15 @@
                         console.log("Bienvenido!!");
                         break;
                     } else {
-                        console.log("Contraseña incorrecta");
+                        intentos++;
+                        console.log(`Intento ${intentos}:${pass}`);
                     }
                 } while (pass!=="TheMaster");
-            } else {
+            } 
+            else {
                 console.log("Usuario Incorrecto");
             }
         } while (!usuarios.includes(user));
-        
-
-
     </script>
 </body>
 </html>

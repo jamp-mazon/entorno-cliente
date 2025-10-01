@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        usuarios=["Admin","Profesor","Alumno"];
+        password="TheMaster";
+        intentos=3;
+        usuarioLogeado=false;
+        do {
+            opcion=Number(prompt("1.Inicio Sesion\n 2.Cambiar Contraseña\n 3.Salir"));
+            switch (opcion) {
+                case 1://Pide el usuario si es correcto pide la contraseña y si es correcto te da la bienvenido y pone el booleano a true.
+                    do {
+                        user=prompt("Usuario:");
+                        if (usuarios.includes(user)) {
+                            do {
+                                pass=prompt("Contraseña:");
+                                if (pass===password) {
+                                    usuarioLogeado=true;
+                                    console.log("Bienvenido!!");
+                                } else {//si fallas 3
+                                    intentos--;
+                                    if (intentos==0) {
+
+                                        break;//porque no entra dentro de este break????
+                                    }
+                                    console.log(`Contraseña Incorrecta. Quedan ${intentos} intentos.`);
+
+                                }
+                            } while (pass!==password && intentos>0);
+                        } else {
+                            console.log("Usuario Incorrecto");
+                        }
+                    } while (!usuarios.includes(user));
+                    break;
+                case 2:
+                    if (usuarioLogeado) {
+                        pass=prompt("Escribe la contraseña actual:");
+                        if (pass===password) {
+                            password=prompt("Escribe la nueva contraseña:");
+                        }
+                        else{
+                            console.log("Contraseña incorrecta, intentelo mas tarde...");
+                            break;
+                        }
+                    }
+                    else{
+                        console.log("Tienes que loguearte para cambiar la contraseña");
+                    }
+                    break;
+                case 3:
+                    console.log("Saliendo...");
+                    break;
+                default:
+                    console.log("Opcion Incorrecta");
+                    break;
+            }
+        } while (opcion!=3 && intentos!==0);
+        if (intentos===0) {
+            console.log("Demasiados intentos fallidos....");
+        }
+    </script>
+</body>
+</html>
