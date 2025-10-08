@@ -186,18 +186,19 @@ function ej6() {
 function ej7() {
     let ingresos="";
     let acumulador=0;
+    
     while (ingresos!="fin") {
        ingresos=prompt("Ingresos[FIN]:");
        if (ingresos==="fin") {
         break;
        } 
        if (ingresos!=="fin") {
-        Number(ingresos)+acumulador=acumulador;
+       let dinero=Number(ingresos);
+        acumulador=dinero+acumulador;
         console.log(acumulador);
        }
-       if (ingresos>=100) {
+       if (acumulador>=100) {
         break;
        }
     }
-
 }
