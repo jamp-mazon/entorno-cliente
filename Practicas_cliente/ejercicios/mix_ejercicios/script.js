@@ -202,3 +202,147 @@ function ej7() {
        }
     }
 }
+function ej8() {
+    let pin=1234;
+    let contador=3;
+    while (contador!=0) {
+        let pin_user=Number(prompt("Escribe tu pin"));
+        if (pin_user===pin) {
+            console.log("Pin correcto...Bienvenido");
+            break;
+        }
+        if (pin_user!==pin) {
+            contador--;
+            if (contador===0) {
+                console.log("Tarjeta bloqueado");
+                break;
+            }
+            console.log(`Pin incorrecto quedan:${contador} intentos`);
+        }
+
+    }
+}
+function ej9() {
+    let respuesta=""
+    while (respuesta!=="si") {
+        respuesta=prompt("Te gusta programar?").toLocaleLowerCase();
+        if (respuesta==="si") {
+            console.log("Gracias por responder!")
+            break;
+        }
+        if (respuesta!=="si") {
+            console.log("Respuesta invalida");
+        }
+    }
+}
+function ej10() {
+    let precioUnitario=Number(prompt("Precio Unitario:"));
+    for (let i = 1; i < 11; i++) {
+        console.log(`Cantidad ${i}-->Total:${precioUnitario*i} €`);
+    }
+}
+function ej11() {
+    let objetivo=Number(prompt("Objetivo de pasos:"));
+    for (let i = 1; i <=objetivo; i++) {
+            if (i%1000==0) {
+                console.log(i);
+            }
+    }
+}
+function ej12() {
+    const notas=[5,7,8,4,10];
+    let acumulador=notas[0];
+    for (let i = 1; i < notas.length; i++) {
+         acumulador =acumulador+notas[i];
+    }
+    console.log(`La media de las notas es:${acumulador/notas.length}`);
+}
+function ej13() {
+    const precios=[12,25,40,18,9,30]
+    let existe=false;
+    for (let i = 0; i < precios.length; i++) {
+        if(precios[i]<=15){
+            console.log(`El precio es:${precios[i]}`);
+            existe=true;
+            break;
+        }
+    }
+    if (!existe) {
+        console.log("No existen precios mas bajos");
+    }
+}
+function ej14() {
+    let mensaje="";
+    let contador=0;
+    for (let i = 0; i < 5; i++) {
+        let mensaje=prompt("Escribe una cadena");
+        if (mensaje!=="") {
+            console.log(mensaje);
+        }
+        if (mensaje==="") {
+            contador++;
+            continue;
+        }
+    }
+    console.log(`Veces cadena vacia:${contador}`);
+}
+function ej15() {
+    const supermercado=["aceite","leche","sal","beer","ambientador"];
+    for (let i = 0; i < supermercado.length; i++) {
+        const element = supermercado[i];
+        console.log(`Linea:${i+1}-->${element}`);
+    }
+}
+function ej16() {
+    let acumulador=0;
+    const precios=[10,20,15,30,25];
+    for (let i = 0; i < precios.length; i++) {
+        acumulador =acumulador+precios[i];
+    }
+    console.log(`El total es ${acumulador}`);
+}
+function ej17() {
+    const productos=["pan","leche","huevos","arroz","manzanas"];
+    let producto=prompt("Escribe el producto a buscar:");
+    if (productos.includes(producto)) {
+        console.log("Existe ese producto");
+    }
+    else{
+        console.log("Ese producto no esta en la lista");
+    }
+}
+function ej18() {
+    const stock=[12,3,7,0,9,5];
+    for (let i = 0; i < stock.length; i++) {
+        if (stock[i]<5) {
+            console.log(`Poco stock ${stock[i]}`);
+        };
+        
+    }
+}
+function ej19() {
+    let tareas=[];
+    let tarea_user=""
+    while (tarea_user!=="fin") {
+        if(tarea_user!=="fin"){
+            tarea_user=prompt("Escribe una tarea:[FIN PARA SALIR]").toLocaleLowerCase();
+            tareas.push(tarea_user);
+        }
+    }
+    console.log(tareas);
+}
+function ej20() {
+    const notas=[3,7,9,4,5,10,6];
+    let aprobados=0;
+    let suspensos=0;
+    for (let i = 0; i < notas.length; i++) {
+        if (notas[i]>4) {
+            aprobados++;
+        }
+        if (notas[i]<5) {
+            suspensos++;
+        }
+    }
+    console.log(`Aprobados:${aprobados}`);
+    console.log(`Suspensos:${suspensos}`);
+}
