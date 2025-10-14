@@ -1,6 +1,6 @@
 function cambiarTexto() {
     
-    document.getElementById("titulo").innerHTML=("HolaQueTal");
+    document.getElementById("titulo").textContent=("HolaQueTal");
 }
 function cambiarColor() {
     document.getElementById("parrafo").style.color="red";
