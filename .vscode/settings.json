@@ -1,5 +1,5 @@
 {
-    "javascript.suggest.enabled": false,
-    "typescript.suggest.enabled": false,
-    "tailwindCSS.suggestions": false
+    "javascript.suggest.enabled": true,
+    "typescript.suggest.enabled": true,
+    "tailwindCSS.suggestions": true
 }
