@@ -1,0 +1,19 @@
+body{
+    background-color: grey;
+
+}
+/* ejercicio 1 */
+.borde_recuadro{
+    width: 100px;
+    height: 100px;
+    background-color: rgb(73, 94, 73);
+    margin-bottom: 20px;
+    
+}
+.div_colores{
+    margin-top: 20px;
+    width: 100px;
+    height: 100px;
+    background-color: yellow;
+    margin-bottom: 20px;
+}
