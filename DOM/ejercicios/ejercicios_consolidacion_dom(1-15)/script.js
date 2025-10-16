@@ -65,4 +65,34 @@ bton_azul.addEventListener("click",function () {
     div_colores.textContent="texto azul";
 })
 //Ejercicio 8
+let parrafo_alineado=document.getElementById("parrafo_alineado");
+let bton_izq=document.getElementById("bton_izq");
+let bton_centro=document.getElementById("bton_centro");
+let bton_der=document.getElementById("bton_der");
+
+bton_izq.addEventListener("click",function () {
+    parrafo_alineado.style.textAlign="left";
+})
+bton_centro.addEventListener("click",function () {
+    parrafo_alineado.style.textAlign="center";
+})
+bton_der.addEventListener("click",function () {
+    parrafo_alineado.style.textAlign="right";
+})
+//Ejercicio 9
+let imagen_opaca=document.getElementById("imagen_opaca");
+let rango=document.getElementById("rango");
+
+rango.addEventListener("input",function () {
+    imagen_opaca.style.opacity=`${rango.value/100}`;
+});
+//Ejercicio 10
+let parrafo_clicks=document.getElementById("parrafo_clicks");
+let bton_clicks=document.getElementById("bton_clicks");
+let contador=0;
+document.addEventListener("click",function () {
+    parrafo_clicks.textContent=contador++;
+})
+//Ejercicio 11
+
 
