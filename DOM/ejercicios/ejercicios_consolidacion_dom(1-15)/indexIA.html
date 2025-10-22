@@ -1,0 +1,198 @@
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prácticas JS</title>
+  <style>
+    :root{
+      --bg:#0f172a;        /* fondo oscuro bonito */
+      --card:#111827;      /* tarjeta */
+      --muted:#94a3b8;     /* texto secundario */
+      --text:#e5e7eb;      /* texto principal */
+      --accent:#60a5fa;    /* azulito */
+      --accent-2:#22c55e;  /* verde */
+      --accent-3:#f59e0b;  /* naranja */
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:system-ui,Segoe UI,Roboto,Ubuntu,Arial,sans-serif;
+      background: radial-gradient(1200px 600px at 10% -10%, #1e293b 0%, var(--bg) 60%);
+      color:var(--text);
+    }
+    header{
+      padding:28px 20px 8px; text-align:center;
+    }
+    .title{ font-size: clamp(20px,3vw,28px); margin:0 0 4px }
+    .subtitle{ color:var(--muted); margin:0 }
+    .app{
+      max-width:1100px; margin:22px auto; padding:0 16px 40px;
+      display:grid; gap:16px;
+      grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+    }
+    .card{
+      background:linear-gradient(0deg, rgba(255,255,255,0.03), rgba(255,255,255,0.03)) , var(--card);
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:16px; padding:16px; box-shadow: 0 8px 24px rgba(0,0,0,.25);
+    }
+    .card h3{
+      margin:0 0 10px; font-size:16px; font-weight:600; color:#fff;
+      letter-spacing:.2px;
+    }
+    .row{ display:flex; flex-wrap:wrap; gap:10px; align-items:center }
+    textarea, input[type="text"], input[type="range"]{
+      width:100%; background:#0b1220; color:var(--text);
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:10px; padding:10px 12px; outline:none;
+    }
+    textarea{ min-height:90px; resize:vertical }
+    pre{
+      background:#0b1220; border:1px dashed rgba(255,255,255,.12);
+      border-radius:12px; padding:10px; min-height:60px; color:#cbd5e1; overflow:auto
+    }
+    img{ border-radius:12px; display:block }
+    .btn{
+      appearance:none; border:none; cursor:pointer; user-select:none;
+      padding:10px 14px; border-radius:12px; font-weight:600;
+      background:#0b1220; color:var(--text); border:1px solid rgba(255,255,255,.12);
+      transition: transform .06s ease, border-color .2s ease, box-shadow .2s ease;
+    }
+    .btn:hover{ border-color:rgba(255,255,255,.22); box-shadow:0 6px 16px rgba(0,0,0,.25) }
+    .btn:active{ transform: translateY(1px) }
+    .btn.primary{ background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)), var(--accent); color:#0b1220; border:none }
+    .btn.green{ background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)), var(--accent-2); color:#052e13; border:none }
+    .btn.orange{ background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)), var(--accent-3); color:#3a2401; border:none }
+    .divider{ border-top:1px dashed rgba(255,255,255,.08); margin:8px 0 0 }
+    /* utilidades pequeñas */
+    .center{ text-align:center }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1 class="title">Prácticas de DOM / Eventos</h1>
+    <p class="subtitle">Mismo HTML, ahora con estilo. Todo listo para tu JS 🙌</p>
+  </header>
+
+  <main class="app">
+
+    <!-- E1 -->
+    <section class="card">
+      <h3>1) Poner borde al recuadro</h3>
+      <div id="borde_recuadro" class="borde_recuadro" style="border: 2px solid white; height:110px; border-radius:12px"></div>
+      <div class="row" style="margin-top:10px">
+        <button id="boton_borde" class="btn primary">Poner borde</button>
+      </div>
+    </section>
+
+    <!-- E2 -->
+    <section class="card">
+      <h3>2) Crear &lt;pre&gt; con el contenido del textarea</h3>
+      <textarea name="area_texto" id="area_texto" placeholder="Escribe aquí..."></textarea>
+      <div class="row" style="margin-top:10px">
+        <button id="btn_text_area" class="btn">Crear Pre</button>
+      </div>
+      <pre id="pre_funciona"></pre>
+    </section>
+
+    <!-- E3 -->
+    <section class="card">
+      <h3>3) Contar letras mientras escribes</h3>
+      <label for="input" style="color:var(--muted)">Escribe para contar las letras</label>
+      <input type="text" id="input" placeholder="Empieza a teclear..." />
+      <p id="parrafo_escrito" class="divider"></p>
+    </section>
+
+    <!-- E4 -->
+    <section class="card center">
+      <h3>4) Cambiar tamaño de imagen</h3>
+      <img src="diablo.png" width="150" id="imagen" alt="imagen ejercicio 4">
+      <div class="row center" style="justify-content:center; margin-top:10px">
+        <button id="aumentar" class="btn green">Aumentar</button>
+        <button id="disminuir" class="btn orange">Disminuir</button>
+      </div>
+    </section>
+
+    <!-- E5 -->
+    <section class="card">
+      <h3>5) Generar H2 dinámicamente</h3>
+      <button id="bton_generar" class="btn primary">Generar H2</button>
+    </section>
+
+    <!-- E6 -->
+    <section class="card">
+      <h3>6) Borrar párrafos</h3>
+      <p class="parrafo">PARRAFO 1</p>
+      <p class="parrafo">PARRAFO 2</p>
+      <p class="parrafo">PARRAFO 3</p>
+      <button id="bton_borrar" class="btn" style="margin-top:6px">Borrar</button>
+    </section>
+
+    <!-- E7 -->
+    <section class="card">
+      <h3>7) Cambiar color de fondo</h3>
+      <div id="div_colores" class="div_colores" style="height:90px; border-radius:10px; background:#0b1220; border:1px dashed rgba(255,255,255,.12)"></div>
+      <div class="row" style="margin-top:10px">
+        <button id="bton_rojo" class="btn orange">Rojo</button>
+        <button id="bton_verde" class="btn green">Verde</button>
+        <button id="bton_azul" class="btn primary">Azul</button>
+      </div>
+    </section>
+
+    <!-- E8 -->
+    <section class="card">
+      <h3>8) Alinear texto</h3>
+      <p id="parrafo_alineado" style="background:#0b1220; padding:10px; border-radius:10px">Texto alineado</p>
+      <div class="row" style="margin-top:10px">
+        <button id="bton_izq" class="btn">Izquierda</button>
+        <button id="bton_centro" class="btn">Centro</button>
+        <button id="bton_der" class="btn">Derecha</button>
+      </div>
+    </section>
+
+    <!-- E9 -->
+    <section class="card center">
+      <h3>9) Opacidad con rango</h3>
+      <img src="diablo.png" id="imagen_opaca" width="120" alt="imagen ejercicio 9">
+      <input type="range" id="rango" min="0" max="100" value="100" style="margin-top:10px">
+    </section>
+
+    <!-- E10 -->
+    <section class="card">
+      <h3>10) Contador de clicks</h3>
+      <p id="parrafo_clicks" style="min-height:24px"></p>
+    </section>
+
+    <!-- E11 -->
+    <section class="card">
+      <h3>11) Hover: ratón encima</h3>
+      <p id="parrafo_encima" style="background:#0b1220; padding:12px; border-radius:10px; text-align:center">Pasa el ratón aquí</p>
+    </section>
+
+    <!-- E12 -->
+    <section class="card">
+      <h3>12) Crear listas</h3>
+      <ul id="ul_lista" style="padding-left:18px; min-height:32px"></ul>
+      <button id="boton_listas" class="btn" style="margin-top:6px">Crear Listas</button>
+    </section>
+
+    <!-- E13 -->
+    <section class="card center">
+      <h3>13) Alternar visibilidad</h3>
+      <img src="diablo.png" width="120" id="imagen_oculta" alt="imagen ejercicio 13">
+      <button id="boton_alternar" class="btn" style="margin-top:10px">Alternar visibilidad</button>
+    </section>
+
+    <!-- E14 -->
+    <section class="card center">
+      <h3>14) Cambiar texto al hacer click</h3>
+      <button id="boton_cambiante" class="btn primary">Haz click aquí</button>
+    </section>
+
+    <!-- E15 -->
+    <section class="card">
+      <h3>15) Coordenadas del ratón</h3>
+      <p id="coordenadas" style="min-height:24px"></p>
+    </section>
+
+  </main>
+</body>
+<script src="script.js"></script>

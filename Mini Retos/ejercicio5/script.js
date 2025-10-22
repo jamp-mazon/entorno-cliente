@@ -1,7 +1,7 @@
 let cpu=document.getElementById("cpu");
 let placa=document.getElementById("placa");
-let btnComprobar=getElementById("btnComprobar");
-let resultado=getElementById("resultado");
+let btnComprobar=document.getElementById("btnComprobar");
+let resultado=document.getElementById("resultado");
 
 btnComprobar.addEventListener("click",function () {
     let seleccionCPU=cpu.value;

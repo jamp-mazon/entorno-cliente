@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body style="display: flex; flex-direction: column; text-align: center; background-color: darkgray;">
+    <h1>PULSA F12 PARA VER LOS RESULTADOS DE LOS BOTONES</h1>
+    <div style="display: flex; flex-direction: column; max-width: 100%; align-items: center; gap: 10px;">
+    <button style="width: 100px; height: 50px; border-radius: 8px;background-color: rgb(26, 109, 187); color: antiquewhite; font-size: large; font-style: italic; cursor: pointer;" 
+    onclick="ej1()">Ejercicio 1</button>
+    <button style="width: 100px; height: 50px; border-radius: 8px;background-color: rgb(26, 109, 187); color: antiquewhite; font-size: large; font-style: italic; cursor: pointer;" 
+    onclick="ej2()">Ejercicio 2</button>
+    <button style="width: 100px; height: 50px; border-radius: 8px;background-color: rgb(26, 109, 187); color: antiquewhite; font-size: large; font-style: italic; cursor: pointer;" 
+    onclick="ej3()">Ejercicio 3</button>  
+    <button style="width: 100px; height: 50px; border-radius: 8px;background-color: rgb(26, 109, 187); color: antiquewhite; font-size: large; font-style: italic; cursor: pointer;" 
+    onclick="ej4()">Ejercicio 4</button>  
+
+    </div>
+</body>
+<script>
+    //Ejercicio 1
+    function ej1() {
+        const lista_usuarios=[
+            {nombre:"Manolo",nota:8},
+            {nombre:"Federico",nota:5},
+            {nombre:"Alberto",nota:9},
+            {nombre:"Eustaquio",nota:5}
+        
+        ];
+        let total_notas=0;
+        for (const usuario of lista_usuarios) {
+            let nombre=usuario.nombre;
+            let nota=usuario.nota;
+            total_notas+=nota;
+            if (nota>=7) {
+                console.log(`El alumno ${nombre} ha obtenido un:${nota}`);
+            }
+        }
+        let media=total_notas/lista_usuarios.length;
+        console.log(`La media de la clase ha sido un:${media.toFixed(2)}`);
+    }
+    function ej2() {
+        const almacen=[
+            {nombre:"Leche",precio:1,stock:10},
+            {nombre:"Huevos",precio:15,stock:0},
+            {nombre:"Cebollas",precio:1,stock:100},
+            {nombre:"Naranjas",precio:2,stock:9},
+
+        ]
+         let total_unProducto=0;
+         let total_precio=0;
+        for (const producto of almacen) {
+            total_unProducto=producto.precio*producto.stock;
+            total_precio+=total_unProducto;
+            if (producto.stock>0) {
+                console.log(`${producto.nombre} hay una cantidad de ${producto.stock}`);
+            }
+        }
+        console.log(`El valor de todos los productos del almacen es:${total_precio}€`);
+    }
+    function ej3() {
+        const agenda={
+           
+            "Pepe": "600123123",
+            "Ana": "678987987",
+            "Manolo":"627159245",
+            "Eustaquio": "644100200",
+            
+            mostrarContactos(agenda){
+                
+            }
+        };
+    }
+</script>
+</html>

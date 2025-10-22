@@ -95,4 +95,47 @@ document.addEventListener("click",function () {
 })
 //Ejercicio 11
 
-
+let parrafo_encima=document.getElementById("parrafo_encima");
+let parrafo_original=parrafo_encima.textContent;
+parrafo_encima.addEventListener("mouseover",function () {
+    parrafo_encima.textContent="Estas encima del texto";
+});
+parrafo_encima.addEventListener("mouseout",function () {
+    
+    parrafo_encima.textContent=parrafo_original;
+})
+//Ejercicio 12
+let boton_listas=document.getElementById("boton_listas");
+let ul_lista=document.getElementById("ul_lista");
+let contador_lista =1;
+boton_listas.addEventListener("click",function () {
+    let li=document.createElement("li");
+    li.textContent=contador_lista++;
+    ul_lista.appendChild(li);
+});
+//Ejercicio 13
+let imagen_oculta=document.getElementById("imagen_oculta");
+let boton_alternar=document.getElementById("boton_alternar");
+let oculta=false;
+boton_alternar.addEventListener("click",function () {
+    if (oculta) {
+        imagen_oculta.style.display="block";
+        oculta=false;
+    }
+    else{
+       imagen_oculta.style.display="none";
+        oculta=true; 
+    }
+});
+//Ejercicio 14
+let boton_cambiante=document.getElementById("boton_cambiante");
+boton_cambiante.addEventListener("click",function () {
+    boton_cambiante.textContent="Gracias!!";
+});
+//Ejercicio 15
+let coordenadas=document.getElementById("coordenadas");
+document.addEventListener("mousemove",function (e) {
+    let ejeX=e.clientX;
+    let ejeY=e.clientY;
+    coordenadas.textContent=`X:${ejeX}---Y:${ejeY}`;
+})
