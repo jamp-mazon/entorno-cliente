@@ -69,10 +69,32 @@
             "Manolo":"627159245",
             "Eustaquio": "644100200",
             
-            mostrarContactos(agenda){
-                
+            mostrarContactos(){//Funcion para mostrar contactos!
+                for (let nombre in this) {//Utilizo un for in llamandose a si mismo 
+                    if (typeof this[nombre]==="string") {//compruebo que el atributo del objeto sea un string
+                        console.log(`${nombre} : ${this[nombre]}`);//imprimo el nombre y numero |1º Pepe: 600123123 ...
+                    }
+                }
             }
         };
+        agenda.mostrarContactos();
+    }
+    function ej4() {
+        
+        const biblioteca={
+            libros:[
+                {titulo:"El señor de los anillos",autor:"J.R.R Tolkien"},
+                {titulo:"Harry Potter", autor: "J.K Rowling"},
+                {titulo:"1969",autor:"Jeronimo Tristante"},
+                {titulo:"Musashi",autor:"Eiji Yoshikawa"},                
+            ],   
+            mostrarBiblioteca(){
+                for (let libro of this.libros){
+                    console.log(`${libro.titulo} : ${libro.autor}`);
+                }
+            }
+        };
+        biblioteca.mostrarBiblioteca();
     }
 </script>
 </html>
