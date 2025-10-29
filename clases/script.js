@@ -142,5 +142,85 @@ function ejercicio5() {
 }
 //Ejercicio 6
 function ejercicio6() {
+    class Usuario{
+        constructor(nombre,correo,rol){
+            this.nombre=nombre;
+            this.correo=correo;
+            this.rol=rol;
+        }
+        mostrarRol(){
+            if (this.rol==="admin") {
+                return `Soy ${this.nombre} y tengo permisos de administrador`;
+            }
+            else if(this.rol==="editor"){
+                return `Soy ${this.nombre} y tengo permisos de ediccion , pero no de administrador`;
+            }
+            else if(this.rol==="visitante"){
+                return `Soy ${this.nombre} y solo tengo permisos de lectura, no tengo permisos de ningun tipo`;
+            }
+            else{
+                return `Soy ${this.nombre} y tengo un Rol incorrecto`;
+            }
+        }
+    }
+    const usuario1=new Usuario("Paco","paco@kk.com","admin");
+    const usuario2=new Usuario("Pepe","pepe@kk.com","editor");
+    const usuario3=new Usuario("Eustaquio","eustaquio@kk.com","visitante");
+    const usuario4=new Usuario("Paca","paca@kk.com","miRol");
+    let lista_usuarios=[];
+    lista_usuarios.push(usuario1,usuario2,usuario3,usuario4);
+    for (const user of lista_usuarios) {
+        console.log(user.mostrarRol());
+    }
+}
+//Ejercicio 7
+function ejercicio7(){
+    class Tarea{
+        constructor(nombre,descripcion,estado){
+            this.nombre=nombre;
+            this.descripcion=descripcion;
+            this.estado=estado;
+        }
+        mostrarEstado(){
+            return `Tarea:${this.nombre} esta en estado ${this.estado}`;
+        }
+        completarTarea(){
+            if (this.estado==="pendiente") {
+                this.estado="completada"
+                return `Tarea:${this.nombre} ha pasado a estar ${this.estado}`;
+            }
+        }
+    }
+    class GestorTareas{
+        constructor(lista_tareas){
+            this.lista_tareas=lista_tareas;
+        }
+        nuevaTarea(Tarea){
+            this.lista_tareas.push(Tarea);
+        }
+        listarTareas(){
+            for (let i = 1; i <=this.lista_tareas.length; i++) {
+                const tarea = this.lista_tareas[i-1];
+                 console.log(`${i}.${tarea.mostrarEstado()}`);
+            }
+        }
+        borrarTareas(indice){
+            this.lista_tareas.splice(indice-1);
+        }
+    }
+    const tarea1=new Tarea("Limpiar clase","Limpiar la clase 104","pendiente");
+    const tarea2=new Tarea("Romper Ordenadores","Romper los ordenadores clase 102","completada");
+    const tarea3=new Tarea("Perder Material","Perder los materiales de oficina","pendiente");
+    let lista_tareas=[];
+    lista_tareas.push(tarea1,tarea2,tarea3);
     
+    const miGestor=new GestorTareas(lista_tareas);
+    miGestor.listarTareas();
+    console.log("-----------AÑADO TAREA----------------------");
+    const tarea4=new Tarea("Nueva Tarea","Nueva tarea desde mi gestor","pendiente");
+    miGestor.nuevaTarea(tarea4);
+    miGestor.listarTareas();
+    console.log("------------BORRO ULTIMA TAREA------------");
+    miGestor.borrarTareas(4);
+    miGestor.listarTareas();
 }
