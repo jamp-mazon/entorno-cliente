@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <section id="galeria">
+  <div id="visor"><img id="grande" src=""/></div>
+  <div id="miniaturas"></div>
+</section>
+<script src="reto.11.js"></script>
+</body>
+</html>
+
+<style>
+    #visor{
+        height: 100px;
+        width: 200px;
+        background-color: blueviolet;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    #miniaturas{
+        margin-top: 20px;
+        height: 100px;
+        width: 200px;
+        background-color: aqua;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+<!-- Pega este <script> al final del body o en un JS externo -->
+<script>
+  // === CONFIGURA AQUÍ TUS RUTAS ===
+  // Sustituye por tus imágenes (mismo tamaño para mejor resultado)
+  const rutas = [
+    "zorra.jpg",
+    "zorra2.jpg"
+  ];
+
+  // === REFERENCIAS AL DOM ESPERADAS POR EL ESQUELETO HTML ===
+  // <section id="galeria">
+  //   <div id="visor"><img id="grande" alt=""></div>
+  //   <div id="miniaturas"></div>
+  // </section>
+  const imgGrande = document.getElementById("grande");
+  const contMini = document.getElementById("miniaturas");
+
+  // === PRE-CARGA EN MEMORIA (evita parpadeos) ===
+  const cache = [];            // guarda objetos Image ya cargados
+  const okCargada = [];        // flags booleanos de carga por índice
+  const ALT_MINI = "Miniatura "; // prefijo accesible
+
+  for (let i = 0; i < rutas.length; i++) {
+    const im = new Image();
+    im.src = rutas[i];
+    // Señalar tamaño sugerido para que el navegador haga layout desde el principio (opcional)
+    // im.decoding = "async"; // permite decodificación asíncrona
+    im.onload = function () { okCargada[i] = true; };
+    im.onerror = function () { okCargada[i] = false; };
+    cache.push(im);
+  }
+
+  // === CREACIÓN DE MINIATURAS DINÁMICAS ===
+  // Usamos un array para poder iterar y resetear estilos
+  const thumbs = [];
+
+  function crearMiniaturas() {
+    // Limpia por si se re-ejecuta
+    while (contMini.firstChild) contMini.removeChild(contMini.firstChild);
+    thumbs.length = 0;
+
+    for (let i = 0; i < rutas.length; i++) {
+      const t = document.createElement("img");
+      t.src = rutas[i];
+      t.alt = ALT_MINI + (i + 1);
+      t.tabIndex = 0; // accesible por teclado
+      // Estilos mínimos en línea para que funcione sin CSS extra
+      t.style.width = "80px";
+      t.style.height = "60px";
+      t.style.objectFit = "cover";
+      t.style.margin = "4px";
+      t.style.border = "2px solid transparent";
+      t.style.borderRadius = "8px";
+      t.style.cursor = "pointer";
+      t.dataset.index = String(i);
+
+      // Eventos: mouseover (principal), focus (teclado), click (por si se prefiere)
+      t.addEventListener("mouseover", manejarActivacion);
+      t.addEventListener("focus", manejarActivacion);
+      t.addEventListener("click", manejarActivacion);
+
+      contMini.appendChild(t);
+      thumbs.push(t);
+    }
+  }
+
+  // === FUNCIÓN PARA ACTIVAR UNA MINIATURA E IMAGEN GRANDE ===
+  let idxActivo = 0;
+
+  function activarIndex(i) {
+    i = Number(i);
+    if (Number.isNaN(i) || i < 0 || i >= rutas.length) return;
+
+    // Cambia la grande usando la ya precargada si está OK; si no, usa la ruta directa
+    if (okCargada[i]) {
+      imgGrande.src = cache[i].src;
+    } else {
+      imgGrande.src = rutas[i];
+    }
+    imgGrande.alt = "Imagen " + (i + 1) + " de " + rutas.length;
+
+    // Indicador visual: borde + sombra en la activa, reset en el resto
+    for (let k = 0; k < thumbs.length; k++) {
+      if (k === i) {
+        thumbs[k].style.borderColor = "#22d3ee"; // cian
+        thumbs[k].style.boxShadow = "0 0 0 3px rgba(34,211,238,0.3)";
+        thumbs[k].setAttribute("aria-current", "true");
+      } else {
+        thumbs[k].style.borderColor = "transparent";
+        thumbs[k].style.boxShadow = "none";
+        thumbs[k].removeAttribute("aria-current");
+      }
+    }
+
+    idxActivo = i;
+  }
+
+  function manejarActivacion(e) {
+    const i = e.currentTarget.dataset.index;
+    activarIndex(i);
+  }
+
+  // === NAVEGACIÓN CON TECLADO ENTRE MINIATURAS (opcional pero útil) ===
+  // Flechas izquierda/derecha para moverse; Enter para activar
+  function manejarTeclado(e) {
+    const key = e.key;
+    if (key !== "ArrowLeft" && key !== "ArrowRight" && key !== "Enter") return;
+
+    if (key === "ArrowLeft") {
+      const prev = (idxActivo - 1 + rutas.length) % rutas.length;
+      thumbs[prev].focus();
+      activarIndex(prev);
+    } else if (key === "ArrowRight") {
+      const next = (idxActivo + 1) % rutas.length;
+      thumbs[next].focus();
+      activarIndex(next);
+    } else if (key === "Enter") {
+      activarIndex(idxActivo);
+    }
+  }
+
+  // === INICIALIZACIÓN ===
+  (function initGaleria() {
+    if (!imgGrande || !contMini || rutas.length === 0) return;
+    crearMiniaturas();
+    activarIndex(0); // establece imagen inicial
+    // evento global de teclado sobre la galería
+    document.getElementById("galeria")?.addEventListener("keydown", manejarTeclado);
+  })();
+</script>
