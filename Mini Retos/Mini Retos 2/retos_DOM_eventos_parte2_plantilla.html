@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Plantilla — Retos DOM y Eventos (Parte 2)</title>
+  <style>
+    :root { --gap: 1rem; }
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin: var(--gap); line-height: 1.4; }
+    section { padding: var(--gap); border: 1px solid #e5e7eb; border-radius: 10px; margin-bottom: 1rem; background: #fff; }
+    h2 { margin: 0 0 .25rem 0; font-size: 1.1rem; }
+    .meta { color: #555; margin: 0 0 .5rem 0; font-size: .95rem; }
+    label { margin-right: .5rem; display: inline-block; }
+    input, textarea, select, button { padding: .4rem .6rem; }
+    textarea { width: 100%; min-height: 120px; }
+    .out { margin-top: .5rem; }
+    .hint { font-size: .9rem; color: #6b7280; margin-top: .25rem; }
+    .grid { display: grid; grid-template-columns: 1fr; gap: .5rem; }
+    @media (min-width: 720px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    code { background: #f6f8fa; padding: .1rem .3rem; border-radius: 6px; }
+  </style>
+</head>
+<body>
+  <h1>Plantilla — Retos 6–10 (DOM + Eventos)</h1>
+  <p class="meta">Instrucciones: <strong>no modifiques el HTML</strong>. Crea un archivo <code>.js</code> para cada reto con el nombre indicado y enlázalo en la etiqueta <code>&lt;script src="..."&gt;</code> de su sección. Usa <strong>let/const</strong> (no <code>var</code>) y evita funciones flecha (usa <code>function () { ... }</code>).</p>
+
+  <!-- ========================================= -->
+  <!-- RETO 6 – Calculadora de descuentos -->
+  <!-- Archivo JS a crear por el alumno: reto6_descuentos.js -->
+  <!-- Debes usar los id que comienzan por r6- -->
+  <!-- ========================================= -->
+  <section id="reto6">
+    <h2>Reto 6 — Calculadora de descuentos</h2>
+    <p class="meta">Calcula el precio final aplicando un descuento (%).</p>
+    <div class="grid">
+      <label>Precio (€): <input id="r6-precio" type="number" step="0.01" min="0"></label>
+      <label>Descuento (%): <input id="r6-dto" type="number" step="1" min="0" max="100"></label>
+    </div>
+    <button id="r6-calc">Calcular precio final</button>
+    <div class="out">
+      <p>Descuento aplicado: <strong id="r6-descuento">0.00</strong> €</p>
+      <p>Precio final: <strong id="r6-final">0.00</strong> €</p>
+      <p id="r6-msg" class="hint"></p>
+    </div>
+    <script src="reto6_descuentos.js"></script>
+  </section>
+
+  <!-- ========================================= -->
+  <!-- RETO 7 – Validador de contraseña simple -->
+  <!-- Archivo JS a crear por el alumno: reto7_password.js -->
+  <!-- Debes usar los id que comienzan por r7- -->
+  <!-- ========================================= -->
+  <section id="reto7">
+    <h2>Reto 7 — Validador de contraseña simple</h2>
+    <p class="meta">Comprueba longitud mínima (6) y que contenga al menos un número.</p>
+    <input id="r7-pwd" type="password" placeholder="Contraseña">
+    <button id="r7-check">Comprobar</button>
+    <p id="r7-resultado" class="out"></p>
+    <script src="reto7_password.js"></script>
+  </section>
+
+  <!-- ========================================= -->
+  <!-- RETO 8 – Comparador de palabras -->
+  <!-- Archivo JS a crear por el alumno: reto8_comparar.js -->
+  <!-- Debes usar los id que comienzan por r8- -->
+  <!-- ========================================= -->
+  <section id="reto8">
+    <h2>Reto 8 — Comparador de palabras</h2>
+    <p class="meta">Indica si dos palabras son iguales (sin distinguir mayúsculas/minúsculas).</p>
+    <input id="r8-p1" placeholder="Palabra 1">
+    <input id="r8-p2" placeholder="Palabra 2">
+    <button id="r8-comparar">Comparar</button>
+    <p id="r8-msg" class="out"></p>
+    <script src="reto8_comparar.js"></script>
+  </section>
+
+  <!-- ========================================= -->
+  <!-- RETO 9 – Saludo según la hora -->
+  <!-- Archivo JS a crear por el alumno: reto9_saludo.js -->
+  <!-- Debes usar los id que comienzan por r9- -->
+  <!-- ========================================= -->
+  <section id="reto9">
+    <h2>Reto 9 — Saludo según la hora</h2>
+    <p class="meta">Introduce una hora (0–23) y muestra el saludo correspondiente.</p>
+    <label>Hora: <input id="r9-hora" type="number" min="0" max="23" placeholder="0–23"></label>
+    <button id="r9-saludar">Saludar</button>
+    <p id="r9-saludo" class="out"></p>
+    <script src="reto9_saludo.js"></script>
+  </section>
+
+  <!-- ========================================= -->
+  <!-- RETO 10 – Contador de palabras -->
+  <!-- Archivo JS a crear por el alumno: reto10_contar.js -->
+  <!-- Debes usar los id que comienzan por r10- -->
+  <!-- ========================================= -->
+  <section id="reto10">
+    <h2>Reto 10 — Contador de palabras</h2>
+    <p class="meta">Escribe un texto y cuenta las palabras.</p>
+    <textarea id="r10-texto" placeholder="Escribe aquí..."></textarea><br>
+    <button id="r10-contar">Contar palabras</button>
+    <p id="r10-total" class="out">Palabras: 0</p>
+    <script src="reto10_contar.js"></script>
+  </section>
+
+</body>
+</html>
