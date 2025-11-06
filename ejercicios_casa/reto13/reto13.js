@@ -28,4 +28,4 @@ btn_atender.addEventListener("click",function () {
         li.textContent=lista_clientes[i];
         cola.appendChild(li);
     }
-})
+});
