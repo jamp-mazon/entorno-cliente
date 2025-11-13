@@ -1,4 +1,4 @@
-// @ts-check
+
 const btn_elemento=document.getElementById("btn_elemento");
 let lista=document.getElementById("lista");
 let contador=1;

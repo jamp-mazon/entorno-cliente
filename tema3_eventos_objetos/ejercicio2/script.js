@@ -4,4 +4,4 @@ let parrafo=document.getElementById("parrafo");
 
 input.addEventListener("keydown",function () {
     parrafo.textContent=event.key;
-})
+}) 
