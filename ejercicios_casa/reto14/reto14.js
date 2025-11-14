@@ -27,4 +27,4 @@ btnEliminar.addEventListener("click",function () {
         li.textContent=pila_tareas[i];
         ul.appendChild(li);
     }    
-})
+})                                                                                                                    
