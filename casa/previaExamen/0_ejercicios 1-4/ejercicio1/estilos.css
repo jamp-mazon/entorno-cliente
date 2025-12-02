@@ -1,0 +1,81 @@
+* {
+    box-sizing: border-box;
+    font-family: system-ui;
+}
+
+body {
+    margin: 0;
+    background: #f3f6ff;
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+}
+
+.app {
+    width: 420px;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .08);
+}
+
+h1 {
+    margin-top: 0;
+    text-align: center;
+}
+
+.nueva-nota {
+    display: flex;
+    gap: 8px;
+}
+
+.nueva-nota input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #c9d3ff;
+    border-radius: 8px;
+}
+
+.nueva-nota button {
+    padding: 10px 14px;
+    background: #4a6bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.nueva-nota button:hover {
+    opacity: .9;
+}
+
+.lista-notas {
+    margin: 16px 0 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.nota {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #eef2ff;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.nota small {
+    color: #555;
+}
+
+.nota button {
+    background: #ff5b5b;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    padding: 6px 8px;
+    cursor: pointer;
+}

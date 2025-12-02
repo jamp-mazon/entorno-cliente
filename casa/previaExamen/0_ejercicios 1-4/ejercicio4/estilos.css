@@ -1,0 +1,82 @@
+* {
+    box-sizing: border-box;
+    font-family: system-ui;
+}
+
+body {
+    margin: 0;
+    background: #0f172a;
+    color: #e2e8f0;
+    display: flex;
+    justify-content: center;
+    padding: 24px;
+}
+
+.wrap {
+    width: 520px;
+    background: #111827;
+    padding: 18px;
+    border-radius: 12px;
+}
+
+.form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 14px;
+}
+
+.form input,
+.form select {
+    padding: 9px;
+    border-radius: 8px;
+    border: 1px solid #334155;
+    background: #0b1220;
+    color: #e2e8f0;
+}
+
+.form button {
+    grid-column: span 2;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background: #38bdf8;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.msg {
+    grid-column: span 2;
+    margin: 0;
+    color: #fbbf24;
+}
+
+.lista {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.user-card {
+    background: #0b1220;
+    border: 1px solid #334155;
+    padding: 10px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.user-card small {
+    color: #94a3b8;
+}
+
+.user-card button {
+    background: #ef4444;
+    border: none;
+    color: white;
+    padding: 6px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+}

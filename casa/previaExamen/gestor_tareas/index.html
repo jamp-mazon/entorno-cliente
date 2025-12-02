@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestor de tareas PRO</title>
+    <link rel="stylesheet" href="estilos.css" />
+</head>
+
+<body>
+    <main class="app">
+        <header class="top">
+            <h1>✅ Gestor de tareas PRO</h1>
+            <input id="inpFiltro" class="filtro" type="text" placeholder="Filtrar tareas..." />
+        </header>
+        <section class="panel">
+            <form id="formTarea" class="form">
+                <label>
+                    Título
+                    <input id="inpTitulo" type="text" placeholder="Ej: Estudiar eventos JS" />
+                </label>
+                <label>
+                    Descripción
+                    <textarea id="inpDesc" rows="4" placeholder="Detalles..."></textarea>
+                    <div class="counter">
+                        <span id="contadorDesc">0</span> caracteres
+                    </div>
+                </label>
+                <label>
+                    Prioridad
+                    <select id="selPrio">
+                        <option value="baja">Baja</option>
+                        <option value="media" selected>Media</option>
+                        <option value="alta">Alta</option>
+                    </select>
+                </label>
+                <label>
+                    Tags (Enter para añadir)
+                    <input id="inpTag" type="text" placeholder="Ej: master, js, examen" />
+                </label>
+                <button class="btn-add" type="submit">Añadir tarea</button>
+                <p id="msg" class="msg"></p>
+            </form>
+            <aside class="preview">
+                <h3>Vista previa</h3>
+                <p><strong id="prevTitulo">—</strong></p>
+                <p id="prevDesc">Escribe una descripción…</p>
+                <div id="prevPrio" class="prio prio-media">Prioridad: media</div>
+                <div id="prevTags" class="tags">
+                    <!-- chips de tags preview -->
+                </div>
+            </aside>
+        </section>
+        <section class="lista-wrap">
+            <h2>Mis tareas</h2>
+            <ul id="listaTareas" class="lista">
+                <!-- Tarjetas generadas por JS -->
+            </ul>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+
+</html>
