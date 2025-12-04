@@ -15,6 +15,7 @@ class LineaPedido{
     constructor(producto, cantidad){
         this.id=conta_id++;
         this.nombre=producto.nombre;
+        this.precio=producto.precio;
         this.cantidad=cantidad;
         this.total_linea=Number(producto.precio*this.cantidad);
     }
@@ -43,21 +44,19 @@ class Pedido{
         this.estado="abierto";
     }
     agregarProducto(producto){
-        producto.nombre=producto.nombre.toLowerCase();
         for (const linea_producto of this.lista_lineas_pedido) {
-            if (linea_producto.nombre.toLowerCase().includes(producto.nombre)) {
+            if (linea_producto.nombre.includes(producto.nombre)) {
                 linea_producto.cantidad++;
-            }
-            else{
-                const nueva_linea=new LineaPedido(producto,1);
-                this.lista_lineas_pedido.push(nueva_linea);
+                linea_producto.total_linea=linea_producto.cantidad*linea_producto.precio
+                return;
             }
         }
+        const nueva_linea = new LineaPedido(producto, 1);
+        this.lista_lineas_pedido.push(nueva_linea);
     }
     cambiarCantidad(producto,delta){
-        producto.nombre=producto.nombre.toLowerCase();
         for (let i = 0; i < this.lista_lineas_pedido.length; i++) {
-            if (this.lista_lineas_pedido[i].nombre.toLowerCase().includes(producto.nombre)) {
+            if (this.lista_lineas_pedido[i].nombre.includes(producto.nombre)) {
                 if (delta<0) {
                     this.lista_lineas_pedido[i].cantidad-=delta;
                 }
@@ -73,7 +72,7 @@ class Pedido{
     total_pedido(){
         let total=0;
         for (const linea of this.lista_lineas_pedido) {
-            total+=linea.total_linea;
+            total=linea.cantidad*linea.precio;
         }
         return total;
     }
@@ -83,6 +82,7 @@ class Pedido{
     confirmar(){
         this.estado="confirmado";
     }
+
 }
 // 4. Crea un array "productosBar" con varios objetos ProductoBar,
 //    por ejemplo: agua, café, bocadillo, refresco, etc.
@@ -98,7 +98,7 @@ const productosBar = [
 // 5. Crea una instancia de Pedido, por ejemplo llamada "pedidoActual".
 const depu_producto=new Producto("Depuracion",1);
 const lista_lineas=[
-    new LineaPedido(depu_producto,1)
+    // new LineaPedido(depu_producto,1)
 ];
 const pedidoActual=new Pedido(lista_lineas);
 // 6. Captura los elementos del DOM que vas a usar.
@@ -177,7 +177,7 @@ function pintarCarrito() {
         pNombre.textContent=lineas.nombre;
         pCantidad.textContent=`Cantidad:${lineas.cantidad}`;
         pCantidad.classList.add("linea-detalle");
-        pSubtotal.textContent=`Coste:${lineas.total_linea}`;
+        pSubtotal.textContent=`Coste:${lineas.total_linea.toFixed(2)}`;
         pCantidad.classList.add("linea-detalle");
         add.textContent="+";
         add.classList.add("linea-controles");
@@ -195,7 +195,7 @@ function pintarCarrito() {
         listaCarrito.appendChild(li);
     }
     console.log(pedidoActual.lista_lineas_pedido);
-    totalPedido.textContent=`Total: ${pedidoActual.total_pedido()} € `;
+    totalPedido.textContent=`Total: ${pedidoActual.total_pedido().toFixed(2)} € `;
 
 }
 // 9. Crea una función "actualizarEstadoPedido()" que:
@@ -231,7 +231,19 @@ function actualizarEstadoPedido() {
 listaProductos.addEventListener("click",function (event) {
     if (event.target.className === "btn-add") {
         const nombre_producto=event.target.getAttribute("data-nombre");
+
         if (pedidoActual.estado==="abierto") {
+
+            if (pedidoActual.lista_lineas_pedido.includes(nombre_producto)) {
+                for (const linea of pedidoActual.lista_lineas_pedido) {
+                    if (linea.nombre.includes(nombre_producto)) {
+                        linea.aumentar_cantidad();
+                        pintarCarrito();
+                        actualizarEstadoPedido();
+                        return;
+                }
+            }
+            }
             for (const producto of productosBar) {
                 if (producto.nombre.includes(nombre_producto)) {
                     pedidoActual.agregarProducto(producto);
