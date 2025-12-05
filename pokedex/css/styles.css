@@ -63,6 +63,8 @@ body {
 /* PISTA: contenedor principal */
 .main {
     /* PISTA: limita el ancho de la página y céntrala con margin */
+    max-width: 1fr;
+    padding: 20px;
 }
 
 /* PISTA: contenedor donde irán las tarjetas de Pokémon */
@@ -71,6 +73,10 @@ body {
      * - Aquí puedes usar display: flex; o display: grid; para crear una rejilla.
      * - Añade separación (gap) entre tarjetas.
      */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-around;
 }
 
 /* PISTA: estilo de cada tarjeta de Pokémon */
@@ -80,16 +86,77 @@ body {
      * - Añade un borde suave y sombra ligera.
      * - Añade padding dentro de la tarjeta.
      */
+    background-color:azure;
+    border-radius: 20px;
+    
+
 }
 
 .pokemon-card img {
     /* PISTA: haz que la imagen no se salga de la tarjeta (width: 100%; height: auto;) */
+    width: 100%;
+    height: auto;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    
 }
 
 .pokemon-card h2 {
     /* PISTA: estilo para el nombre del Pokémon */
+    padding: 10px;
+
 }
 
 .pokemon-card p {
     /* PISTA: estilo para el texto secundario (tipo, número, etc.) */
+    padding-left: 20px;
+    margin-top: 0px;
+
+
+}
+.pokemon-card-quince{
+    color: var(--rojo-suave);
+    font-weight: bold;
+}
+.pokemon-card-diez{
+    color: green;
+    font-weight: bold;
+}
+.pokemon-card-planta{
+    background-color: greenyellow;
+    
+    width: 70px;
+    height: 25px;
+    font-weight: bolder;
+    border-radius: 20px;
+}
+.pokemon-card-fuego{
+    background-color: darkred;
+    color: white;
+    width: 70px;
+    height: 25px;
+    font-weight: bolder;
+    border-radius: 20px;
+}.pokemon-card-agua{
+    background-color: darkblue;
+    color: white;
+    width: 70px;
+    height: 25px;
+    font-weight: bolder;
+    border-radius: 20px;
+}.pokemon-card-electrico{
+    background-color: yellow;
+    
+    width: 75px;
+    height: 25px;
+    font-weight: bolder;
+    border-radius: 20px;
+}
+.pokemon-card-normal{
+    background-color: darkkhaki;
+    
+    width: 70px;
+    height: 25px;
+    font-weight: bolder;
+    border-radius: 20px;
 }
