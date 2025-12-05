@@ -54,33 +54,36 @@ class Pedido{
         const nueva_linea = new LineaPedido(producto, 1);
         this.lista_lineas_pedido.push(nueva_linea);
     }
-    cambiarCantidad(producto,delta){
+    cambiarCantidad(nombre_producto,delta){
         for (let i = 0; i < this.lista_lineas_pedido.length; i++) {
-            if (this.lista_lineas_pedido[i].nombre.includes(producto.nombre)) {
-                if (delta<0) {
-                    this.lista_lineas_pedido[i].cantidad-=delta;
-                }
-                else if (delta>0) {
+            if (this.lista_lineas_pedido[i].nombre.includes(nombre_producto)) {
                     this.lista_lineas_pedido[i].cantidad+=delta;
+                    this.lista_lineas_pedido[i].total_linea=this.lista_lineas_pedido[i].precio*this.lista_lineas_pedido[i].cantidad;
                 }
                 if (this.lista_lineas_pedido[i].cantidad<=0) {
                     this.lista_lineas_pedido[i].splice(i,1);
                 }
             }   
         }
+    devolverProducto(nombre_producto){
+        for (const linea of this.lista_lineas_pedido) {
+            if (linea.nombre.includes(nombre_producto)) {
+                return 
+            }
+        }
     }
     total_pedido(){
         let total=0;
         for (const linea of this.lista_lineas_pedido) {
-            total=linea.cantidad*linea.precio;
+            total=total+(linea.cantidad*linea.precio);
         }
         return total;
     }
     vaciar_pedido(){
         this.lista_lineas_pedido=[];
     }
-    confirmar(){
-        this.estado="confirmado";
+    cerrar_pedido(){
+        this.estado="cerrado";
     }
 
 }
@@ -185,6 +188,8 @@ function pintarCarrito() {
         restar.classList.add("linea-controles");
         add.setAttribute("data-nombre",lineas.nombre);
         restar.setAttribute("data-nombre",lineas.nombre);
+        add.setAttribute("data-text","sumar");
+        restar.setAttribute("data-text","restar");
         
         li.appendChild(pNombre);
         li.appendChild(pCantidad);
@@ -265,18 +270,50 @@ listaProductos.addEventListener("click",function (event) {
 //     - Modifica la cantidad según la acción realizada
 //     - Verifica que el pedido pueda ser modificado antes de hacer cambios
 //     - Actualiza la visualización después de cada modificación
-
+listaCarrito.addEventListener("click",function (event) {
+    if (event.target.tagName==="BUTTON") {
+        const nombre_prod=event.target.getAttribute("data-nombre");
+        for (const linea of pedidoActual.lista_lineas_pedido) {
+                if (linea.nombre.includes(nombre_prod)) {
+                    const liBotone=event.target.getAttribute("data-text");
+                    if (liBotone.includes("sumar")) {
+                        pedidoActual.cambiarCantidad(nombre_prod,1);
+                        break;
+                    }
+                    else{
+                        pedidoActual.cambiarCantidad(nombre_prod,-1);
+                        break;
+                    }
+                }
+        }
+    }
+    pintarCarrito();
+    actualizarEstadoPedido();
+})
 // 12. Evento en btnVaciarPedido:
 //     - Verifica el estado del pedido antes de realizar acciones
 //     - Limpia el contenido del pedido si es posible
 //     - Actualiza la interfaz para reflejar los cambios
 //     - Proporciona feedback al usuario sobre la acción realizada
-
+btnVaciarPedido.addEventListener("click",function () {
+    if (pedidoActual.estado.includes("cerrado")) {
+        return;
+    }
+    else{
+        pedidoActual.vaciar_pedido();
+        pintarCarrito();
+        actualizarEstadoPedido();
+    }
+})
 // 13. Evento en btnConfirmarPedido:
 //     - llamar a pedidoActual.confirmar()
 //     - actualizarEstadoPedido()
 //     - actualizar mensajeInfo
-
+btnConfirmarPedido.addEventListener("click",function () {
+    pedidoActual.cerrar_pedido();
+    actualizarEstadoPedido();
+    mensajeInfo.textContent="CERRADO";
+})
 // 14. Al cargar la página:
 //     - llama a pintarProductosBar()
 //     - llama a pintarCarrito() (estará vacío al principio)
