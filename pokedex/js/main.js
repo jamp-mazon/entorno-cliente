@@ -35,6 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // PISTA: selecciona el contenedor donde irán las tarjetas
     const pokedexContainer = document.getElementById("pokedex");
     const nav_botones_tipo= document.getElementById("nav_botones_tipo");
+    
 
 class Pokemon{
     constructor(nombre,descripcion,nivel,tipo,url){
@@ -64,16 +65,16 @@ class Pokemon{
     // const pokemons = [  ];
     // PISTA: define aquí dentro tus Pokémon
 const lista_pokemon = [
-    new Pokemon("Bulbasaur","Planta/veneno que empieza con lianas",12,"planta","img/bulbasaur.png"),
-    new Pokemon("Charmander","Lagartija de fuego muy enérgica",14,"fuego","img/charmander.png"),
-    new Pokemon("Chikorita","Hoja dulce con aroma calmante",11,"planta","img/chikorita.png"),
-    new Pokemon("Eevee","Normal adaptable a muchas evoluciones",10,"normal","img/eevee.png"),
-    new Pokemon("Flareon","Evolución de Eevee cargada de fuego",18,"fuego","img/flareon.png"),
-    new Pokemon("Jolteon","Evolución eléctrica de Eevee",18,"electrico","img/jolteon.png"),
-    new Pokemon("Mareep","Oveja lanuda que acumula estática",13,"electrico","img/mareep.png"),
-    new Pokemon("Pikachu","Ratón eléctrico carismático",15,"electrico","img/pikachu.png"),
-    new Pokemon("Squirtle","Tortuga de agua tranquila",12,"agua","img/squirtle.png"),
-    new Pokemon("Vaporeon","Evolución acuática de Eevee",18,"agua","img/vaporeon.png"),
+    new Pokemon("Bulbasaur", "Planta/veneno que empieza con lianas", 12, "planta", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"),
+    new Pokemon("Charmander", "Lagartija de fuego muy enérgica", 14, "fuego", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png"),
+    new Pokemon("Chikorita", "Hoja dulce con aroma calmante", 11, "planta", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/152.png"),
+    new Pokemon("Eevee", "Normal adaptable a muchas evoluciones", 10, "normal", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png"),
+    new Pokemon("Flareon", "Evolución de Eevee cargada de fuego", 18, "fuego", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/136.png"),
+    new Pokemon("Jolteon", "Evolución eléctrica de Eevee", 18, "electrico", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/135.png"),
+    new Pokemon("Mareep", "Oveja lanuda que acumula estática", 13, "electrico", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/179.png"),
+    new Pokemon("Pikachu", "Ratón eléctrico carismático", 15, "electrico", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png"),
+    new Pokemon("Squirtle", "Tortuga de agua tranquila", 12, "agua", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/7.png"),
+    new Pokemon("Vaporeon", "Evolución acuática de Eevee", 18, "agua", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/134.png")
 ];
     /*
      * PASO 2: RECORRER EL ARRAY Y CREAR LAS TARJETAS
@@ -150,6 +151,16 @@ function crear_tarjetas(lista_pokemon) {
      * - Puedes ordenar el array por número o nombre antes de pintarlo.
      * Estos extras solo si te sobra tiempo y ya tienes lo básico funcionando.
      */
+    const buscardor_poke=document.getElementById("buscardor_poke");
+    buscardor_poke.addEventListener("input",function (event) {
+        const lista_poke_filtro=[];
+        for (const pokemon of lista_pokemon) {
+            if (pokemon.nombre.toLowerCase().includes(event.target.value.toLowerCase())) {
+                lista_poke_filtro.push(pokemon);
+            }
+        }
+        crear_tarjetas(lista_poke_filtro);
+    })
     nav_botones_tipo.addEventListener("click",function (event) {
         const lista_filtrada_poke=[];
         if (event.target.tagName!=="BUTTON") {

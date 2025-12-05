@@ -96,6 +96,10 @@ body {
     /* PISTA: haz que la imagen no se salga de la tarjeta (width: 100%; height: auto;) */
     width: 100%;
     height: auto;
+    width: 300px;
+    height: 300px;
+    overflow: hidden;
+    object-fit: contain;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     
@@ -159,4 +163,11 @@ body {
     height: 25px;
     font-weight: bolder;
     border-radius: 20px;
+}
+
+@media (max-width: 768px) {
+    .nav_botones_tipo{
+        display: flex;
+        flex-wrap: wrap;
+    }
 }
