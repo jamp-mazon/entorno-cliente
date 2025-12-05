@@ -94,6 +94,26 @@ function crear_tarjetas(lista_pokemon) {
     for (const pokemon of lista_pokemon) {
         const div_poke=document.createElement("div");
         div_poke.classList.add("pokemon-card");
+        div_poke.setAttribute("data-tipo",pokemon.tipo);
+        if (pokemon.tipo === "planta") {
+            div_poke.classList.add("pokemon-card-planta");
+        }
+        else if (pokemon.tipo === "fuego") {
+        div_poke.classList.add("pokemon-card-fuego");
+
+        }
+        else if (pokemon.tipo === "agua") {
+        div_poke.classList.add("pokemon-card-agua");
+
+        }
+        else if (pokemon.tipo === "electrico") {
+        div_poke.classList.add("pokemon-card-electrico");
+
+        }
+        else if (pokemon.tipo === "normal") {
+        div_poke.classList.add("pokemon-card-normal");
+
+        }                
         const image_poke=document.createElement("img");
         image_poke.src=pokemon.url;
         const nombre=document.createElement("h2");
@@ -110,23 +130,23 @@ function crear_tarjetas(lista_pokemon) {
         const pTipo = document.createElement("p");
         if (pokemon.tipo === "planta") {
           pTipo.textContent = "Planta";
-          pTipo.classList.add("pokemon-card-planta");
+          pTipo.classList.add("pokemon-tipo-planta");
         }
         else if (pokemon.tipo === "fuego") {
           pTipo.textContent = "Fuego";
-          pTipo.classList.add("pokemon-card-fuego");
+          pTipo.classList.add("pokemon-tipo-fuego");
         }
         else if (pokemon.tipo === "agua") {
           pTipo.textContent = "Agua";
-          pTipo.classList.add("pokemon-card-agua");
+          pTipo.classList.add("pokemon-tipo-agua");
         }
         else if (pokemon.tipo === "electrico") {
           pTipo.textContent = "Eléctrico";
-          pTipo.classList.add("pokemon-card-electrico");
+          pTipo.classList.add("pokemon-tipo-electrico");
         }
         else if (pokemon.tipo === "normal") {
           pTipo.textContent = "Normal";
-          pTipo.classList.add("pokemon-card-normal");
+          pTipo.classList.add("pokemon-tipo-normal");
         }        
 
         div_poke.appendChild(image_poke);
@@ -151,6 +171,20 @@ function crear_tarjetas(lista_pokemon) {
      * - Puedes ordenar el array por número o nombre antes de pintarlo.
      * Estos extras solo si te sobra tiempo y ya tienes lo básico funcionando.
      */
+    // pokedexContainer.addEventListener("mousemove",function (event) {
+    //     if (event.target.className!=="pokemon-card") {
+    //         return;
+    //     }
+    //     else{
+    //         console.log("Entro dentro del else")
+    //             const tipo_div=event.target.getAttribute("data-tipo");
+    //             console.log(tipo_div);
+    //             if (tipo_div.includes("planta")) {
+    //                 event.target.classList.add("pokemon-card-planta");
+    //             }
+    //     }
+
+    // })
     const buscardor_poke=document.getElementById("buscardor_poke");
     buscardor_poke.addEventListener("input",function (event) {
         const lista_poke_filtro=[];

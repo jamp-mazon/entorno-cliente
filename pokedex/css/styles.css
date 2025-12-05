@@ -91,6 +91,61 @@ body {
     
 
 }
+.pokemon-card-planta:hover {
+    /* PISTA:
+     * - Pon un fondo blanco o claro.
+     * - Añade un borde suave y sombra ligera.
+     * - Añade padding dentro de la tarjeta.
+     */
+    background-color:greenyellow;
+    border-radius: 20px;
+    
+
+}
+.pokemon-card-electrico:hover {
+    /* PISTA:
+     * - Pon un fondo blanco o claro.
+     * - Añade un borde suave y sombra ligera.
+     * - Añade padding dentro de la tarjeta.
+     */
+    background-color:yellow;
+    border-radius: 20px;
+    
+
+}
+.pokemon-card-agua:hover{
+    /* PISTA:
+     * - Pon un fondo blanco o claro.
+     * - Añade un borde suave y sombra ligera.
+     * - Añade padding dentro de la tarjeta.
+     */
+    background-color:rgb(67, 173, 243);
+    border-radius: 20px;
+    
+
+}
+.pokemon-card-fuego:hover {
+    /* PISTA:
+     * - Pon un fondo blanco o claro.
+     * - Añade un borde suave y sombra ligera.
+     * - Añade padding dentro de la tarjeta.
+     */
+    background-color:rgb(235, 74, 74);
+    border-radius: 20px;
+    
+
+}
+.pokemon-card-normal:hover {
+    /* PISTA:
+     * - Pon un fondo blanco o claro.
+     * - Añade un borde suave y sombra ligera.
+     * - Añade padding dentro de la tarjeta.
+     */
+    background-color:rgb(224, 191, 128);
+    border-radius: 20px;
+    
+
+}
 
 .pokemon-card img {
     /* PISTA: haz que la imagen no se salga de la tarjeta (width: 100%; height: auto;) */
@@ -126,7 +181,7 @@ body {
     color: green;
     font-weight: bold;
 }
-.pokemon-card-planta{
+.pokemon-tipo-planta{
     background-color: greenyellow;
     
     width: 70px;
@@ -134,21 +189,21 @@ body {
     font-weight: bolder;
     border-radius: 20px;
 }
-.pokemon-card-fuego{
+.pokemon-tipo-fuego{
     background-color: darkred;
     color: white;
     width: 70px;
     height: 25px;
     font-weight: bolder;
     border-radius: 20px;
-}.pokemon-card-agua{
+}.pokemon-tipo-agua{
     background-color: darkblue;
     color: white;
     width: 70px;
     height: 25px;
     font-weight: bolder;
     border-radius: 20px;
-}.pokemon-card-electrico{
+}.pokemon-tipo-electrico{
     background-color: yellow;
     
     width: 75px;
@@ -156,7 +211,7 @@ body {
     font-weight: bolder;
     border-radius: 20px;
 }
-.pokemon-card-normal{
+.pokemon-tipo-normal{
     background-color: darkkhaki;
     
     width: 70px;
