@@ -44,6 +44,7 @@ class Pokemon{
         this.nivel=nivel;
         this.tipo=tipo;
         this.url=url;
+        this.favorito=false;
     }
 }
 
@@ -92,8 +93,12 @@ const lista_pokemon = [
 function crear_tarjetas(lista_pokemon) {
     pokedexContainer.innerHTML="";
     for (const pokemon of lista_pokemon) {
+        
         const div_poke=document.createElement("div");
         div_poke.classList.add("pokemon-card");
+        if (pokemon.favorito) {
+            div_poke.classList.add("favorito");   
+        }
         div_poke.setAttribute("data-tipo",pokemon.tipo);
         if (pokemon.tipo === "planta") {
             div_poke.classList.add("pokemon-card-planta");
@@ -147,13 +152,20 @@ function crear_tarjetas(lista_pokemon) {
         else if (pokemon.tipo === "normal") {
           pTipo.textContent = "Normal";
           pTipo.classList.add("pokemon-tipo-normal");
-        }        
-
+        }
+        const btn_favorito=document.createElement("button");
+        btn_favorito.textContent="Favorito";
+        btn_favorito.setAttribute("data-nombre",pokemon.nombre);        
+        btn_favorito.classList.add("btn_favorito");
+        const div_boton=document.createElement("div");
+        div_boton.classList.add("div-boton");
         div_poke.appendChild(image_poke);
         div_poke.appendChild(nombre);
         div_poke.appendChild(pDescripcion);
         div_poke.appendChild(pNivel);
         div_poke.appendChild(pTipo);
+        div_boton.appendChild(btn_favorito);
+        div_poke.appendChild(div_boton);
 
         pokedexContainer.appendChild(div_poke);
 
@@ -185,6 +197,28 @@ function crear_tarjetas(lista_pokemon) {
     //     }
 
     // })
+    const lista_poke_fav=[];
+    pokedexContainer.addEventListener("click",function (event) {
+        for (const pokemon of lista_pokemon) {
+            if (event.target.tagName!=="BUTTON") {
+                return;
+            }
+            else{
+                const nombre_poke=event.target.getAttribute("data-nombre");
+                if (pokemon.nombre.includes(nombre_poke)) {
+                    lista_poke_fav.push(pokemon);
+                    pokemon.favorito=true;
+
+                }
+            }
+        }
+    });
+    console.log(lista_poke_fav);
+    const bton_favorito=document.getElementById("favoritos");
+    bton_favorito.addEventListener("click",function () {
+            crear_tarjetas(lista_poke_fav);
+    })
+
     const buscardor_poke=document.getElementById("buscardor_poke");
     buscardor_poke.addEventListener("input",function (event) {
         const lista_poke_filtro=[];

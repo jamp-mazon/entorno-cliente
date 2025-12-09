@@ -29,6 +29,9 @@ body {
 
 
 }
+.favorito{
+    border: solid yellow;
+}
 .header-total{
     display: flex;
     justify-content: space-around;
@@ -88,8 +91,27 @@ body {
      */
     background-color:azure;
     border-radius: 20px;
-    
-
+    display: flex;
+    flex-direction: column;
+}
+.div-boton{
+    padding: 10px;
+    text-align: center;
+}
+.btn_favorito{
+    width: 200px;
+    height: 30px;
+    border-radius: 10px;
+    border: none;
+    background-color: white;
+    color: black;
+    font-weight: bolder;
+    margin-top: 0px;
+    cursor: pointer;
+}
+.btn_favorito:hover{
+    background-color: yellow;
+    border: none;
 }
 .pokemon-card-planta:hover {
     /* PISTA:
