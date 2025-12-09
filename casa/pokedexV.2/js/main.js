@@ -86,7 +86,44 @@ const lista_pokemon = [
 function pintarPokes(lista) {
     pokedexContainer.innerHTML="";
     for (const pokemon of lista) {
+        const div_poke=document.createElement("div")
+        div_poke.classList.add("pokemon-card");
+        const hTitulo=document.createElement("h2");
+        hTitulo.textContent=pokemon.nombre;
+        const pDescripcion=document.createElement("p");
+        pDescripcion.textContent=pokemon.descripcion;
+        const pTipo=document.createElement("p");
+        if (pokemon.tipo.includes("planta")) {
+            pTipo.textContent="Planta";
+            pTipo.classList.add("pokemon-tipo-planta");
+        }
+        else if(pokemon.tipo.includes("fuego")){
+            pTipo.textContent="Fuego";
+            pTipo.classList.add("pokemon-tipo-fuego");            
+        }
+        else if(pokemon.tipo.includes("agua")){
+            pTipo.textContent="Agua";
+            pTipo.classList.add("pokemon-tipo-agua");
+        }
+        else if(pokemon.tipo.includes("electrico")){
+            pTipo.textContent="Eléctrico";
+            pTipo.classList.add("pokemon-tipo-electrico");
+        }
+        else if(pokemon.tipo.includes("normal")){
+            pTipo.textContent="Normal";
+            pTipo.classList.add("pokemon-tipo-Normal");
+        }
+        const pNivel=document.createElement("p");
+        pNivel.textContent="LVL:"+pokemon.nivel;
+        const img_poke=document.createElement("img");
+        img_poke.src=pokemon.imagen
+        div_poke.appendChild(img_poke);
+        div_poke.appendChild(hTitulo);
+        div_poke.appendChild(pDescripcion);
+        div_poke.appendChild(pTipo);
+        div_poke.appendChild(pNivel);
         
+        pokedexContainer.appendChild(div_poke);                        
     }
 }
     // PISTA: escribe aquí tu bucle cuando tengas el array creado
@@ -101,4 +138,5 @@ function pintarPokes(lista) {
      * - Puedes ordenar el array por número o nombre antes de pintarlo.
      * Estos extras solo si te sobra tiempo y ya tienes lo básico funcionando.
      */
+    pintarPokes(lista_pokemon);
 });
