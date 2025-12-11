@@ -321,7 +321,13 @@ function crear_tarjetas(lista_pokemon) {
             btn_fondo.textContent="Modo Claro 🔆";
             btn_fondo.className="fondo_claro";
         }
-        crear_tarjetas(lista_pokemon);
+        if (lista_poke_fav.length===0) {
+            crear_tarjetas(lista_pokemon);
+        }
+        else{
+            crear_tarjetas(lista_poke_fav);
+        }
+        
     })    
     crear_tarjetas(lista_pokemon);
 });

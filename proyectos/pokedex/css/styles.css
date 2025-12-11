@@ -289,7 +289,7 @@ body {
 #favoritos{
     width: 130px;
     height: 40px;
-    font-size: large;
+    font-size: medium;
     font-weight:bold;
     border-radius: 10px;
     background-color: aliceblue;
@@ -302,7 +302,7 @@ body {
 .fondo_oscuro{
     width: 150px;
     height: 40px;
-    font-size: large;
+    font-size: medium;
     font-weight:bold;
     border-radius: 10px;
     background-color: aliceblue;
@@ -313,9 +313,9 @@ body {
     background-color: grey;
 }
 .fondo_claro{
-    width: 140px;
+    width: 150px;
     height: 40px;
-    font-size: large;
+    font-size: medium;
     font-weight:bold;
     border-radius: 10px;
     background-color: aliceblue;
