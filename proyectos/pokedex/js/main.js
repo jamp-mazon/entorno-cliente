@@ -94,28 +94,20 @@ const lista_pokemon = [
         fondo_oscuro:false,
 
     }
-    const btn_fondo=document.getElementById("fondo");
-    btn_fondo.addEventListener("click",function () {
-        if (estado_pag.fondo_oscuro) {
-            document.body.style.backgroundColor="aliceblue";
-            estado_pag.fondo_oscuro=false;
-            btn_fondo.textContent="Modo Oscuro ☽";
-            btn_fondo.className="fondo_oscuro";            
-        }
-        else{
-            document.body.style.backgroundColor="grey";
-            estado_pag.fondo_oscuro=true;
-            btn_fondo.textContent="Modo Claro ☀";
-            btn_fondo.className="fondo_claro";
-        }
-    })
+
     //SEGUN EL ESTADO DEL FONDO DE LA PAG LAS TARJETAS SE PINTARAN DE UNA FORMA U OTRA;
 function crear_tarjetas(lista_pokemon) {
     pokedexContainer.innerHTML="";
     for (const pokemon of lista_pokemon) {
         
         const div_poke=document.createElement("div");
-        div_poke.classList.add("pokemon-card");
+        if (estado_pag.fondo_oscuro) {
+            div_poke.classList.add("pokemon-card-oscuro")
+        }
+        else{
+            div_poke.classList.add("pokemon-card");
+        }
+        
         if (pokemon.favorito) {
             div_poke.classList.add("favorito");   
         }
@@ -221,7 +213,7 @@ function crear_tarjetas(lista_pokemon) {
     //     }
 
     // })
-    const lista_poke_fav=[];
+    let lista_poke_fav=[];
     pokedexContainer.addEventListener("click",function (event) {
         for (const pokemon of lista_pokemon) {
             if (event.target.tagName!=="BUTTON") {
@@ -231,6 +223,9 @@ function crear_tarjetas(lista_pokemon) {
                 const nombre_poke=event.target.getAttribute("data-nombre");
                 if (pokemon.nombre.includes(nombre_poke)) {
                     if (lista_poke_fav.some(poke=>poke.nombre===nombre_poke)) {//si el pokemon ya esta dentro de la lista retorno para evitar duplicados con some.
+                        event.target.className="btn_favorito";
+                        lista_poke_fav=lista_poke_fav.filter(poke=>poke.nombre!==nombre_poke);
+                        pokemon.favorito=false;
                         return;
                     }
                     event.target.classList.add("btn_favorito_seleccionado");
@@ -311,6 +306,24 @@ function crear_tarjetas(lista_pokemon) {
             }
             crear_tarjetas(lista_filtrada_poke);
         }
-    })
+    });
+    const btn_fondo=document.getElementById("fondo");
+    btn_fondo.addEventListener("click",function () {
+        if (estado_pag.fondo_oscuro) {
+            document.body.style.backgroundColor="aliceblue";
+            estado_pag.fondo_oscuro=false;
+            btn_fondo.textContent="Modo Oscuro☽";
+            btn_fondo.className="fondo_oscuro";            
+        }
+        else{
+            document.body.style.backgroundColor="grey";
+            estado_pag.fondo_oscuro=true;
+            btn_fondo.textContent="Modo Claro 🔆";
+            btn_fondo.className="fondo_claro";
+        }
+        crear_tarjetas(lista_pokemon);
+    })    
     crear_tarjetas(lista_pokemon);
 });
+
+//QUEDA QUE SI LE ESTAN EN FAVORITOS Y CAMBIA A MODO OSCURO , QUE NO SE VAYA A LA LISTA DE POKEMON COMPLETA Y SE QUEDE EN LA FILTRADA.

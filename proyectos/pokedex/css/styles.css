@@ -66,7 +66,7 @@ body {
 /* PISTA: contenedor principal */
 .main {
     /* PISTA: limita el ancho de la página y céntrala con margin */
-    max-width: 2000px;
+    max-width: 1700px;
     padding: 20px;
     margin: auto;
 }
@@ -94,6 +94,13 @@ body {
     border-radius: 20px;
     display: flex;
     flex-direction: column;
+}
+.pokemon-card-oscuro{
+    background-color: rgb(114, 106, 106);
+    color: white;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;    
 }
 .div-boton{
     padding: 10px;
@@ -193,8 +200,25 @@ body {
     border-top-right-radius: 20px;
     
 }
+.pokemon-card-oscuro img {
+    /* PISTA: haz que la imagen no se salga de la tarjeta (width: 100%; height: auto;) */
+    width: 100%;
+    height: auto;
+    width: 300px;
+    height: 300px;
+    overflow: hidden;
+    object-fit: contain;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    
+}
 
 .pokemon-card h2 {
+    /* PISTA: estilo para el nombre del Pokémon */
+    padding: 10px;
+
+}
+.pokemon-card-oscuro h2 {
     /* PISTA: estilo para el nombre del Pokémon */
     padding: 10px;
 
@@ -207,17 +231,26 @@ body {
 
 
 }
+.pokemon-card-oscuro p {
+    /* PISTA: estilo para el texto secundario (tipo, número, etc.) */
+    padding-left: 20px;
+    margin-top: 0px;
+
+
+}
 .pokemon-card-quince{
     color: var(--rojo-suave);
     font-weight: bold;
+    font-size: large;
 }
+
 .pokemon-card-diez{
-    color: green;
+    color: greenyellow;
     font-weight: bold;
 }
 .pokemon-tipo-planta{
     background-color: greenyellow;
-    
+    color: black;
     width: 70px;
     height: 25px;
     font-weight: bolder;
@@ -239,7 +272,7 @@ body {
     border-radius: 20px;
 }.pokemon-tipo-electrico{
     background-color: yellow;
-    
+    color: black;
     width: 75px;
     height: 25px;
     font-weight: bolder;
