@@ -15,3 +15,11 @@
     // Escribe aquí tu solución para este ejercicio.
     // Recuerda probar el archivo activando su <script> correspondiente en index.html
     // y comprobando los resultados en la consola del navegador.
+  const repetidor=alumnos.filter(alu=>alu.repetidor===true);
+  const noRepetidor=alumnos.filter(alu=>alu.repetidor===false);
+
+  const estadisticas ={
+    repetidores:repetidor,
+    noRepetidor:noRepetidor
+  };
+  console.log(estadisticas);

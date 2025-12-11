@@ -15,3 +15,7 @@
     // Escribe aquí tu solución para este ejercicio.
     // Recuerda probar el archivo activando su <script> correspondiente en index.html
     // y comprobando los resultados en la consola del navegador.
+const alumnos_aprobados=alumnos.filter(alu=>alu.notaMedia>=5);
+const media=Number(alumnos_aprobados.length/alumnos.length);
+const mediaTotal=media*100;
+console.log("La media de clase es:"+mediaTotal.toFixed(0)+"%");

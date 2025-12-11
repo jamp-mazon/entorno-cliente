@@ -20,3 +20,4 @@
     estado:alumno.notaMedia>=5 ? "Aprobado":"Suspenso",
     faltas:alumno.faltas
  }));
+ console.log(alumnos_aprobados);
