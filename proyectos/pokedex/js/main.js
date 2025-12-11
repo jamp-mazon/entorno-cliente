@@ -90,6 +90,26 @@ const lista_pokemon = [
      *   - Añade la imagen usando la ruta de la carpeta img.
      *   - Añade la tarjeta al contenedor pokedexContainer.
      */
+    const estado_pag={
+        fondo_oscuro:false,
+
+    }
+    const btn_fondo=document.getElementById("fondo");
+    btn_fondo.addEventListener("click",function () {
+        if (estado_pag.fondo_oscuro) {
+            document.body.style.backgroundColor="aliceblue";
+            estado_pag.fondo_oscuro=false;
+            btn_fondo.textContent="Modo Oscuro ☽";
+            btn_fondo.className="fondo_oscuro";            
+        }
+        else{
+            document.body.style.backgroundColor="grey";
+            estado_pag.fondo_oscuro=true;
+            btn_fondo.textContent="Modo Claro ☀";
+            btn_fondo.className="fondo_claro";
+        }
+    })
+    //SEGUN EL ESTADO DEL FONDO DE LA PAG LAS TARJETAS SE PINTARAN DE UNA FORMA U OTRA;
 function crear_tarjetas(lista_pokemon) {
     pokedexContainer.innerHTML="";
     for (const pokemon of lista_pokemon) {
@@ -157,8 +177,11 @@ function crear_tarjetas(lista_pokemon) {
         btn_favorito.textContent="Favorito";
         btn_favorito.setAttribute("data-nombre",pokemon.nombre);        
         btn_favorito.classList.add("btn_favorito");
-        const div_boton=document.createElement("div");
-        div_boton.classList.add("div-boton");
+        if (pokemon.favorito) {
+            btn_favorito.classList.add("btn_favorito_seleccionado");
+        }
+        const div_boton = document.createElement("div");
+        div_boton.classList.add("div-boton");      
         div_poke.appendChild(image_poke);
         div_poke.appendChild(nombre);
         div_poke.appendChild(pDescripcion);
@@ -171,6 +194,7 @@ function crear_tarjetas(lista_pokemon) {
 
     }
 }
+
     // PISTA: escribe aquí tu bucle cuando tengas el array creado
     // for ( ... ) {
     //     // Dentro del bucle creas la tarjeta
@@ -206,6 +230,10 @@ function crear_tarjetas(lista_pokemon) {
             else{
                 const nombre_poke=event.target.getAttribute("data-nombre");
                 if (pokemon.nombre.includes(nombre_poke)) {
+                    if (lista_poke_fav.some(poke=>poke.nombre===nombre_poke)) {//si el pokemon ya esta dentro de la lista retorno para evitar duplicados con some.
+                        return;
+                    }
+                    event.target.classList.add("btn_favorito_seleccionado");
                     lista_poke_fav.push(pokemon);
                     pokemon.favorito=true;
 

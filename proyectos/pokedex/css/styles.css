@@ -25,9 +25,6 @@ body {
     padding: 20px;
     min-width: 100%;
     color: white;
-
-
-
 }
 .favorito{
     border: solid yellow;
@@ -52,9 +49,12 @@ body {
 }
 .nav_botones_tipo button{
     border-radius: 10px;
-    height: 25px;
+    width: 100px;
+    height: 30px;
     color: var(--rojo-suave);
+    font-weight: bold;
     cursor: pointer;
+    border: none;
 }
 .nav_botones_tipo button:hover{
     background-color: orange;
@@ -66,8 +66,9 @@ body {
 /* PISTA: contenedor principal */
 .main {
     /* PISTA: limita el ancho de la página y céntrala con margin */
-    max-width: 1fr;
+    max-width: 2000px;
     padding: 20px;
+    margin: auto;
 }
 
 /* PISTA: contenedor donde irán las tarjetas de Pokémon */
@@ -109,6 +110,17 @@ body {
     margin-top: 0px;
     cursor: pointer;
 }
+.btn_favorito_seleccionado{
+        width: 200px;
+    height: 30px;
+    border-radius: 10px;
+    border: none;
+    background-color: yellow;
+    color: black;
+    font-weight: bolder;
+    margin-top: 0px;
+    cursor: pointer;
+}
 .btn_favorito:hover{
     background-color: yellow;
     border: none;
@@ -130,7 +142,7 @@ body {
      * - Añade un borde suave y sombra ligera.
      * - Añade padding dentro de la tarjeta.
      */
-    background-color:yellow;
+    background-color:rgb(238, 238, 44);
     border-radius: 20px;
     
 
@@ -241,10 +253,56 @@ body {
     font-weight: bolder;
     border-radius: 20px;
 }
+#favoritos{
+    width: 130px;
+    height: 40px;
+    font-size: large;
+    font-weight:bold;
+    border-radius: 10px;
+    background-color: aliceblue;
+    cursor: pointer;
+    border: none;
+}
+#favoritos:hover{
+    background-color: orange;
+}
+.fondo_oscuro{
+    width: 150px;
+    height: 40px;
+    font-size: large;
+    font-weight:bold;
+    border-radius: 10px;
+    background-color: aliceblue;
+    cursor: pointer;
+    border: none;    
+}
+.fondo_oscuro:hover{
+    background-color: grey;
+}
+.fondo_claro{
+    width: 140px;
+    height: 40px;
+    font-size: large;
+    font-weight:bold;
+    border-radius: 10px;
+    background-color: aliceblue;
+    cursor: pointer;
+    border: none;    
+}
+.fondo_claro:hover{
+    background-color:floralwhite;
+}
+.div_fav-darkens{
+    margin-top: 20px;
+}
 
 @media (max-width: 768px) {
+    .header-total{
+        padding: 20px;
+    }
     .nav_botones_tipo{
         display: flex;
-        flex-wrap: wrap;
+        flex-direction: column;
+        gap: 10px;
     }
 }
