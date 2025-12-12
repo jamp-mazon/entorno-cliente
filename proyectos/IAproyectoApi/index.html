@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Generador de Imágenes</title>
+<style>
+  body { font-family: sans-serif; padding: 20px; }
+  img { max-width: 400px; margin-top: 20px; display: block; }
+</style>
+</head>
+<body>
+
+<h1>Generador de imágenes con IA</h1>
+
+<input type="text" id="prompt" placeholder="Escribe tu prompt aquí" size="50">
+<button id="generate">Generar imagen</button>
+
+<img id="result" alt="Aquí aparecerá la imagen">
+
+<script>
+const btn = document.getElementById("generate");
+const input = document.getElementById("prompt");
+const img = document.getElementById("result");
+
+btn.addEventListener("click", async () => {
+  const prompt = input.value;
+  if (!prompt) return alert("Escribe un prompt");
+
+  // Llamada al backend
+  const res = await fetch("http://localhost:3000/generate", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ prompt }),
+  });
+
+const data = await res.json();
+if (data.data && data.data[0].b64_json) {
+    img.src = "data:image/png;base64," + data.data[0].b64_json; // muestra la imagen
+    } 
+    else {
+        alert("Error generando imagen");
+    }
+})
+</script>
+
+</body>
+</html>
