@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mini-Amazon · DIW</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            marca: {
+              500: "#6366f1",
+              600: "#4f46e5",
+              700: "#4338ca"
+            }
+          }
+        }
+      }
+    };
+  </script>
+</head>
+
+<body class="bg-gray-200 text-gray-900 ">
+
+  <!-- ======================================
+       HEADER
+  ======================================= -->
+  <header class="sticky top-0 bg-white shadow z-20 ">
+    <!-- TODO 1:
+         Convierte este header en:
+         - sticky
+         - con fondo blanco
+         - sombra suave
+         - padding horizontal
+    -->
+    <div class="grid grid-cols-[250px_1fr_100px] justify-items-center items-center p-5 ">
+      <!-- Logo -->
+      <div class="flex justify-center items-center gap-2">
+        <!-- TODO 2:
+             Estiliza el logo:
+             - forma cuadrada o redonda
+             - color principal
+             - texto centrado
+        -->
+        <span class="bg-marca-500 p-2 rounded-md text-white font-bold text-center w-9 h-10">M</span>
+        <h1 class="font-bold text-lg">Mini-Amazon</h1>
+      </div>
+
+      <!-- Buscador -->
+      <div class="w-full border-2 border-gray-100 rounded-md p-1 ">
+        <!-- TODO 3:
+             Estiliza este input:
+             - ancho completo
+             - borde suave
+             - padding cómodo
+             - focus visible
+        -->
+        <input class="w-full focus:outline-none"
+          type="search"
+          placeholder="Buscar productos..."
+        />
+      </div>
+
+      <!-- Carrito -->
+      <div>
+        <!-- TODO 4:
+             Diseña el botón carrito:
+             - icono o texto
+             - contador circular
+             - hover
+        -->
+        <button id="btn-carrito">
+          🛒
+          <span>0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ======================================
+       CONTENIDO PRINCIPAL
+  ======================================= -->
+  <main class="grid grid-cols-[250px_1fr_250px] p-2 gap-4 justify-items-center w-11/12 m-auto">
+
+    <!-- ======================================
+         FILTROS (SIDEBAR)
+    ======================================= -->
+    <aside class="bg-white p-4 rounded-md max-h-72 flex flex-col gap-4 w-full">
+      <!-- TODO 5:
+           Convierte este aside en:
+           - columna lateral en desktop
+           - oculto en móvil
+           - tarjeta con borde o sombra
+      -->
+
+      <h2 class="text-lg font-bold">Filtros</h2>
+
+      <!-- Categorías -->
+      <section>
+        <h3 class="">Categorías</h3>
+
+        <!-- TODO 6:
+             Diseña estos botones como CHIPS:
+             - redondeados
+             - tamaño pequeño
+             - hover
+        -->
+        <button class="bg-gray-300 rounded-md p-1 mb-1">Periféricos</button>
+        <button class="bg-gray-300 rounded-md p-1">Componentes</button>
+        <button class="bg-gray-300 rounded-md p-1">Accesorios</button>
+      </section>
+
+      <!-- Precio -->
+      <section>
+        <h3>Precio máximo</h3>
+
+        <!-- TODO 7:
+             Mejora el diseño del range
+             (color, tamaño, separación)
+        -->
+        <input type="range" min="0" max="1000" class="w-full" />
+        <p>Hasta 1000 €</p>
+      </section>
+
+      <!-- Stock -->
+      <section>
+        <label>
+          <input type="checkbox" />
+          Solo en stock
+        </label>
+      </section>
+    </aside>
+
+    <!-- ======================================
+         PRODUCTOS
+    ======================================= -->
+    <section class="grid grid-flow-[100px_1fr] gap-2 w-11/12">
+
+      <!-- Cabecera sección -->
+      <div class="flex justify-between">
+        <!-- TODO 8:
+             Alinea este contenido en horizontal
+             y separa título y botón
+        -->
+        <h2 class="font-bold text-xl">Productos</h2>
+        <button class="font-bold text-marca-500 text-sm">Limpiar filtros</button>
+      </div>
+
+      <!-- Grid de productos -->
+      <div class="grid grid-cols-3">
+        <!-- TODO 9:
+             Convierte este contenedor en un GRID:
+             - 1 columna en móvil
+             - 2 en tablet
+             - 3 o 4 en desktop
+             - gap consistente
+        -->
+
+        <!-- ======================
+             TARJETA DE PRODUCTO
+        ======================= -->
+        <article class="bg-white rounded-b-md min-w-60 max-w-60">
+          <!-- TODO 10:
+               Diseña la tarjeta:
+               - fondo blanco
+               - borde o sombra
+               - hover con elevación
+          -->
+
+          <!-- Imagen -->
+          <div>
+            <!-- TODO 11:
+                 Mantén proporción de imagen
+                 y evita que se deforme
+            -->
+            <img
+              src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800&q=60"
+              alt="Producto"
+              class="overflow-hidden rounded-t"
+            />
+          </div>
+
+          <!-- Contenido -->
+          <div class="p-3 flex flex-col gap-2">
+            <!-- TODO 12:
+                 Jerarquía tipográfica:
+                 - nombre destacado
+                 - categoría secundaria
+            -->
+            <h3 class="font-bold">Ratón inalámbrico</h3>
+            <p class="text-sm text-gray-500">Periféricos</p>
+
+            <!-- Precio + botón -->
+            <div class="flex justify-between items-center">
+              <!-- TODO 13:
+                   Alinea precio y botón
+                   en una misma fila
+              -->
+              <span class="text-xl font-bold text-marca-700">19,99 €</span>
+              <button class="bg-marca-600 p-2 text-white rounded-md font-bold text-sm">Añadir</button>
+            </div>
+          </div>
+        </article>
+        <article class="bg-white rounded-b-md min-w-60 max-w-60">
+          <!-- TODO 10:
+               Diseña la tarjeta:
+               - fondo blanco
+               - borde o sombra
+               - hover con elevación
+          -->
+
+          <!-- Imagen -->
+          <div>
+            <!-- TODO 11:
+                 Mantén proporción de imagen
+                 y evita que se deforme
+            -->
+            <img
+              src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800&q=60"
+              alt="Producto"
+              class="overflow-hidden rounded-t"
+            />
+          </div>
+
+          <!-- Contenido -->
+          <div class="p-3 flex flex-col gap-2">
+            <!-- TODO 12:
+                 Jerarquía tipográfica:
+                 - nombre destacado
+                 - categoría secundaria
+            -->
+            <h3 class="font-bold">Ratón inalámbrico</h3>
+            <p class="text-sm text-gray-500">Periféricos</p>
+
+            <!-- Precio + botón -->
+            <div class="flex justify-between items-center">
+              <!-- TODO 13:
+                   Alinea precio y botón
+                   en una misma fila
+              -->
+              <span class="text-xl font-bold text-marca-700">19,99 €</span>
+              <button class="bg-marca-600 p-2 text-white rounded-md font-bold text-sm">Añadir</button>
+            </div>
+          </div>
+        </article>
+        <article class="bg-white rounded-b-md min-w-60 max-w-60">
+          <!-- TODO 10:
+               Diseña la tarjeta:
+               - fondo blanco
+               - borde o sombra
+               - hover con elevación
+          -->
+
+          <!-- Imagen -->
+          <div>
+            <!-- TODO 11:
+                 Mantén proporción de imagen
+                 y evita que se deforme
+            -->
+            <img
+              src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800&q=60"
+              alt="Producto"
+              class="overflow-hidden rounded-t"
+            />
+          </div>
+
+          <!-- Contenido -->
+          <div class="p-3 flex flex-col gap-2">
+            <!-- TODO 12:
+                 Jerarquía tipográfica:
+                 - nombre destacado
+                 - categoría secundaria
+            -->
+            <h3 class="font-bold">Ratón inalámbrico</h3>
+            <p class="text-sm text-gray-500">Periféricos</p>
+
+            <!-- Precio + botón -->
+            <div class="flex justify-between items-center">
+              <!-- TODO 13:
+                   Alinea precio y botón
+                   en una misma fila
+              -->
+              <span class="text-xl font-bold text-marca-700">19,99 €</span>
+              <button class="bg-marca-600 p-2 text-white rounded-md font-bold text-sm">Añadir</button>
+            </div>
+          </div>
+        </article>
+        <article class="bg-white rounded-b-md min-w-60 max-w-60">
+          <!-- TODO 10:
+               Diseña la tarjeta:
+               - fondo blanco
+               - borde o sombra
+               - hover con elevación
+          -->
+
+          <!-- Imagen -->
+          <div>
+            <!-- TODO 11:
+                 Mantén proporción de imagen
+                 y evita que se deforme
+            -->
+            <img
+              src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800&q=60"
+              alt="Producto"
+              class="overflow-hidden rounded-t"
+            />
+          </div>
+
+          <!-- Contenido -->
+          <div class="p-3 flex flex-col gap-2">
+            <!-- TODO 12:
+                 Jerarquía tipográfica:
+                 - nombre destacado
+                 - categoría secundaria
+            -->
+            <h3 class="font-bold">Ratón inalámbrico</h3>
+            <p class="text-sm text-gray-500">Periféricos</p>
+
+            <!-- Precio + botón -->
+            <div class="flex justify-between items-center">
+              <!-- TODO 13:
+                   Alinea precio y botón
+                   en una misma fila
+              -->
+              <span class="text-xl font-bold text-marca-700">19,99 €</span>
+              <button class="bg-marca-600 p-2 text-white rounded-md font-bold text-sm">Añadir</button>
+            </div>
+          </div>
+        </article>                
+        <!-- 👉 DUPLICA ESTA TARJETA PARA MÁS PRODUCTOS -->
+      </div>
+    </section>
+
+    <!-- ======================================
+         CARRITO (SECCIÓN)
+    ======================================= -->
+    <section class="bg-white p-4 rounded-md max-h-72 flex flex-col gap-4 w-full">
+      <!-- TODO 14:
+           Diseña esta sección como:
+           - columna lateral en desktop
+           - bloque inferior en móvil
+      -->
+
+      <h2 class="font-bold text-xl">Carrito</h2>
+
+      <!-- Producto carrito -->
+      <div class="flex gap-2">
+        <!-- TODO 15:
+             Diseña una línea de carrito:
+             - miniatura
+             - nombre
+             - cantidad
+             - precio
+        -->
+        <img 
+        src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800&q=60"
+        class="w-20 rounded-md"
+        alt="">
+        <div>
+          <p class="font-bold">Ratón inalámbrico</p>
+          <span class="text-sm">1 × 19,99 €</span>
+        </div>
+      </div>
+
+      <hr />
+
+      <!-- Total -->
+      <div class="flex flex-row justify-between">
+        <!-- TODO 16:
+             Destaca el total visualmente
+        -->
+        <strong>Total:</strong>
+        <span class="text-marca-500 font-bold text-xl">19,99 €</span>
+      </div>
+
+      <button class="bg-marca-500 text-white font-bold rounded-md p-2 text-sm">
+        Finalizar compra
+      </button>
+    </section>
+
+  </main>
+
+</body>
+</html>
