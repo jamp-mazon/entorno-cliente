@@ -39,7 +39,7 @@
          - sombra suave
          - padding horizontal
     -->
-    <div class="grid grid-cols-[250px_1fr_100px] justify-items-center items-center p-5 ">
+    <div class="grid grid-cols-[100px_1fr_100px] lg:grid-cols-[250px_1fr_100px] justify-items-center items-center p-5 ">
       <!-- Logo -->
       <div class="flex justify-center items-center gap-2">
         <!-- TODO 2:
@@ -49,11 +49,11 @@
              - texto centrado
         -->
         <span class="bg-marca-500 p-2 rounded-md text-white font-bold text-center w-9 h-10">M</span>
-        <h1 class="font-bold text-lg">Mini-Amazon</h1>
+        <h1 class=" hidden font-bold text-lg lg:inline-block">Mini-Amazon</h1>
       </div>
 
       <!-- Buscador -->
-      <div class="w-full border-2 border-gray-100 rounded-md p-1 ">
+      <div class="w-full border-2 border-gray-100 rounded-md p-1">
         <!-- TODO 3:
              Estiliza este input:
              - ancho completo
@@ -75,9 +75,10 @@
              - contador circular
              - hover
         -->
-        <button id="btn-carrito">
-          🛒
-          <span>0</span>
+        <button id="btn-carrito" class="text-xl bg-marca-500 w-20 lg:w-24 rounded-lg relative">
+          🛒 
+          <span class="hidden sm:inline text-sm font-bold text-white">Carrito</span>
+          <span class="absolute -top-2 -right-2 bg-red-500 w-4 h-4 text-sm text-white font-bold rounded-full flex items-center justify-center">0</span>
         </button>
       </div>
     </div>
@@ -140,7 +141,7 @@
     <!-- ======================================
          PRODUCTOS
     ======================================= -->
-    <section class="grid grid-flow-[100px_1fr] gap-2 w-11/12">
+    <section class="grid grid-flow-[100px_1fr] gap-2 w-full">
 
       <!-- Cabecera sección -->
       <div class="flex justify-between">
@@ -153,7 +154,7 @@
       </div>
 
       <!-- Grid de productos -->
-      <div class="grid grid-cols-1 justify-items-center md:grid-cols-2 md:gap-4  lg:grid-cols-3 lg:gap-4">
+      <div class="grid grid-cols-1 justify-items-center gap-4 w-full lg:grid-cols-2 lg:gap-4">
         <!-- TODO 9:
              Convierte este contenedor en un GRID:
              - 1 columna en móvil
@@ -165,7 +166,7 @@
         <!-- ======================
              TARJETA DE PRODUCTO
         ======================= -->
-        <article class="bg-white rounded-b-md min-w-60 max-w-60">
+        <article class="bg-white rounded-b-md">
           <!-- TODO 10:
                Diseña la tarjeta:
                - fondo blanco
@@ -207,7 +208,49 @@
             </div>
           </div>
         </article>
-        <article class="bg-white rounded-b-md min-w-60 max-w-60">
+        <article class="bg-white rounded-b-md overflow-hidden">
+          <!-- TODO 10:
+               Diseña la tarjeta:
+               - fondo blanco
+               - borde o sombra
+               - hover con elevación
+          -->
+
+          <!-- Imagen -->
+          <div>
+            <!-- TODO 11:
+                 Mantén proporción de imagen
+                 y evita que se deforme
+            -->
+            <img
+              src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800&q=60"
+              alt="Producto"
+              class="overflow-hidden object-cover rounded-t"
+            />
+          </div>
+
+          <!-- Contenido -->
+          <div class="p-3 flex flex-col gap-2">
+            <!-- TODO 12:
+                 Jerarquía tipográfica:
+                 - nombre destacado
+                 - categoría secundaria
+            -->
+            <h3 class="font-bold">Ratón inalámbrico</h3>
+            <p class="text-sm text-gray-500">Periféricos</p>
+
+            <!-- Precio + botón -->
+            <div class="flex justify-between items-center">
+              <!-- TODO 13:
+                   Alinea precio y botón
+                   en una misma fila
+              -->
+              <span class="text-xl font-bold text-marca-700">19,99 €</span>
+              <button class="bg-marca-600 p-2 text-white rounded-md font-bold text-sm">Añadir</button>
+            </div>
+          </div>
+        </article>
+        <article class="bg-white rounded-b-md">
           <!-- TODO 10:
                Diseña la tarjeta:
                - fondo blanco
@@ -249,49 +292,7 @@
             </div>
           </div>
         </article>
-        <article class="bg-white rounded-b-md min-w-60 max-w-60">
-          <!-- TODO 10:
-               Diseña la tarjeta:
-               - fondo blanco
-               - borde o sombra
-               - hover con elevación
-          -->
-
-          <!-- Imagen -->
-          <div>
-            <!-- TODO 11:
-                 Mantén proporción de imagen
-                 y evita que se deforme
-            -->
-            <img
-              src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800&q=60"
-              alt="Producto"
-              class="overflow-hidden rounded-t"
-            />
-          </div>
-
-          <!-- Contenido -->
-          <div class="p-3 flex flex-col gap-2">
-            <!-- TODO 12:
-                 Jerarquía tipográfica:
-                 - nombre destacado
-                 - categoría secundaria
-            -->
-            <h3 class="font-bold">Ratón inalámbrico</h3>
-            <p class="text-sm text-gray-500">Periféricos</p>
-
-            <!-- Precio + botón -->
-            <div class="flex justify-between items-center">
-              <!-- TODO 13:
-                   Alinea precio y botón
-                   en una misma fila
-              -->
-              <span class="text-xl font-bold text-marca-700">19,99 €</span>
-              <button class="bg-marca-600 p-2 text-white rounded-md font-bold text-sm">Añadir</button>
-            </div>
-          </div>
-        </article>
-        <article class="bg-white rounded-b-md min-w-60 max-w-60">
+        <article class="bg-white rounded-b-md">
           <!-- TODO 10:
                Diseña la tarjeta:
                - fondo blanco
