@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Carrito con LocalStorage</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 24px; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .card { border: 1px solid #ddd; border-radius: 8px; padding: 16px; }
+    .productos { display: grid; gap: 12px; }
+    .producto { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px; border: 1px solid #eee; border-radius: 8px; }
+    .producto h3 { margin: 0; font-size: 16px; }
+    .producto p { margin: 0; color: #555; }
+    button { cursor: pointer; padding: 8px 10px; border: 1px solid #ccc; border-radius: 8px; background: #fff; }
+    button:hover { background: #f6f6f6; }
+    .carrito-lista { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+    .carrito-item { display: grid; grid-template-columns: 1fr auto auto; gap: 10px; align-items: center; padding: 10px; border: 1px solid #eee; border-radius: 8px; }
+    .muted { color: #666; font-size: 14px; }
+    .row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+    .totales { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 999px; border: 1px solid #ddd; font-size: 12px; color: #444; }
+    .empty { padding: 12px; border: 1px dashed #ccc; border-radius: 8px; color: #666; }
+  </style>
+</head>
+<body>
+
+  <h1>Mini tienda — Carrito persistente con LocalStorage</h1>
+  <p class="muted">
+    Objetivo: que el carrito se mantenga al recargar la página (persistencia).
+    No modifiques el HTML. Trabaja solo en <strong>app.js</strong>.
+  </p>
+
+  <div class="grid">
+    <section class="card">
+      <h2>Productos</h2>
+      <div id="productos" class="productos">
+        <!-- Productos renderizados por JS -->
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="totales">
+        <h2>Carrito <span id="contador" class="badge">0</span></h2>
+        <div class="row">
+          <button id="vaciarBtn" type="button">Vaciar carrito</button>
+        </div>
+      </div>
+
+      <div id="carritoVacio" class="empty">El carrito está vacío.</div>
+      <ul id="carritoLista" class="carrito-lista"></ul>
+
+      <hr />
+
+      <div class="totales">
+        <p><strong>Total:</strong> <span id="total">0.00</span> €</p>
+        <p class="muted">Revisa Application → Local Storage</p>
+      </div>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
