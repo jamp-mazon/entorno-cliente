@@ -174,13 +174,13 @@ function pintarProductos(lista){
 // }) 
 // pintarProductos(productos);
 const filtro_sidebar={
-   categoria:[],
+   categoria:"",
    rango:0,
    checkbox:false
    };
 
-filtro_sidebar.categoria.push("prueba");
-console.log(filtro_sidebar.categoria);
+// filtro_sidebar.categoria.push("prueba");
+// console.log(filtro_sidebar.categoria);
 
 chipsCategorias.addEventListener("click",function (event) {
    if (event.target.tagName!=="BUTTON") {
@@ -189,18 +189,21 @@ chipsCategorias.addEventListener("click",function (event) {
    else{
       if (event.target.getAttribute("data-nombre").includes("perifericos")) {
          if (filtro_sidebar.categoria.includes("perifericos")) {
+
             console.log(true);//seguir por aqui <------
          }
-            filtro_sidebar.categoria.push("perifericos");
+            filtro_sidebar.categoria="perifericos";
             aplicarFiltros();
       }
       if (event.target.getAttribute("data-nombre").includes("componentes")) {
-            filtro_sidebar.categoria.push("componentes");
+            filtro_sidebar.categoria="componentes";
+
             aplicarFiltros();
 
       }
       if (event.target.getAttribute("data-nombre").includes("accesorios")) {
-            filtro_sidebar.categoria.push("accesorios");
+            filtro_sidebar.categoria="accesorios";
+
             aplicarFiltros();
 
       }
