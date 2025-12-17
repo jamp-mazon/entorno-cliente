@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mini-Amazon · DIW</title>
+
+  <!-- CSS propio (sin Tailwind) -->
+  <link rel="stylesheet" href="estilos.css" />
+
+  <!-- (Opcional) JS: aquí engancharás filtros/búsqueda/carrito -->
+  <!-- <script src="app.js" defer></script> -->
+</head>
+
+<body class="pagina">
+
+  <!-- ======================================
+       HEADER
+  ======================================= -->
+  <header class="encabezado" id="encabezado">
+    <div class="encabezado__contenedor">
+
+      <!-- Logo -->
+      <div class="logo" id="zona-logo">
+        <span class="logo__icono" id="logo-icono">M</span>
+        <h1 class="logo__texto solo-lg" id="logo-texto">Mini-Amazon</h1>
+      </div>
+
+      <!-- Buscador -->
+      <div class="buscador" id="zona-buscador">
+        <input
+          class="buscador__input"
+          id="input-busqueda"
+          type="search"
+          placeholder="Buscar productos..."
+        />
+      </div>
+
+      <!-- Carrito -->
+      <div class="zona-carrito" id="zona-carrito">
+        <button class="carrito-boton" id="boton-carrito" type="button">
+          🛒
+          <span class="carrito-boton__texto solo-desde-sm-inline" id="texto-carrito">Carrito</span>
+          <span class="carrito-boton__contador" id="contador-carrito">0</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ======================================
+       CONTENIDO PRINCIPAL
+  ======================================= -->
+  <main class="principal" id="principal">
+
+    <!-- ======================================
+         FILTROS (SIDEBAR)
+    ======================================= -->
+    <aside class="filtros" id="panel-filtros">
+
+      <h2 class="filtros__titulo" id="titulo-filtros">Filtros</h2>
+
+      <!-- Categorías -->
+      <section class="filtro" id="filtro-categorias">
+        <h3 class="filtro__subtitulo" id="titulo-categorias">Categorías</h3>
+
+        <div class="chips" id="chips-categorias">
+          <button class="chip" id="btn-categoria-perifericos" data-nombre="perifericos" type="button">Periféricos</button>
+          <button class="chip" id="btn-categoria-componentes" data-nombre="componentes" type="button">Componentes</button>
+          <button class="chip" id="btn-categoria-accesorios" data-nombre="accesorios" type="button">Accesorios</button>
+        </div>
+      </section>
+
+      <!-- Precio -->
+      <section class="filtro" id="filtro-precio">
+        <h3 class="filtro__subtitulo" id="titulo-precio">Precio máximo</h3>
+
+        <input
+          class="rango"
+          id="rango-precio-maximo"
+          type="range"
+          min="0"
+          max="1000"
+          value="1000"
+        />
+        <p class="texto-ayuda" id="texto-precio-maximo">Hasta 1000 €</p>
+      </section>
+
+      <!-- Stock -->
+      <section class="filtro" id="filtro-stock">
+        <label class="filtro-check" id="etiqueta-solo-stock">
+          <input id="check-solo-stock" type="checkbox" />
+          Solo en stock
+        </label>
+      </section>
+    </aside>
+
+    <!-- ======================================
+         PRODUCTOS
+    ======================================= -->
+    <section class="seccion-productos" id="seccion-productos">
+
+      <!-- Cabecera sección -->
+      <div class="seccion-productos__cabecera" id="cabecera-productos">
+        <h2 class="seccion-productos__titulo" id="titulo-productos">Productos</h2>
+        <button class="boton-limpiar" id="btn-limpiar-filtros" type="button">Limpiar filtros</button>
+      </div>
+
+      <!-- Grid de productos -->
+      <div class="grid-productos" id="grid-productos">
+
+        <!-- ======================
+             TARJETA DE PRODUCTO
+        ======================= -->
+        <!-- <article class="tarjeta-producto" data-id-producto="1">
+          <img
+            class="tarjeta-producto__imagen"
+            src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800&q=60"
+            alt="Producto"
+          />
+
+          <div class="tarjeta-producto__contenido">
+            <h3 class="tarjeta-producto__nombre">Ratón inalámbrico</h3>
+            <p class="tarjeta-producto__categoria">Periféricos</p>
+
+            <div class="tarjeta-producto__pie">
+              <span class="tarjeta-producto__precio">19,99 €</span>
+              <button class="boton-anadir" type="button">Añadir</button>
+            </div>
+          </div>
+        </article> -->
+
+        
+
+        <!-- 👉 DUPLICA ESTA TARJETA PARA MÁS PRODUCTOS -->
+      </div>
+    </section>
+
+    <!-- ======================================
+         CARRITO (SECCIÓN)
+    ======================================= -->
+    <section class="panel-carrito solo-desde-sm-flex" id="panel-carrito">
+
+      <h2 class="panel-carrito__titulo" id="titulo-carrito">Carrito</h2>
+
+      <!-- Lista del carrito (para JS) -->
+      <div id="lista-carrito">
+        <!-- Producto carrito (ejemplo) -->
+        <div class="linea-carrito" data-id-producto="1">
+          <img
+            class="linea-carrito__miniatura"
+            src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800&q=60"
+            alt=""
+          />
+          <div class="linea-carrito__info">
+            <p class="linea-carrito__nombre">Ratón inalámbrico</p>
+            <span class="linea-carrito__detalle">1 × 19,99 €</span>
+          </div>
+        </div>
+      </div>
+
+      <hr class="separador" />
+
+      <!-- Total -->
+      <div class="total" id="zona-total">
+        <strong class="total__etiqueta">Total:</strong>
+        <span class="total__valor" id="total-carrito">19,99 €</span>
+      </div>
+
+      <button class="boton-finalizar" id="btn-finalizar-compra" type="button">
+        Finalizar compra
+      </button>
+    </section>
+
+  </main>
+<script src="app.js"></script>
+</body>
+</html>
