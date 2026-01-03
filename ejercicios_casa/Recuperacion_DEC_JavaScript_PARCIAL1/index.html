@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Recuperación JavaScript - DEC</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <h1>Recuperación JavaScript - DEC</h1>
+    <p><strong>Instrucciones:</strong> No modifiques este HTML. Cada ejercicio tiene su fichero .js.</p>
+
+    <!-- EJERCICIO 1 -->
+    <section id="ej1">
+      <h2>Ejercicio 1 – Mini-biblioteca (catálogo + sugerencias)</h2>
+
+      <label for="buscarLibro">Buscar título:</label><br />
+      <input id="buscarLibro" type="text" placeholder="Escribe para buscar..." />
+      <ul id="sugerenciasLibros"></ul>
+
+      <h3>Catálogo</h3>
+      <div id="catalogoLibros"></div>
+
+      <script src="app_rec.js"></script>
+    </section>
+
+    <!-- EJERCICIO 2 -->
+    <section id="ej2">
+      <h2>Ejercicio 2 – Lista de recados (toggle visual)</h2>
+
+      <input id="txtRecado" type="text" placeholder="Nuevo recado" />
+      <button id="btnAddRecado">Añadir</button>
+      <p id="errorRecado" class="error"></p>
+
+      <ul id="listaRecados"></ul>
+
+      <p>Total: <span id="contadorRecados">0</span></p>
+      <button id="btnBorrarTodo">Borrar todo</button>
+
+      <script src="recados.js"></script>
+    </section>
+
+    <!-- EJERCICIO 3 -->
+    <section id="ej3">
+      <h2>Ejercicio 3 – Estadísticas de tiempos (prompt)</h2>
+      <p>Introduce tiempos en minutos mediante <code>prompt()</code>. Muestra el resultado aquí:</p>
+      <pre id="salidaTiempos">Esperando resultados...</pre>
+
+      <script src="tiempos.js"></script>
+    </section>
+
+    <!-- EJERCICIO 4 -->
+    <section id="ej4">
+      <h2>Ejercicio 4 – Formulario de inscripción (validación + resumen)</h2>
+
+      <form id="formInscripcion">
+        <label>Nombre completo:<br />
+          <input id="nombre" type="text" />
+          <small id="errNombre"></small>
+        </label><br /><br />
+
+        <label>Email:<br />
+          <input id="email" type="email" />
+          <small id="errEmail"></small>
+        </label><br /><br />
+
+        <label>Edad:<br />
+          <input id="edad" type="text" placeholder="Ej: 18" />
+          <small id="errEdad"></small>
+        </label><br /><br />
+
+        <label>Turno:<br />
+          <select id="turno">
+            <option value="">-- Elige --</option>
+            <option value="mañana">Mañana</option>
+            <option value="tarde">Tarde</option>
+          </select>
+          <small id="errTurno"></small>
+        </label><br /><br />
+
+        <label>Motivo (mín. 10 caracteres):<br />
+          <textarea id="motivo" rows="4"></textarea>
+          <small id="errMotivo"></small>
+        </label><br /><br />
+
+        <button type="submit">Enviar</button>
+      </form>
+
+      <p id="ok" class="ok"></p>
+      <pre id="resumen"></pre>
+
+      <script src="inscripcion.js"></script>
+    </section>
+  </body>
+</html>
