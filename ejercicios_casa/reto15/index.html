@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Práctica filtros + data-* (sin JS)</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 24px; max-width: 1050px; }
+    h1 { margin: 0 0 6px; }
+    .muted { margin: 0 0 18px; color: #666; }
+
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 900px){ .grid{ grid-template-columns: 1fr; } }
+
+    .card { border: 1px solid #ddd; border-radius: 14px; padding: 16px; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 650px){ .row{ grid-template-columns: 1fr; } }
+
+    label { display:block; margin-top: 10px; font-weight: 700; }
+    input, select { width: 100%; padding: 10px; border-radius: 10px; border: 1px solid #ccc; }
+    .check { display:flex; gap:10px; align-items:center; margin-top: 12px; }
+    .check input { width:auto; transform: scale(1.1); }
+
+    .actions { display:flex; gap:10px; flex-wrap:wrap; margin-top: 14px; }
+    button { padding: 10px 12px; border-radius: 12px; border: 1px solid #bbb; background: white; cursor: pointer; }
+    button:disabled { opacity: .5; cursor: not-allowed; }
+
+    .info { padding: 10px 12px; border-radius: 12px; background: #f6f6f6; border: 1px solid #e5e5e5; }
+    .empty { padding: 14px; border: 1px dashed #bbb; border-radius: 14px; color: #666; }
+
+    .list { display:grid; gap: 12px; margin-top: 12px; }
+    .item { border: 1px solid #ddd; border-radius: 14px; padding: 14px; display:grid; gap: 10px; }
+    .item header { display:flex; justify-content: space-between; gap: 10px; align-items:flex-start; }
+    .estado { font-weight: 900; letter-spacing: .3px; }
+    .chips { display:flex; gap: 8px; flex-wrap: wrap; }
+    .chip { border: 1px solid #ccc; border-radius: 999px; padding: 4px 10px; font-size: 12px; }
+    .btns { display:flex; gap: 8px; flex-wrap: wrap; }
+  </style>
+</head>
+
+<body>
+  <h1>Panel para practicar JS</h1>
+  <p class="muted">
+    Idea: tú harás el JS. Pintas tarjetas dinámicamente y a los botones les pondrás <b>data-op</b> y <b>data-index</b> con <code>setAttribute</code>.
+  </p>
+
+  <div class="grid">
+    <!-- FORMULARIO -->
+    <section class="card" aria-labelledby="t-form">
+      <h2 id="t-form">Registrar incidencia</h2>
+
+      <label for="descripcionIncidencia">Descripción</label>
+      <input id="descripcionIncidencia" type="text" placeholder="Ej: Proyector no enciende" />
+
+      <div class="row">
+        <div>
+          <label for="aulaIncidencia">Aula</label>
+          <select id="aulaIncidencia">
+            <option value="">Selecciona aula</option>
+            <option value="A1">A1</option>
+            <option value="A2">A2</option>
+            <option value="A3">A3</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="tipoIncidencia">Tipo</label>
+          <select id="tipoIncidencia">
+            <option value="">Selecciona tipo</option>
+            <option value="hardware">Hardware</option>
+            <option value="software">Software</option>
+            <option value="red">Red</option>
+          </select>
+        </div>
+      </div>
+
+      <label class="check">
+        <input id="urgenteIncidencia" type="checkbox" />
+        Marcar como urgente
+      </label>
+
+      <div class="actions">
+        <button id="btnRegistrarIncidencia" type="button">Registrar</button>
+        <button id="btnCrearDemo" type="button">Crear 2 de prueba</button>
+        <button id="btnVaciarTodo" type="button">Vaciar todo</button>
+      </div>
+
+      <p id="mensajeInfo" class="info" role="status">
+        Listo. Crea tu JS y usa delegación de eventos leyendo <code>getAttribute("data-op")</code>.
+      </p>
+    </section>
+
+    <!-- FILTROS -->
+    <section class="card" aria-labelledby="t-filtros">
+      <h2 id="t-filtros">Filtros</h2>
+
+      <div class="row">
+        <div>
+          <label for="filtroAula">Aula</label>
+          <select id="filtroAula">
+            <option value="todas">Todas</option>
+            <option value="A1">A1</option>
+            <option value="A2">A2</option>
+            <option value="A3">A3</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="filtroEstado">Estado</label>
+          <select id="filtroEstado">
+            <option value="todas">Todos</option>
+            <option value="abierta">Abierta</option>
+            <option value="en-curso">En curso</option>
+            <option value="resuelta">Resuelta</option>
+          </select>
+        </div>
+      </div>
+
+      <label for="busqueda">Búsqueda</label>
+      <input id="busqueda" type="search" placeholder="Buscar por texto en la descripción..." />
+
+      <label class="check">
+        <input id="filtroSoloUrgentes" type="checkbox" />
+        Solo urgentes
+      </label>
+
+      <div class="actions">
+        <button id="btnAplicarFiltros" type="button">Aplicar filtros</button>
+        <button id="btnResetFiltros" type="button">Reset filtros</button>
+      </div>
+
+      <div class="info" id="resumenIncidencias">
+        Total: <b id="total">0</b> · Abiertas: <b id="abiertas">0</b> · En curso: <b id="enCurso">0</b> · Resueltas: <b id="resueltas">0</b>
+      </div>
+    </section>
+  </div>
+
+  <!-- LISTA -->
+  <section class="card" style="margin-top:16px;" aria-labelledby="t-lista">
+    <h2 id="t-lista">Listado</h2>
+
+    <div id="mensajeVacio" class="empty">
+      No hay incidencias. Registra una o crea demos.
+    </div>
+
+    <!-- Contenedor para delegación de eventos -->
+    <div id="listaIncidencias" class="list" aria-live="polite">
+      <!-- (Vacío: tú lo pintas desde JS) -->
+    </div>
+  </section>
+
+  <!-- TEMPLATE: lo clonas y luego tú pones data-op / data-index con setAttribute -->
+  <template id="tplIncidencia">
+    <article class="item">
+      <header>
+        <div>
+          <div class="estado js-estado">ABIERA</div>
+          <div><b class="js-descripcion">Descripción</b></div>
+        </div>
+
+        <div class="chips">
+          <span class="chip js-chip-aula">Aula: ?</span>
+          <span class="chip js-chip-tipo">Tipo: ?</span>
+          <span class="chip js-chip-urgente">Urgente: ?</span>
+        </div>
+      </header>
+
+      <div class="btns">
+        <button type="button" class="js-btn-avanzar">Avanzar estado</button>
+        <button type="button" class="js-btn-reset">Reset</button>
+        <button type="button" class="js-btn-toggleUrgente">Toggle urgente</button>
+        <button type="button" class="js-btn-borrar">Borrar</button>
+      </div>
+    </article>
+  </template>
+
+  <!-- Tu JS -->
+  <script src="./app.js"></script>
+</body>
+</html>
