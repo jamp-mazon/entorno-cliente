@@ -117,153 +117,200 @@ document.addEventListener("DOMContentLoaded",function () {
          new Producto("Cable HDMI 2m", "Accesorios", 7.99, 20, "https://picsum.photos/seed/cable-hdmi-2m/800/600"), 
       ];
    
-function pintarProductos(lista){
-   // const gridProductos = document.getElementById("grid-productos");
-   gridProductos.innerHTML="";
-   lista.forEach(producto => {
-      const articulo=document.createElement("article");
-      articulo.classList.add("tarjeta-producto");
+   function pintarProductos(lista){
+      gridProductos.innerHTML="";
+      lista.forEach(producto => {
+         const articulo=document.createElement("article");
+         articulo.classList.add("tarjeta-producto");
 
-      const img=document.createElement("img");
-      img.classList.add("tarjeta-producto__imagen");
-      img.src=producto.img;
+         const img=document.createElement("img");
+         img.classList.add("tarjeta-producto__imagen");
+         img.src=producto.img;
 
-      const div_contenido=document.createElement("div");
-      div_contenido.classList.add("tarjeta-producto__contenido");
+         const div_contenido=document.createElement("div");
+         div_contenido.classList.add("tarjeta-producto__contenido");
 
-      const h3=document.createElement("h3");
-      h3.textContent=producto.nombre;
-      h3.classList.add("tarjeta-producto__nombre");
+         const h3=document.createElement("h3");
+         h3.textContent=producto.nombre;
+         h3.classList.add("tarjeta-producto__nombre");
 
-      const pCategoria=document.createElement("p");
-      pCategoria.textContent=producto.categoria;
-      pCategoria.classList.add("tarjeta-producto__categoria");
+         const pCategoria=document.createElement("p");
+         pCategoria.textContent=producto.categoria;
+         pCategoria.classList.add("tarjeta-producto__categoria");
 
-      div_contenido.appendChild(h3);
-      div_contenido.appendChild(pCategoria);
+         div_contenido.appendChild(h3);
+         div_contenido.appendChild(pCategoria);
 
-      const div_producto_pie=document.createElement("div");
-      div_producto_pie.classList.add("tarjeta-producto__pie");
+         const div_producto_pie=document.createElement("div");
+         div_producto_pie.classList.add("tarjeta-producto__pie");
 
-      const spanPrecio=document.createElement("span");
-      spanPrecio.textContent=producto.precio+"€";
-      spanPrecio.classList.add("tarjeta-producto__precio");
+         const spanPrecio=document.createElement("span");
+         spanPrecio.textContent=producto.precio+"€";
+         spanPrecio.classList.add("tarjeta-producto__precio");
 
-      const btn_añadir=document.createElement("button");
-      btn_añadir.textContent="Añadir";
-      btn_añadir.classList.add("boton-anadir");
-      btn_añadir.setAttribute("data-nombre",producto.nombre);
-      
-      div_producto_pie.appendChild(spanPrecio);
-      div_producto_pie.appendChild(btn_añadir);
+         const btn_añadir=document.createElement("button");
+         btn_añadir.textContent="Añadir";
+         btn_añadir.classList.add("boton-anadir");
+         btn_añadir.setAttribute("data-nombre",producto.nombre);
+         
+         div_producto_pie.appendChild(spanPrecio);
+         div_producto_pie.appendChild(btn_añadir);
 
-      articulo.appendChild(img);
-      articulo.appendChild(div_contenido);
-      articulo.appendChild(div_producto_pie);
+         articulo.appendChild(img);
+         articulo.appendChild(div_contenido);
+         articulo.appendChild(div_producto_pie);
 
-      gridProductos.appendChild(articulo);
+         gridProductos.appendChild(articulo);
+      });
+
+   }
+
+   const filtro_sidebar={
+      categoria:null,
+      rango:1000,
+      checkbox:false,
+      texto:""
+      };
+
+   function aplicarFiltros() {
+      const textoBusqueda=filtro_sidebar.texto.trim().toLowerCase();
+      let nueva_lista=[...productos];
+
+      if (textoBusqueda!=="") {
+         nueva_lista=nueva_lista.filter(producto=>producto.nombre.toLowerCase().includes(textoBusqueda));
+      }
+
+      if (filtro_sidebar.categoria) {
+         nueva_lista=nueva_lista.filter(producto=>producto.categoria.toLowerCase()===filtro_sidebar.categoria);
+      }
+
+      if (typeof filtro_sidebar.rango==="number") {
+         textoPrecioMaximo.textContent="Hasta "+filtro_sidebar.rango+" €";
+         nueva_lista=nueva_lista.filter(producto=>producto.precio<=filtro_sidebar.rango);
+      }
+
+      if (filtro_sidebar.checkbox) {
+         nueva_lista=nueva_lista.filter(producto=>producto.hayStock);
+      }
+
+      pintarProductos(nueva_lista);
+   }
+
+   chipsCategorias.addEventListener("click",function (event) {
+      if (event.target.tagName!=="BUTTON") {
+         return;
+      }
+      const categoriaSeleccionada=event.target.getAttribute("data-nombre");
+      if (filtro_sidebar.categoria===categoriaSeleccionada) {
+         filtro_sidebar.categoria=null;
+      } else {
+         filtro_sidebar.categoria=categoriaSeleccionada;
+      }
+      aplicarFiltros();
    });
 
-}
-// const inputBusqueda = document.getElementById("input-busqueda");
-// inputBusqueda.addEventListener("input",function () {
-//    const busqueda=inputBusqueda.value;
-//    const nueva_lista=productos.filter(producto=>producto.nombre.toLowerCase().includes(busqueda.toLowerCase()));
-//    pintarProductos(nueva_lista);
+   rangoPrecioMaximo.addEventListener("input",function () {
+      filtro_sidebar.rango=Number(rangoPrecioMaximo.value);
+      aplicarFiltros();
+   });
 
-// }) 
-// pintarProductos(productos);
-const filtro_sidebar={
-   categoria:"",
-   rango:0,
-   checkbox:false
-   };
+   checkSoloStock.addEventListener("change",function () {
+      filtro_sidebar.checkbox=checkSoloStock.checked;
+      aplicarFiltros();
+   });
 
-// filtro_sidebar.categoria.push("prueba");
-// console.log(filtro_sidebar.categoria);
+   inputBusqueda.addEventListener("input",function () {
+      filtro_sidebar.texto=inputBusqueda.value;
+      aplicarFiltros();
+   });
 
-chipsCategorias.addEventListener("click",function (event) {
-   if (event.target.tagName!=="BUTTON") {
-      return;
-   }
-   else{
-      if (event.target.getAttribute("data-nombre").includes("perifericos")) {
-         if (filtro_sidebar.categoria.includes("perifericos")) {
-
-            console.log(true);//seguir por aqui <------
-         }
-            filtro_sidebar.categoria="perifericos";
-            aplicarFiltros();
-      }
-      if (event.target.getAttribute("data-nombre").includes("componentes")) {
-            filtro_sidebar.categoria="componentes";
-
-            aplicarFiltros();
-
-      }
-      if (event.target.getAttribute("data-nombre").includes("accesorios")) {
-            filtro_sidebar.categoria="accesorios";
-
-            aplicarFiltros();
-
-      }
-   }
-});
-rangoPrecioMaximo.addEventListener("change",function () {
-   filtro_sidebar.rango=rangoPrecioMaximo.value;
-})
-checkSoloStock.addEventListener("change",function () {
-   if (checkSoloStock.checked) {
-      filtro_sidebar.checkbox=true;
-   }
-   else{
+   btnLimpiarFiltros.addEventListener("click",function () {
+      filtro_sidebar.categoria=null;
+      filtro_sidebar.rango=Number(rangoPrecioMaximo.max ?? 1000);
       filtro_sidebar.checkbox=false;
-   }
-})
+      filtro_sidebar.texto="";
 
-
-function aplicarFiltros() {
-   
-   let copia_lista=[...productos];
-   let nueva_lista=[];
-   let texto=inputBusqueda.value.toLowerCase();
-   if (texto!=="") {
-      nueva_lista=copia_lista.filter(producto=>producto.nombre.toLowerCase().includes(texto));
-      pintarProductos(nueva_lista);
-   }
-   if (filtro_sidebar.categoria.includes("perifericos")) {
-      nueva_lista=copia_lista.filter(producto=>producto.categoria.toLowerCase().includes("perifericos"));
-      pintarProductos(nueva_lista);
-   }
-   if (filtro_sidebar.categoria.includes("componentes")) {
-      nueva_lista=copia_lista.filter(producto=>producto.categoria.toLowerCase().includes("componentes"));
-      pintarProductos(nueva_lista);
-   }
-   if (filtro_sidebar.categoria.includes("accesorios")) {
-      nueva_lista=copia_lista.filter(producto=>producto.categoria.toLowerCase().includes("accesorios"));
-      pintarProductos(nueva_lista);
-   }
-   console.log(filtro_sidebar.categoria)
-   console.log(nueva_lista);
-   if (!filtro_sidebar.rango<=0 ||!filtro_sidebar.rango>=1000) {
-      nueva_lista=copia_lista.filter(producto=>producto.precio<=filtro_sidebar.rango);
+      inputBusqueda.value="";
+      rangoPrecioMaximo.value=filtro_sidebar.rango;
       textoPrecioMaximo.textContent="Hasta "+filtro_sidebar.rango+" €";
-      pintarProductos(nueva_lista);
-   }      
-   
-   if (filtro_sidebar.checkbox) {
-      nueva_lista=copia_lista.filter(producto=>producto.hayStock);
-      pintarProductos(nueva_lista);
-   }
-   //depuracion
-   pintarProductos(nueva_lista);
+      checkSoloStock.checked=false;
 
-}
-// pintarProductos(productos);
-inputBusqueda.addEventListener("input",aplicarFiltros);
-document.body.addEventListener("change",aplicarFiltros);
-aplicarFiltros();
-pintarProductos(productos);
+      aplicarFiltros();
+   });
+
+   const carrito=new Map();
+
+   function renderCarrito() {
+      listaCarrito.innerHTML="";
+      let total=0;
+      let totalUnidades=0;
+
+      carrito.forEach((linea) => {
+         const {producto, unidades}=linea;
+         total+=producto.precio*unidades;
+         totalUnidades+=unidades;
+
+         const fila=document.createElement("div");
+         fila.classList.add("linea-carrito");
+         fila.setAttribute("data-id-producto",producto.nombre);
+
+         const miniatura=document.createElement("img");
+         miniatura.classList.add("linea-carrito__miniatura");
+         miniatura.src=producto.img;
+         miniatura.alt="";
+
+         const info=document.createElement("div");
+         info.classList.add("linea-carrito__info");
+
+         const nombre=document.createElement("p");
+         nombre.classList.add("linea-carrito__nombre");
+         nombre.textContent=producto.nombre;
+
+         const detalle=document.createElement("span");
+         detalle.classList.add("linea-carrito__detalle");
+         detalle.textContent=`${unidades} × ${producto.precio.toFixed(2)} €`;
+
+         info.appendChild(nombre);
+         info.appendChild(detalle);
+         fila.appendChild(miniatura);
+         fila.appendChild(info);
+         listaCarrito.appendChild(fila);
+      });
+
+      if (carrito.size===0) {
+         listaCarrito.textContent="El carrito está vacío";
+      }
+
+      totalCarrito.textContent=total.toFixed(2)+" €";
+      contadorCarrito.textContent=totalUnidades.toString();
+   }
+
+   function anadirAlCarrito(nombreProducto) {
+      const producto=productos.find(prod=>prod.nombre===nombreProducto);
+      if (!producto) return;
+      if (!producto.hayStock || producto.cantidad<=0) return;
+
+      const lineaExistente=carrito.get(nombreProducto) || {producto, unidades:0};
+      if (lineaExistente.unidades>=producto.cantidad) {
+         return;
+      }
+
+      lineaExistente.unidades+=1;
+      carrito.set(nombreProducto,lineaExistente);
+      renderCarrito();
+   }
+
+   gridProductos.addEventListener("click",(event)=>{
+      const boton=event.target;
+      if (boton.classList.contains("boton-anadir")) {
+         const nombreProducto=boton.getAttribute("data-nombre");
+         anadirAlCarrito(nombreProducto);
+      }
+   });
+
+   listaCarrito.innerHTML="";
+   aplicarFiltros();
+   renderCarrito();
 });
 
 
