@@ -17,6 +17,8 @@
     // y comprobando los resultados en la consola del navegador.
 
     let nueva_lista=alumnos.map(alu=>alu);
+    // let nuevalista=[...alumnos];
+    // console.log(nuevalista);
      nueva_lista=nueva_lista.sort((a,b)=>a.notaMedia-b.notaMedia);
     console.log(nueva_lista);
     console.log(alumnos); 

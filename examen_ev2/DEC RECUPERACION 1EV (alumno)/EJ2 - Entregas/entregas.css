@@ -1,0 +1,22 @@
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+.formulario input {
+  margin-right: 5px;
+}
+
+.tarjeta {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 8px 0;
+}
+
+.aprobada {
+  color: green;
+}
+
+.suspensa {
+  color: red;
+}

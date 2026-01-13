@@ -8,7 +8,7 @@
   { id: 3, nombre: 'Marta', grupo: '1ºDAW', modulo: 'DIW', notaMedia: 6.5, faltas: 1, practicasEntregadas: 6, practicasTotales: 6, repetidor: true },
   { id: 4, nombre: 'Pablo', grupo: '1ºDAW', modulo: 'DIW', notaMedia: 5.1, faltas: 5, practicasEntregadas: 5, practicasTotales: 6, repetidor: false },
   { id: 5, nombre: 'Alae', grupo: '1ºDAW', modulo: 'DIW', notaMedia: 9.0, faltas: 0, practicasEntregadas: 6, practicasTotales: 6, repetidor: false },
-  { id: 6, nombre: 'Naaman', grupo: '1ºDAW', modulo: 'DIW', notaMedia: 3.9, faltas: 8, practicasEntregadas: 3, practicasTotales: 6, repetidor: true }
+  { id: 6, nombre: 'Naman', grupo: '1ºDAW', modulo: 'DIW', notaMedia: 3.9, faltas: 8, practicasEntregadas: 3, practicasTotales: 6, repetidor: true }
 ];
 
 

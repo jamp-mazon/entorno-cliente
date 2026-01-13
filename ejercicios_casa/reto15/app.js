@@ -132,6 +132,8 @@ function pintarIncidencias(lista_incidencias){
         //===============FIN BOTONES======================
         listaIncidencias.appendChild(article);
     }
-    
+    function crearIncidencias(params) {
+        
+    }
 }
 pintarIncidencias(incidencias);
