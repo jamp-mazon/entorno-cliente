@@ -18,6 +18,10 @@ const posts = document.getElementById("posts");
 
 function comprobarOk(response) {
   // TODO: si !response.ok -> throw new Error("HTTP ...")
+  if (!response.ok) {
+    throw new Error("");
+    
+  }
 }
 
 function pintarPosts(listaPosts) {
