@@ -1,0 +1,26 @@
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+.tarjeta {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 8px 0;
+}
+
+.estado-nuevo {
+  color: blue;
+}
+
+.estado-en-progreso {
+  color: orange;
+}
+
+.estado-cerrado {
+  color: green;
+}
+
+.btn-mini {
+  margin-right: 5px;
+}

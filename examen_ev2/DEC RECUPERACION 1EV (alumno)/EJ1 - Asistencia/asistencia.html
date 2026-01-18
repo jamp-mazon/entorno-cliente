@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ej1 - Asistencia y Puntos</title>
+    <link rel="stylesheet" href="asistencia.css" />
+  </head>
+  <body>
+    <main class="contenedor">
+      <header class="cabecera">
+        <h1>Ejercicio 1 · Asistencia y Puntos</h1>
+        <p class="sub">
+          Marca asistencia, suma/resta puntos y revisa el ranking.
+        </p>
+      </header>
+
+      <section class="panel">
+        <div class="campo">
+          <label for="selectAlumno">Alumno</label>
+          <select id="selectAlumno">
+            <option value="">-- Selecciona --</option>
+            <option value="Antonio">Antonio</option>
+            <option value="Laura">Laura</option>
+            <option value="Diego">Diego</option>
+            <option value="Guillermo">Guillermo</option>
+            <option value="Sara">Sara</option>
+            <option value="Pablo">Pablo</option>
+          </select>
+        </div>
+
+        <div class="botonera">
+          <button id="btnPresente" class="btn">Presente</button>
+          <button id="btnAusente" class="btn btn-sec">Ausente</button>
+        </div>
+
+        <div class="puntos">
+          <div class="campo">
+            <label for="inputCantidad">Cantidad de puntos</label>
+            <input
+              id="inputCantidad"
+              type="number"
+              inputmode="numeric"
+              placeholder="Ej: 1"
+              value="1"
+              min="0"
+            />
+          </div>
+          <div class="botonera">
+            <button id="btnSumar" class="btn">Sumar</button>
+            <button id="btnRestar" class="btn btn-sec">Restar</button>
+          </div>
+        </div>
+
+        <p id="mensajeInfo" class="mensaje" aria-live="polite"></p>
+        <p id="resumen" class="resumen">
+          Asistencias: 0 | Ausencias: 0 | Puntos totales: 0
+        </p>
+      </section>
+
+      <section class="tabla">
+        <h2>Asistencia</h2>
+        <div class="wrap-tabla">
+          <table>
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Asistencias</th>
+                <th>Ausencias</th>
+                <th>Puntos</th>
+              </tr>
+            </thead>
+            <tbody id="tbodyTabla">
+              <!-- filas por JS -->
+            </tbody>
+          </table>
+        </div>
+        <p class="ayuda">
+          Atajos: tecla <strong>1</strong>, <strong>2</strong>,
+          <strong>3</strong> para marcar presente rápido a los 3 primeros.
+        </p>
+      </section>
+    </main>
+
+    <script src="asistencia.js"></script>
+  </body>
+</html>

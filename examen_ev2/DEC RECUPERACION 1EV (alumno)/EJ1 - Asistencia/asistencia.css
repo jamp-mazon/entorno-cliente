@@ -1,0 +1,30 @@
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+.panel {
+  margin-bottom: 15px;
+}
+
+.botones button,
+.puntos button {
+  margin-right: 5px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 6px;
+  text-align: center;
+}
+
+#mensajeInfo {
+  margin-top: 10px;
+  font-weight: bold;
+}

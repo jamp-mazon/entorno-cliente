@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ejercicio 2 - Entregas</title>
+    <link rel="stylesheet" href="entregas.css" />
+  </head>
+  <body>
+    <h1>Gestor de Entregas</h1>
+
+    <section class="formulario">
+      <input id="alumnoEntrega" placeholder="Alumno" />
+      <input id="tareaEntrega" placeholder="Tarea" />
+      <input id="moduloEntrega" placeholder="Módulo" />
+      <input
+        id="notaEntrega"
+        type="number"
+        placeholder="Nota (1-10)"
+        min="1"
+        max="10"
+        step="1"
+      />
+      <button id="btnRegistrarEntrega">Registrar</button>
+    </section>
+
+    <section class="filtros">
+      <select id="filtroModulo">
+        <option value="todos">Todos los módulos</option>
+        <option value="DIW">DIW</option>
+        <option value="DEC">DEC</option>
+      </select>
+
+      <label>
+        <input type="checkbox" id="filtroSoloAprobadas" />
+        Solo aprobadas
+      </label>
+    </section>
+
+    <p id="mensajeVacio">No hay entregas</p>
+    <div id="contenedorEntregas"></div>
+
+    <p id="resumenEntregas"></p>
+
+    <script src="entregas.js"></script>
+  </body>
+</html>

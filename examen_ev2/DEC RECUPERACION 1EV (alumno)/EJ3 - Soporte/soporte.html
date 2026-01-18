@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejercicio 3 - Soporte</title>
+  <link rel="stylesheet" href="soporte.css">
+</head>
+<body>
+  <h1>Tickets de Soporte</h1>
+
+  <section class="formulario">
+    <input id="descripcionTicket" placeholder="Descripción">
+    <input id="aulaTicket" placeholder="Aula">
+    <select id="prioridadTicket">
+      <option>Baja</option>
+      <option>Media</option>
+      <option>Alta</option>
+    </select>
+    <button id="btnRegistrarTicket">Registrar ticket</button>
+  </section>
+
+  <section class="filtros">
+    <select id="filtroAula">
+      <option value="todas">Todas las aulas</option>
+      <option value="Aula 1">Aula 1</option>
+      <option value="Aula 2">Aula 2</option>
+    </select>
+
+    <select id="filtroEstado">
+      <option value="todas">Todos los estados</option>
+      <option value="nuevo">Nuevo</option>
+      <option value="en-progreso">En progreso</option>
+      <option value="cerrado">Cerrado</option>
+    </select>
+  </section>
+
+  <p id="mensajeVacio">No hay tickets</p>
+  <div id="contenedorTickets"></div>
+
+  <p id="resumenTickets"></p>
+
+  <script src="soporte.js"></script>
+</body>
+</html>
