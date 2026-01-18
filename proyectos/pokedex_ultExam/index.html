@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mini Pokédex</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!-- HEADER con Flex -->
+    <header class="header">
+        <h1>Proyecto Pokédex</h1>
+        <p class="subtitle">Galería básica de Pokémon con HTML, CSS y JavaScript</p>
+
+        <!-- Barra de búsqueda (Flex) -->
+        <div class="buscador-botones">
+            <div class="search-bar">
+                <input type="text" placeholder="Buscar Pokémon...">
+                <button>Buscar</button>
+            </div>
+            <!-- Filtros (Flex) -->
+            <section class="filters">
+                <button>Todos</button>
+                <button>Fuego</button>
+                <button>Agua</button>
+                <button>Planta</button>
+                <button>Eléctrico</button>
+            </section>        
+        </div>
+    </header>
+
+    <main class="main">
+
+        <!-- POKEDEX con Grid -->
+        <section id="pokedex" class="pokedex">
+
+            <!-- Tarjeta de ejemplo (luego JS las generará) -->
+            <article class="pokemon-card">
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" width="300px" alt="Bulbasaur">
+                <h2>Bulbasaur</h2>
+                <p>Tipo: Planta / Veneno</p>
+            </article>
+
+            <article class="pokemon-card">
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png" width="300px" alt="Charmander">
+                <h2>Charmander</h2>
+                <p>Tipo: Fuego</p>
+            </article>
+
+            <article class="pokemon-card">
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png" width="300px" alt="Squirtle">
+                <h2>Squirtle</h2>
+                <p>Tipo: Agua</p>
+            </article>
+
+        </section>
+    </main>
+
+    <!-- FOOTER con Flex -->
+    <footer class="footer">
+        <p>&copy; 2025 - Proyecto Pokédex</p>
+        <div class="footer-links">
+            <a href="#">GitHub</a>
+            <a href="#">Contacto</a>
+            <a href="#">Ayuda</a>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
