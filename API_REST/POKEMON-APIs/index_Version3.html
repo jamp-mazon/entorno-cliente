@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscador de Pokémon</title>
+    <link rel="stylesheet" href="styles_Version3.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🔴 Buscador de Pokémon</h1>
+
+        <!-- Sección de búsqueda -->
+        <div class="search-box">
+            <input 
+                type="text" 
+                id="pokemonInput" 
+                placeholder="Ej: pikachu, 25, charizard... ">
+            <button id="buscarBtn">Buscar</button>
+        </div>
+
+        <!-- Mensaje de carga -->
+        <p id="loading" class="hidden">Buscando... </p>
+
+        <!-- Mensaje de error -->
+        <p id="error" class="error hidden"></p>
+
+        <!-- Resultado -->
+        <div id="resultado" class="resultado hidden">
+            <img id="pokemonImg" src="" alt="Pokémon">
+            <h2 id="pokemonNombre"></h2>
+            <p id="pokemonId"></p>
+        </div>
+    </div>
+
+    <script src="script_Version3.js"></script>
+</body>
+</html>
