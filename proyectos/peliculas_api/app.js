@@ -41,6 +41,7 @@ function init() {
     // - Cargar favoritos desde LocalStorage
     // - Mostrar favoritos en la UI
     // - Agregar event listeners
+  
   cargarFavoritos();
   mostrarFavoritos();
   btnBuscar.addEventListener("click",function () {
@@ -52,7 +53,11 @@ function init() {
       return;
     }
     const botonFav=e.target;
-     
+    const peliculaJSON=botonFav.getAttribute("data-pelicula");
+    const pelicula=JSON.parse(peliculaJSON);
+    console.log("PElicula boton");
+    console.log(pelicula);
+    agregarAFavoritos(pelicula);
   })
   inputPelicula.addEventListener("keydown",function (e) {
   if (e.key==="Enter") {
@@ -110,8 +115,9 @@ function mostrarResultados(peliculas) {
       titulo.className="text-2xl font-bold";
       article.appendChild(titulo);
 
-      const pID=document.createElement("p");
-      pID.textContent=pelicula.Year;
+      // const pID=document.createElement("p");
+      // pID.textContent=pelicula.imdbID;
+      // article.appendChild(pID)
 
       const pAnio=document.createElement("p");
       pAnio.textContent=pelicula.Year;
@@ -127,9 +133,11 @@ function mostrarResultados(peliculas) {
       btnFavorito.textContent="Agregar a Favoritos";
       btnFavorito.className="bg-yellow-600 hover:bg-yellow-700 text-white px-6 py-2 rounded-lg font-semibold transition";
       btnFavorito.setAttribute("data-op","favorito");
+      // Guardamos la película serializada porque los data-* solo admiten strings
+      btnFavorito.setAttribute("data-pelicula", JSON.stringify(pelicula));
+      console.log("Meto pelicula");
+      console.log(pelicula);
       btnFavorito.setAttribute("data-index",i);
-
-      btnFavorito.addEventListener("click",guardarFavoritos());
       article.appendChild(btnFavorito);
 
     }
@@ -171,10 +179,8 @@ function cargarFavoritos() {
     // - Parsear JSON (usar JSON.parse)
     // - Si no existe, devolver array vacío []
     // - Asignar a peliculasFavoritas
-    let favoritos=localStorage.getItem("favortios");
-    favoritos=JSON.parse(favoritos);
-    peliculasFavoritas.push(favoritos);
-    mostrarFavoritos();
+    const favoritos = JSON.parse(localStorage.getItem("favoritos"));
+    peliculasFavoritas = favoritos ?? [];
 }
 
 // 6️⃣ Guardar favoritos en LocalStorage
@@ -194,8 +200,8 @@ function agregarAFavoritos(pelicula) {
     // - Guardar en LocalStorage
     // - Actualizar la UI
     // - Mostrar feedback visual (opcional)
-    const encontrado=peliculasFavoritas.find((peli)=>peli.toLowerCase().includes("pelicula"));
-    if (!encontrado) {
+    const encontrado=peliculasFavoritas.find((peli)=>peli.Title===pelicula.Title);
+    if (encontrado) {
       return;
     }
     peliculasFavoritas.push(pelicula);
@@ -226,10 +232,34 @@ function mostrarFavoritos() {
     // - Iterar sobre peliculasFavoritas
     // - Crear mini-cards con:  póster, título, botón eliminar
     favoritosDiv.innerHTML="";
-    if (peliculasFavoritas.length===0) {
+    if (peliculasFavoritas.length===0 ||peliculasFavoritas===null) {
       const pError=document.createElement("p");
       pError.textContent="No hay favoritos";
       favoritosDiv.appendChild(pError);
+      return;
+    }
+    for (let i = 0; i < peliculasFavoritas.length; i++) {
+      console.log(peliculasFavoritas);
+      const pelicula = peliculasFavoritas[i];
+      const article=document.createElement("article");
+      favoritosDiv.appendChild(article);
+
+      const titulo=document.createElement("h3");
+      titulo.textContent=pelicula.Title;
+      titulo.className="text-2xl font-bold";
+      article.appendChild(titulo);
+
+      // const pID=document.createElement("p");
+      // pID.textContent=pelicula.imdbID;
+      // article.appendChild(pID)
+
+      const pAnio=document.createElement("p");
+      pAnio.textContent=pelicula.Year;
+      article.appendChild(pAnio);
+
+      const caratula=document.createElement("img");
+      caratula.src=pelicula.Poster;
+      article.appendChild(caratula);      
     }
 
 }
