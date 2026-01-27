@@ -41,39 +41,9 @@ function init() {
     // - Cargar favoritos desde LocalStorage
     // - Mostrar favoritos en la UI
     // - Agregar event listeners
-  
-  cargarFavoritos();
-  mostrarFavoritos();
-  btnBuscar.addEventListener("click",function () {
-    const titulo=inputPelicula.value.trim().toLowerCase();
-    buscarPeliculas(titulo);
-  });
-  resultadosDiv.addEventListener("click",function (e) {
-    if (e.target.tagName!=="BUTTON") {
-      return;
-    }
-    const botonFav=e.target;
-    const peliculaJSON=botonFav.getAttribute("data-pelicula");
-    const pelicula=JSON.parse(peliculaJSON);
-    console.log("PElicula boton");
-    console.log(pelicula);
-    agregarAFavoritos(pelicula);
-  })
-  inputPelicula.addEventListener("keydown",function (e) {
-  if (e.key==="Enter") {
-    buscarPeliculas(inputPelicula.value.trim().toLowerCase());
-  }
-});
-favoritosDiv.addEventListener("click",function (e) {
-    if (e.target.tagName!=="BUTTON") {
-      return;
-    }
-    const boton=e.target;
-    const peliculaJSON=boton.getAttribute("data-pelicula");
-    const pelicula=JSON.parse(peliculaJSON);
-    eliminarDeFavoritos(pelicula);
-})
-
+    cargarFavoritos();
+    mostrarFavoritos();
+    agregarListeners();
 }
 
 // 2️⃣ Buscar películas en la API
@@ -84,26 +54,27 @@ async function buscarPeliculas(titulo) {
     // - Manejar la respuesta
     // - Llamar a mostrarResultados()
     // - Manejar errores
+    titulo=titulo.trim().toLowerCase();
     if (titulo==="") {
-      console.log("El input de pelicula esta vacio");
-      mostrarError("El campo no puede estar vacio");
       return;
     }
-    const url= `http://www.omdbapi.com/?apikey=${API_KEY}&s=${titulo}`;
-
+    const url=`http://www.omdbapi.com/?apikey=${API_KEY}&s=${titulo}`;
     try {
-      const respuesta= await fetch(url);
+      const respuesta=await fetch(url);
       if (!respuesta.ok) {
-        throw new Error("No se encontro ninguna pelicula con ese titulo");
+        mostrarError("No se obtuvieron resultados...");
+        throw new Error("No se han encontrado resultados");        
       }
-      let peliculas= await respuesta.json();
-      console.log(peliculas.Search);
-      mostrarResultados(peliculas.Search);
+      const resultados= await respuesta.json();
+      console.log(resultados.Search);
+      mostrarResultados(resultados.Search);
+
     } catch (error) {
-      console.log(error)
-      mostrarError(`No se ha encontrado la pelicula`);
+      console.log("Error en try Catch de peliculas:"+error);
     }
-  }
+
+
+}
 
 // 3️⃣ Mostrar resultados de búsqueda
 function mostrarResultados(peliculas) {
@@ -113,42 +84,36 @@ function mostrarResultados(peliculas) {
     // - Crear una tarjeta (card) para cada película
     // - Agregar botón "Agregar a Favoritos"
     // - Verificar si ya está en favoritos (deshabilitar botón)
-    resultadosDiv.innerHTML="";
-    for (let i = 1; i < peliculas.length; i++) {
-      const pelicula = peliculas[i];
-      const article=document.createElement("article");
-      resultadosDiv.appendChild(article);
+    limpiarResultados();
+    peliculas.forEach(pelicula => {
+        const article=document.createElement("article");
+        resultadosDiv.appendChild(article);
 
-      const titulo=document.createElement("h3");
-      titulo.textContent=pelicula.Title;
-      titulo.className="text-2xl font-bold";
-      article.appendChild(titulo);
+        const titulo=document.createElement("h3");
+        titulo.textContent=pelicula.Title;
+        article.appendChild(titulo);
 
-      // const pID=document.createElement("p");
-      // pID.textContent=pelicula.imdbID;
-      // article.appendChild(pID)
+        const id=document.createElement("p");
+        id.textContent=pelicula.imdbID;
 
-      const pAnio=document.createElement("p");
-      pAnio.textContent=pelicula.Year;
-      article.appendChild(pAnio);
+        const year=document.createElement("p");
+        year.textContent=pelicula.Year;
+        article.appendChild(year);
 
-      const caratula=document.createElement("img");
-      caratula.src=pelicula.Poster;
-      article.appendChild(caratula);
+        const poster=document.createElement("img");
+        poster.src=pelicula.Poster;
+        poster.className="w-80 h-80 object-cover rounded";
+        article.appendChild(poster);
 
-      const btnFavorito=document.createElement("button");
-      btnFavorito.textContent="Agregar a Favoritos";
-      btnFavorito.className="bg-yellow-600 hover:bg-yellow-700 text-white px-6 py-2 rounded-lg font-semibold transition";
-      btnFavorito.setAttribute("data-op","favorito");
-      // Guardamos la película serializada porque los data-* solo admiten strings
-      btnFavorito.setAttribute("data-pelicula", JSON.stringify(pelicula));
+        const btnFavorito=document.createElement("button");
+        btnFavorito.textContent="Añadir Favoritos";
+        btnFavorito.setAttribute("data-op","favorito");
+        btnFavorito.setAttribute("data-pelicula",JSON.stringify(pelicula));
+        btnFavorito.className="mt-2 bg-yellow-500 text-white px-3 py-1 rounded";
+        article.appendChild(btnFavorito);
 
-      console.log("Meto pelicula");
-      console.log(pelicula);
-      btnFavorito.setAttribute("data-index",i);
-      article.appendChild(btnFavorito);
 
-    }
+    });
 }
 
 // 4️⃣ Obtener detalles completos de una película
@@ -157,23 +122,6 @@ async function obtenerDetalles(imdbID) {
     // - Hacer fetch con &i=imdbID para obtener detalles completos
     // - Retornar los datos
     // NOTA: Esto es opcional, pero mejora la info que guardas
-    if (imdbID==="") {
-      mostrarError("El imdb no puede estar vacio para mostrar los detalles");
-      return;
-    }
-    const url=`http://www.omdbapi.com/?apikey=${API_KEY}?i=${imdbID}`;
-
-    try {
-      const respuesta=await fetch(url);
-      if (!respuesta.ok) {
-        throw new Error("No se obtuvo respuesta al obtener detalles");
-      }
-      const detalles= await respuesta.json();
-      return detalles;
-    } catch (error) {
-      console.log(error);
-      mostrarError("No se han encontrado detalles descritos");
-    }
 }
 
 // =============================================================
@@ -187,8 +135,14 @@ function cargarFavoritos() {
     // - Parsear JSON (usar JSON.parse)
     // - Si no existe, devolver array vacío []
     // - Asignar a peliculasFavoritas
-    const favoritos = JSON.parse(localStorage.getItem("favoritos"));
-    peliculasFavoritas = favoritos ?? [];
+    let favoritos=localStorage.getItem("favoritos");
+    if (favoritos) {
+      peliculasFavoritas=JSON.parse(favoritos);
+    }
+    else{
+      peliculasFavoritas=[];
+    }
+
 }
 
 // 6️⃣ Guardar favoritos en LocalStorage
@@ -196,8 +150,8 @@ function guardarFavoritos() {
     // TODO:
     // - Convertir peliculasFavoritas a JSON (JSON.stringify)
     // - Guardar en localStorage. setItem('favoritos', json)
-    const jsonPelis=JSON.stringify(peliculasFavoritas);
-    localStorage.setItem("favoritos",jsonPelis);
+    const peliculasJSON=JSON.stringify(peliculasFavoritas);
+    localStorage.setItem("favoritos",peliculasJSON);
 }
 
 // 7️⃣ Agregar película a favoritos
@@ -208,36 +162,31 @@ function agregarAFavoritos(pelicula) {
     // - Guardar en LocalStorage
     // - Actualizar la UI
     // - Mostrar feedback visual (opcional)
-    const encontrado=peliculasFavoritas.find((peli)=>peli.Title===pelicula.Title);
-    if (encontrado) {
+    let encontrada=peliculasFavoritas.some(peli=>peli.imdbID===pelicula.imdbID);
+    console.log(encontrada);
+    if (encontrada) {
       return;
     }
-    peliculasFavoritas.push(pelicula);
+    else{
+      peliculasFavoritas.push(pelicula);
+      console.log(peliculasFavoritas);
+      guardarFavoritos();
+      cargarFavoritos();
+      mostrarFavoritos();
+    }
+}
+
+// 8️⃣ Eliminar película de favoritos
+function eliminarDeFavoritos(imdbID) {
+    // TODO:
+    // - Filtrar el array para remover la película (filter)
+    // - Guardar cambios en LocalStorage
+    // - Actualizar la UI
+    peliculasFavoritas=peliculasFavoritas.filter(pelicula=>pelicula.imdbID!==imdbID);
     guardarFavoritos();
     cargarFavoritos();
     mostrarFavoritos();
 }
-
-// 8️⃣ Eliminar película de favoritos
-function eliminarDeFavoritos(pelicula) {
-//     // TODO:
-//     // - Filtrar el array para remover la película (filter)
-//     // - Guardar cambios en LocalStorage
-//     // - Actualizar la UI
-//     const detalles=obtenerDetalles(imdbID);
-
-//     peliculasFavoritas=peliculasFavoritas.filter((pelicula)=>!pelicula.includes(detalles.Search[0].name));
-//     guardarFavoritos();
-//     cargarFavoritos();
-//     mostrarFavoritos();
-  peliculasFavoritas = peliculasFavoritas.filter(
-    (peli) => peli.imdbID !== pelicula.imdbID
-  );
-  console.log(peliculasFavoritas);
-  guardarFavoritos();
-  cargarFavoritos();
-  mostrarFavoritos();
- }
 
 // 9️⃣ Mostrar lista de favoritos
 function mostrarFavoritos() {
@@ -247,45 +196,39 @@ function mostrarFavoritos() {
     // - Iterar sobre peliculasFavoritas
     // - Crear mini-cards con:  póster, título, botón eliminar
     favoritosDiv.innerHTML="";
-    if (peliculasFavoritas.length===0 ||peliculasFavoritas===null) {
-      const pError=document.createElement("p");
+    if (peliculasFavoritas===0) {
+      let pError=document.createElement("p");
       pError.textContent="No hay favoritos";
       favoritosDiv.appendChild(pError);
-      return;
     }
-    for (let i = 0; i < peliculasFavoritas.length; i++) {
-      console.log(peliculasFavoritas);
-      const pelicula = peliculasFavoritas[i];
-      const article=document.createElement("article");
-      favoritosDiv.appendChild(article);
+    peliculasFavoritas.forEach(pelicula => {
 
-      const titulo=document.createElement("h3");
-      titulo.textContent=pelicula.Title;
-      titulo.className="text-2xl font-bold";
-      article.appendChild(titulo);
+        const article=document.createElement("article");
+        favoritosDiv.appendChild(article);
 
-      // const pID=document.createElement("p");
-      // pID.textContent=pelicula.imdbID;
-      // article.appendChild(pID)
+        const titulo=document.createElement("h6");
+        titulo.textContent=pelicula.Title;
+        article.appendChild(titulo);
 
-      const pAnio=document.createElement("p");
-      pAnio.textContent=pelicula.Year;
-      article.appendChild(pAnio);
+        const id=document.createElement("p");
+        id.textContent=pelicula.imdbID;
 
-      const caratula=document.createElement("img");
-      caratula.src=pelicula.Poster;
-      article.appendChild(caratula);
-      
-      const btnEliminar=document.createElement("button");
-      btnEliminar.textContent="Eliminar Fav";
-      btnEliminar.className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-semibold transition";
-      btnEliminar.setAttribute("data-op","eliminar");
-      btnEliminar.setAttribute("data-pelicula",JSON.stringify(pelicula));
-      article.appendChild(btnEliminar);
+        const year=document.createElement("p");
+        year.textContent=`Año ${pelicula.Year}`;
+        article.appendChild(year);
 
+        const poster=document.createElement("img");
+        poster.src=pelicula.Poster;
+        poster.className="w25 h-25 object-cover rounded mb-5";
+        article.appendChild(poster);
 
-    }
-
+        const btnEliminar=document.createElement("button");
+        btnEliminar.textContent="Eliminar Favoritos";
+        btnEliminar.setAttribute("data-op","eliminar");
+        btnEliminar.setAttribute("data-id",pelicula.imdbID);
+        btnEliminar.className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-semibold transition";
+        article.appendChild(btnEliminar);        
+    });
 }
 
 // =============================================================
@@ -296,9 +239,10 @@ function mostrarFavoritos() {
 function mostrarError(mensaje) {
     // TODO: Mostrar error en el div de resultados
     resultadosDiv.innerHTML="";
-      const pError=document.createElement("p");
-      pError.textContent=mensaje;
-      resultadosDiv.appendChild(pError);
+    const pError=document.createElement("p");
+    pError.textContent=mensaje;
+    pError.className="text-red-500";
+    resultadosDiv.appendChild(pError);
 }
 
 // 1️⃣1️⃣ Limpiar resultados
@@ -319,6 +263,46 @@ function limpiarResultados() {
 // =============================================================
 // 📚 RECURSOS Y TIPS
 // =============================================================
+function agregarListeners(){
+
+  btnBuscar.addEventListener("click",function () {
+    buscarPeliculas(inputPelicula.value);
+    
+  });
+  inputPelicula.addEventListener("keydown",function (e) {
+    if (e.key==="Enter") {
+      buscarPeliculas(inputPelicula.value);
+    }
+  });
+  resultadosDiv.addEventListener("click",function (e) {
+    if (e.target.tagName!=="BUTTON") {
+      return;
+    }
+    console.log("pulsando fav");
+    const fav=e.target;
+    const peliJSON=fav.getAttribute("data-pelicula");
+    // console.log(peliJSON);
+    const pelicula=JSON.parse(peliJSON);
+    // console.log(pelicula);
+    agregarAFavoritos(pelicula);
+    guardarFavoritos();
+    cargarFavoritos();
+    mostrarFavoritos();
+  });
+  favoritosDiv.addEventListener("click",function (e) {
+    if (e.target.tagName!=="BUTTON") {
+      return;
+    }
+    console.log("pulsando del");
+
+    const eliminar=e.target;
+    const imdbID=eliminar.getAttribute("data-id");
+    eliminarDeFavoritos(imdbID);
+    guardarFavoritos();
+    cargarFavoritos();
+    mostrarFavoritos();
+  });  
+}
 /*
 ESTRUCTURA DE RESPUESTA DE LA API (búsqueda):
 {

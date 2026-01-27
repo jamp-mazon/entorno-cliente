@@ -1,0 +1,350 @@
+// =============================================================
+// 🎬 CATÁLOGO STUDIO GHIBLI - PRÁCTICA ARRAYS Y ASYNC/AWAIT
+// =============================================================
+// Práctica para 2º DAW - Entorno Cliente
+// API REAL: Studio Ghibli API (sin API Key)
+// URL: https://ghibliapi.vercel.app/films
+// =============================================================
+
+// ========================================
+// VARIABLES GLOBALES
+// ========================================
+
+let peliculasCargadas = [];
+let peliculasFiltradas = [];
+
+const API_URL = "https://ghibliapi.vercel.app/films";
+
+// ========================================
+// FUNCIÓN ASÍNCRONA - CONSUMIR API REAL
+// ========================================
+
+// Carga las películas desde la API real de Studio Ghibli
+async function cargarPeliculasAPI() {
+  // TODO: Implementar función asíncrona con fetch()
+  // 1. Hacer petición con fetch() a API_URL
+  // 2. Verificar que response.ok sea true (si no, lanzar error)
+  // 3. Convertir respuesta a JSON con response.json()
+  // 4. Retornar el array de películas
+  // 5. Manejar errores con try/catch
+  try {
+    const respuesta=await fetch(API_URL);
+    if (!respuesta.ok) {
+      throw new Error("No se obtuvo respuesta");
+    }
+    const resultados= await respuesta.json();
+    return resultados;
+  } catch (error) {
+    console.log("Fallo en la respuesta trycatch:"+error);
+  }
+
+
+  
+}
+// ========================================
+// FUNCIONES CON MÉTODOS DE ARRAYS
+// ========================================
+
+// Extrae solo los títulos de las películas usando map()
+function obtenerTitulos(peliculas) {
+  // TODO: Usar map() para extraer la propiedad 'title'
+  const tituloPeliculas=peliculas.map((pelicula)=>pelicula.title);
+  return tituloPeliculas;
+}
+
+// Filtra películas por director usando filter()
+function filtrarPorDirector(peliculas, director) {
+  // TODO: Usar filter() para obtener películas del director indicado
+  let peliculasDirector=peliculas.filter((pelicula)=>pelicula.director===director);
+  return peliculasDirector;
+}
+
+// Busca películas por título (búsqueda parcial, no sensible a mayúsculas)
+function buscarPorTitulo(peliculas, termino) {
+  // TODO: Usar filter() con includes() y toLowerCase()
+  termino=termino.trim().toLowerCase();
+  const peliculasTitulo = peliculas.filter((pelicula) =>
+    pelicula.title.toLowerCase().includes(termino)
+  );
+  return peliculasTitulo;
+}
+
+// Calcula el promedio de puntuaciones RT Score usando reduce()
+function calcularPuntuacionPromedio(peliculas) {
+  // TODO: Calcular promedio de rt_score
+  // 1. Verificar que el array no esté vacío (retornar 0 si lo está)
+  // 2. Usar reduce() para sumar todos los rt_score
+  // 3. IMPORTANTE: rt_score es string, convertir con parseFloat()
+  // 4. Dividir la suma entre la cantidad de películas
+  // 5. Retornar el promedio
+  const rt_score=peliculas.reduce((acumulador,pelicula)=>{
+    const score=parseFloat(pelicula.rt_score);
+    return acumulador+=score;
+  },0)
+  const promedio=rt_score/peliculas.length;
+  return promedio;
+
+}
+
+// Busca una película específica por su ID usando find()
+function buscarPorId(peliculas, id) {
+  // TODO: Usar find() para buscar por id
+  const pelicula=peliculas.find((pelicula)=>pelicula.id===id);
+  return pelicula;
+}
+
+
+// Verifica si existe alguna película del director indicado usando some()
+function tieneDirector(peliculas, director) {
+  // TODO: Usar some() para verificar si existe al menos una película del director
+  director=director.trim().toLowerCase();
+  const existeDirector=peliculas.some((pelicula)=>pelicula.director.toLowerCase()===director);
+  return existeDirector;
+}
+
+// Ordena películas por año (más recientes primero) usando sort()
+function ordenarPorAño(peliculas) {
+  // TODO: Ordenar por release_date descendente
+  // 1. Usar spread operator [...peliculas] para no modificar el original
+  // 2. Usar sort() con función comparadora
+  // 3. IMPORTANTE: release_date es string, convertir con parseInt()
+  // 4. Ordenar de mayor a menor (más reciente primero)
+  const peliculas_por_anio = [...peliculas].sort((a, b) => {
+    const fecha1 = parseInt(a.release_date, 10);
+    const fecha2 = parseInt(b.release_date, 10);
+    return fecha2 - fecha1; // descendente
+  });
+  return peliculas_por_anio;
+}
+
+// Ordena películas por puntuación RT (mayor a menor) usando sort()
+function ordenarPorPuntuacion(peliculas) {
+  // TODO: Ordenar por rt_score descendente
+  // 1. Usar spread operator [...peliculas] para no modificar el original
+  // 2. Usar sort() con función comparadora
+  // 3. IMPORTANTE: rt_score es string, convertir con parseFloat()
+  // 4. Ordenar de mayor a menor
+  const peliculas_por_calificacion=[...peliculas].sort((a,b)=>{
+    const puntucion1=parseFloat(a.rt_score);
+    const puntuacion2=parseFloat(b.rt_score);
+    return puntuacion2-puntucion1;
+  });
+  return peliculas_por_calificacion;
+}
+
+// ========================================
+// FUNCIONES DE INTERFAZ Y DOM
+// ========================================
+  const btnCargar = document.getElementById("btnCargar");
+  const selectDirector = document.getElementById("selectDirector");
+  const inputBuscar = document.getElementById("inputBuscar");
+  const btnOrdenarAño = document.getElementById("btnOrdenarAño");
+  const btnOrdenarPuntuacion = document.getElementById("btnOrdenarPuntuacion");
+  const btnReset = document.getElementById("btnReset");
+// Inicializa la aplicación y configura los event listeners
+function inicializarApp() {
+  console.log("🎬 Aplicación Studio Ghibli iniciada - SOLUCIÓN");
+
+  console.log("API URL:", API_URL);
+
+  // Configurar event listeners
+  btnCargar.addEventListener("click", manejarCargaDatos);
+  selectDirector.addEventListener("change", manejarFiltroDirector);
+  inputBuscar.addEventListener("keydown",function (e) {
+    if (e.key==="Enter") {
+      const peliculas_encontradas=buscarPorTitulo(peliculasCargadas,inputBuscar.value);
+      console.log(peliculas_encontradas);
+      actualizarEstadisticas(peliculas_encontradas);
+      mostrarPeliculas(peliculas_encontradas);
+    }
+  });
+  btnOrdenarAño.addEventListener("click", manejarOrdenarAño);
+  btnOrdenarPuntuacion.addEventListener("click", manejarOrdenarPuntuacion);
+  btnReset.addEventListener("click", manejarReset);
+
+}
+
+// Maneja la carga de películas desde la API real
+async function manejarCargaDatos() {
+  // TODO: Cargar películas de forma asíncrona
+  // 1. Mostrar mensaje "Cargando..." con mostrarEstadoCarga()
+  // 2. Llamar a cargarPeliculasAPI() con await
+  // 3. Guardar resultado en peliculasCargadas y peliculasFiltradas
+  // 4. Llamar a mostrarPeliculas() y actualizarEstadisticas()
+  // 5. Mostrar mensaje de éxito
+  // 6. Manejar errores con try/catch y mostrar mensaje de error
+  mostrarEstadoCarga("Cargando...","cargando");
+  const director=selectDirector.value;
+  try {
+   peliculasCargadas= await cargarPeliculasAPI();
+  //  console.log(peliculasCargadas);
+  console.log(peliculasFiltradas);
+   actualizarEstadisticas(peliculasCargadas);
+   mostrarPeliculas(peliculasCargadas);
+   mostrarEstadoCarga("Peliculas cargadas con exito","exito")
+  } catch (error) {
+    mostrarEstadoCarga(`ERROR al cargar datos:(${error})`);
+  }
+ 
+
+}
+
+// Maneja el filtro por director
+function manejarFiltroDirector() {
+  // TODO: Filtrar películas por director seleccionado
+  // 1. Obtener valor del select con id 'selectDirector'
+  // 2. Si está vacío, mostrar todas las películas
+  // 3. Si no, usar filtrarPorDirector()
+  // 4. Actualizar peliculasFiltradas
+  // 5. Llamar a mostrarPeliculas() y actualizarEstadisticas()
+  const director=selectDirector.value;
+  if (director==="") {
+    mostrarPeliculas(peliculasCargadas);
+    return;
+  }
+  peliculasFiltradas=filtrarPorDirector(peliculasCargadas,director);
+  mostrarPeliculas(peliculasFiltradas);
+  actualizarEstadisticas(peliculasFiltradas);
+}
+
+// Maneja la búsqueda por título en tiempo real
+function manejarBusqueda() {
+  // TODO: Buscar películas por título
+  // 1. Obtener valor del input con id 'inputBuscar'
+  // 2. Si está vacío, mostrar todas las películas
+  // 3. Si no, usar buscarPorTitulo()
+  // 4. Actualizar peliculasFiltradas
+  // 5. Llamar a mostrarPeliculas() y actualizarEstadisticas()
+  const busqueda=inputBuscar.value;
+  if (busqueda==="") {
+    mostrarPeliculas(peliculasCargadas);
+    return;
+  }
+  peliculasFiltradas = buscarPorTitulo(peliculasCargadas, busqueda);
+  actualizarEstadisticas(peliculasFiltradas);
+  mostrarPeliculas(peliculasFiltradas);
+}
+
+// Ordena las películas mostradas por año
+function manejarOrdenarAño() {
+  // TODO: Ordenar peliculasFiltradas por año y mostrar resultado
+  peliculasFiltradas=ordenarPorAño(peliculasFiltradas);
+  actualizarEstadisticas(peliculasFiltradas);  
+  mostrarPeliculas(peliculasFiltradas);
+
+}
+
+// Ordena las películas mostradas por puntuación RT
+function manejarOrdenarPuntuacion() {
+  // TODO: Ordenar peliculasFiltradas por puntuación y mostrar resultado
+  const lista_peliculas_ordenadas=ordenarPorPuntuacion(peliculasFiltradas);
+  actualizarEstadisticas(lista_peliculas_ordenadas);  
+  mostrarPeliculas(lista_peliculas_ordenadas);
+
+}
+
+// Resetea todos los filtros y ordenamientos
+function manejarReset() {
+  // TODO: Resetear filtros
+  // 1. Limpiar valor de selectDirector
+  // 2. Limpiar valor de inputBuscar
+  // 3. Restaurar peliculasFiltradas = peliculasCargadas
+  // 4. Llamar a mostrarPeliculas() y actualizarEstadisticas()
+  selectDirector.value=selectDirector[0];
+  inputBuscar.value="";
+  peliculasFiltradas=[...peliculasCargadas];
+  actualizarEstadisticas(peliculasCargadas);
+  mostrarPeliculas(peliculasCargadas);
+}
+
+// Renderiza las películas en el DOM usando forEach()
+function mostrarPeliculas(peliculas) {
+  // TODO: Renderizar películas en el contenedor
+  // 1. Obtener elemento con id 'listaPeliculas'
+  // 2. Limpiar su contenido (innerHTML = '')
+  // 3. Si no hay películas, mostrar mensaje "No se encontraron películas"
+  // 4. Si hay películas, usar forEach() para crear cada tarjeta
+  // 5. Dentro del forEach, llamar a crearTarjetaPelicula() y añadir al contenedor
+  // 6. Actualizar el contador de películas (elemento con id 'contadorPeliculas')
+  const listaPeliculas=document.getElementById("listaPeliculas");
+  listaPeliculas.innerHTML="";
+  if (peliculas.length===0) {
+    const pError=document.createElement("p");
+    pError.textContent="No se encontraron peliculas";
+    listaPeliculas.appendChild(pError);
+    return;
+  }
+  peliculas.forEach(peli => {
+    const tarjeta=document.createElement("div");
+    tarjeta.innerHTML=crearTarjetaPelicula(peli);
+    listaPeliculas.appendChild(tarjeta);
+  });
+  let contador=document.getElementById("contadorPeliculas");
+  contador.textContent=peliculas.length;
+}
+
+// Crea el HTML de una tarjeta de película con datos reales de la API
+function crearTarjetaPelicula(pelicula) {
+  return `
+    <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl overflow-hidden shadow-xl hover:scale-105 transition transform duration-300">
+      <img src="${pelicula.image}" alt="${pelicula.title}" class="w-full h-80 object-cover">
+      <div class="p-4">
+        <h3 class="text-lg font-bold text-white mb-2 line-clamp-1">${pelicula.title}</h3>
+        <p class="text-gray-300 text-sm mb-1">🎬 ${pelicula.director}</p>
+        <p class="text-gray-300 text-sm mb-1">📅 ${pelicula.release_date}</p>
+        <p class="text-gray-300 text-sm mb-2">⏱️ ${pelicula.running_time} min</p>
+        <div class="flex justify-between items-center mt-3 mb-3">
+          <span class="bg-yellow-400 text-black px-3 py-1 rounded-full text-sm font-bold">
+            ⭐ ${pelicula.rt_score}/100
+          </span>
+        </div>
+        <p class="text-gray-400 text-xs line-clamp-3">${pelicula.description}</p>
+      </div>
+    </div>
+  `;
+}
+
+// Actualiza el panel de estadísticas
+function actualizarEstadisticas(peliculas) {
+  // TODO: Actualizar estadísticas en el DOM
+  // 1. Actualizar 'statTotal' con peliculas.length
+  // 2. Calcular promedio con calcularPuntuacionPromedio()
+  // 3. Actualizar 'statPromedio' con el promedio (usar .toFixed(1))
+  const statTotal=document.getElementById("statTotal");
+  statTotal.textContent=peliculas.length;
+  const promedio=calcularPuntuacionPromedio(peliculas);
+  const statPromedio=document.getElementById("statPromedio");
+  statPromedio.textContent=promedio.toFixed(1);
+}
+
+// Muestra mensajes de estado de carga
+function mostrarEstadoCarga(mensaje, tipo) {
+  // TODO: Mostrar mensajes de estado
+  // 1. Obtener elemento con id 'estadoCarga'
+  // 2. Establecer el texto con el mensaje
+  // 3. Limpiar las clases y añadir clases base
+  // 4. Según el tipo ('cargando', 'exito', 'error'), añadir clases de color:
+  //    - cargando: bg-yellow-100 text-yellow-800
+  //    - exito: bg-green-100 text-green-800
+  //    - error: bg-red-100 text-red-800
+  // 5. Quitar la clase 'hidden' para mostrar el mensaje
+  const estadoCarga=document.getElementById("estadoCarga");
+  estadoCarga.textContent=mensaje;
+  if (tipo==="cargando") {
+    estadoCarga.className="bg-yellow-100 text-yellow-800";
+  }
+  else if(tipo==="exito"){
+    estadoCarga.className="bg-green-100 text-green-800";
+
+  }
+  else{
+    estadoCarga.className="bg-red-100 text-red-800";
+
+  }
+}
+
+// ========================================
+// INICIAR APLICACIÓN
+// ========================================
+
+document.addEventListener("DOMContentLoaded", inicializarApp);
