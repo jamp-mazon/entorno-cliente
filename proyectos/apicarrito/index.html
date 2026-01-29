@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carrito de la compra</title>
+  </head>
+
+  <body>
+    <header>
+      <h1>Tienda Online</h1>
+      <p>Ejercicio: carrito + localStorage</p>
+    </header>
+
+    <main>
+      <section>
+         <h2>Buscar productos</h2>
+
+        <label>
+          Nombre:
+          <input
+            id="busqueda"
+            type="text"
+            placeholder="Ej: camiseta, mochila..."
+            autocomplete="off"
+          />
+        </label>
+        <button id="ordenar">Ordenar</button>
+        <h2>Productos</h2>
+        <div id="lista-productos">
+          <!-- Productos -->
+        </div>
+      </section>
+
+      <section>
+        <h2>Carrito</h2>
+        <div id="carrito">
+          <!-- Productos del carrito -->
+
+
+        </div>
+
+        <p id="total-carrito">
+          <!-- Total -->
+        </p>
+
+
+      </section>
+    </main>
+
+    <script src="api4.js"></script>
+  </body>
+</html>
