@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mini Pokédex</title>
+    <!-- PISTA: enlaza correctamente el CSS de la carpeta css -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- PISTA: aquí puedes poner el título principal de la página -->
+    <header class="header">
+        <h1>Proyecto Pokédex</h1>
+        <!-- PISTA: añade aquí un subtítulo o una pequeña descripción -->
+        <p class="subtitle">Galería básica de Pokémon con HTML, CSS y JavaScript</p>
+    <section class="controls">
+            <div class="search">
+                <label for="searchInput">Buscar por nombre:</label>
+                <input class="searchInput" type="text" id="searchInput" placeholder="Ej. Pikachu, Bulbasaur..." autocomplete="off">
+            </div>
+            <div class="filters" id="typeFilters">
+                <button class="filter-btn active" data-type="all">Todos</button>
+                <button class="filter-btn" data-type="fire">Fuego</button>
+                <button class="filter-btn" data-type="water">Agua</button>
+                <button class="filter-btn" data-type="grass">Planta</button>
+                <button class="filter-btn" data-type="electric">Eléctrico</button>
+                <button class="filter-btn" data-type="normal">Normal</button>
+                <button class="filter-btn" data-type="flying">Volador</button>
+                <button class="filter-btn" data-type="poison">Veneno</button>
+                <button class="filter-btn" data-type="ground">Tierra</button>
+                <button class="filter-btn" data-type="psychic">Psíquico</button>
+                <button class="filter-btn" data-type="fighting">Lucha</button>
+                <button class="filter-btn" data-type="ice">Hielo</button>
+                <button class="filter-btn" data-type="rock">Roca</button>
+                <button class="filter-btn" data-type="bug">Bicho</button>
+                <button class="filter-btn" data-type="ghost">Fantasma</button>
+                <button class="filter-btn" data-type="dragon">Dragón</button>
+            </div>
+        </section>
+    </header>
+
+    <main class="main">
+        
+
+        <section id="pokedex" class="pokedex"></section>
+    </main>
+
+    <footer class="footer">
+        <!-- PISTA: añade aquí tu nombre, el curso, o cualquier texto de pie de página -->
+        <p>&copy; 2025 - Proyecto Pokédex</p>
+    </footer>
+
+    <!-- PISTA: enlaza el archivo JavaScript al final del body -->
+    <script src="js/main.js"></script>
+</body>
+</html>
