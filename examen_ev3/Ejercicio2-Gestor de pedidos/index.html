@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestor de pedidos</title>
+    <!-- NO cambies la ruta del archivo CSS de Tailwind, solo copia y pega en el archivo tailwind.min.css de la carpeta assets 
+ el contenido del archivo que usamos en clase-->
+<script src="./assets/tailwind.js"></script>
+  </head>
+
+  <body class="min-h-screen bg-slate-50 text-slate-900">
+    <header class="border-b bg-white">
+      <div class="mx-auto max-w-5xl px-4 py-4">
+        <h1 class="text-xl font-bold">Gestor de pedidos</h1>
+        <p class="text-sm text-slate-600">
+          Métodos de array · Cálculos · Resumen
+        </p>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-5xl px-4 py-6">
+      <!-- Controles -->
+      <section class="rounded-xl bg-white p-4 shadow-sm">
+        <label class="block">
+          <span class="text-sm font-medium">Buscar por cliente</span>
+          <input
+            id="buscador"
+            type="text"
+            placeholder="Ej: Ana..."
+            class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 outline-none focus:ring"
+          />
+        </label>
+
+        <label class="mt-3 flex items-center gap-2 text-sm">
+          <input id="soloGrandes" type="checkbox" />
+          Mostrar solo pedidos grandes (≥ 50 €)
+        </label>
+      </section>
+
+      <!-- Resumen -->
+      <section class="mt-6 rounded-xl bg-white p-4 shadow-sm">
+        <h2 class="text-sm font-semibold text-slate-700">Resumen</h2>
+
+        <div class="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <div class="rounded-lg border p-3">
+            <p class="text-xs text-slate-500">Pedidos visibles</p>
+            <p class="text-lg font-bold" id="kpiPedidos">—</p>
+          </div>
+
+          <div class="rounded-lg border p-3">
+            <p class="text-xs text-slate-500">Total ventas</p>
+            <p class="text-lg font-bold" id="kpiTotal">—</p>
+          </div>
+
+          <div class="rounded-lg border p-3">
+            <p class="text-xs text-slate-500">Ticket medio</p>
+            <p class="text-lg font-bold" id="kpiMedia">—</p>
+          </div>
+
+          <div class="rounded-lg border p-3">
+            <p class="text-xs text-slate-500">Pedido más caro</p>
+            <p class="text-lg font-bold" id="kpiMax">—</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Lista -->
+      <section class="mt-6">
+        <div
+          id="listaPedidos"
+          class="mt-3 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+        ></div>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MiniCatálogo Fitness</title>
+    <!-- NO cambies la ruta del archivo CSS de Tailwind, solo copia y pega en el archivo tailwind.min.css de la carpeta assets 
+ el contenido del archivo que usamos en clase-->
+<script src="./assets/tailwind.js"></script>
+  </head>
+
+  <body class="min-h-screen bg-slate-50 text-slate-900">
+    <header class="border-b bg-white">
+      <div class="mx-auto max-w-5xl px-4 py-4">
+        <h1 class="text-xl font-bold">MiniCatálogo Fitness</h1>
+        <p class="text-sm text-slate-600">
+          Búsqueda · Favoritos · LocalStorage
+        </p>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-5xl px-4 py-6 ">
+      <!-- Buscador -->
+      <section class="rounded-xl bg-white p-4 shadow-sm">
+        <label class="block">
+          <span class="text-sm font-medium">Buscar por nombre</span>
+          <input
+            id="buscador"
+            type="text"
+            placeholder="Ej: Mancuernas..."
+            class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 outline-none focus:ring"
+          />
+        </label>
+      </section>
+
+      <!-- Lista -->
+      <section class="mt-6">
+        <div
+          id="listaProductos"
+          class="mt-3 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+        ></div>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+    <script src="./assets/tailwind.js"></script>
+  </body>
+</html>
