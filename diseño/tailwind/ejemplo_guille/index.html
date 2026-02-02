@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Práctica: Transiciones, Modales y Animaciones</title>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <!-- Opción A (CSS): crea estilos en styles.css -->
+  <!-- <link rel="stylesheet" href="style.css" /> -->
+
+  <!-- Opción B (Tailwind): comenta el CSS y mete tu build de Tailwind o CDN.
+       Si usas CDN, recuerda que no tendrás variantes arbitrarias igual que en build.
+  -->
+  <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+</head>
+
+<body>
+  <header class="sticky top-0 min-h-20 bg-slate-900/50 flex items-center justify-around">
+    <h1 class="font-bold text-xl text-white">Práctica: Transiciones • Modales • Animaciones</h1>
+    <p class="text-sm text-white">
+      Objetivo: que tú metas Tailwind/CSS para hover overlays, transiciones suaves, modal animado y keyframes.
+    </p>
+  </header>
+
+  <main class="bg-slate-800">
+
+    <!-- =========================
+         1) GALERÍA: group-hover overlay
+         ========================= -->
+    <section class="" aria-labelledby="gallery-title">
+      <div class="text-center space-y-5">
+        <h2 id="gallery-title" class="text-white">1) Transiciones + overlay con group-hover</h2>
+        <p class="mb-10 text-white">
+          Haz que al pasar el ratón por la card: aparezca el texto (opacity/translate/blur) y la imagen cambie (scale/brightness).
+        </p>
+      </div>
+
+      <div class="flex flex-wrap gap-10 items-center justify-center">
+        <!-- CARD 1 -->
+        <article class="max-w-100 group relative" data-card>
+          <a class="card-link" href="#" aria-label="Abrir detalle de imagen 1">
+            <img
+              class="w-full h-full object-contain"
+              src="https://picsum.photos/seed/forest/900/600"
+              alt="Imagen de ejemplo 1"
+              loading="lazy"
+              
+            />
+
+            <!-- Overlay (debería ocupar TODO el article) -->
+            <div class="opacity-0 absolute bottom-0 left-0 right-0 group-hover:opacity-100 bg-slate-900 text-white text-center transition-all duration-500 border shadow-[0_0_5px]">
+              <h3 class="font-bold text-xl">Bosque</h3>
+              <p class="text-sm">Overlay completo con transición (opacity + translate + blur).</p>
+
+              <div class="card-actions">
+                <button
+                  class="bg-slate-600 p-2 rounded cursor-pointer m-1"
+                  type="button"
+                  data-modal-open
+                  data-modal-title="Bosque"
+                  data-modal-image="https://picsum.photos/seed/forest/1200/800"
+                >
+                  Abrir modal
+                </button>
+
+                <button class="bg-slate-600 p-2 rounded cursor-pointer m-1" type="button" data-like>
+                  Me gusta
+                </button>
+              </div>
+            </div>
+          </a>
+        </article>
+
+         <!-- CARD 4 -->
+        <article class="max-w-100 group relative" data-card>
+          <a class="card-link" href="#" aria-label="Abrir detalle de imagen 1">
+            <img
+              class="w-full h-full object-contain"
+              src="https://picsum.photos/seed/forest/900/600"
+              alt="Imagen de ejemplo 1"
+              loading="lazy"
+            />
+            <!-- Overlay (debería ocupar TODO el article) -->
+            <div class="opacity-0 absolute bottom-0 left-0 right-0 group-hover:opacity-100 bg-slate-900 text-white text center transition-all duration-500 border shadow-[0_0_5px]">
+              <h3 class="font-bold text-xl">Bosque</h3>
+              <p class="text-sm">Overlay completo con transición (opacity + translate + blur).</p>
+              <div class="card-actions">
+                <button
+                  class="bg-slate-600 p-2 rounded cursor-pointer m-1"
+                  type="button"
+                  data-modal-open
+                  data-modal-title="Bosque"
+                  data-modal-image="https://picsum.photos/seed/forest/1200/800"
+                >
+                  Abrir modal
+                </button>
+                <button class="bg-slate-600 p-2 rounded cursor-pointer m-1" type="button" data-like>
+                  Me gusta
+                </button>
+              </div>
+            </div>
+          </a>
+        </article>
+        <!-- CARD 2 -->
+        <article class="max-w-100 group relative" data-card>
+          <a class="card-link" href="#" aria-label="Abrir detalle de imagen 2">
+            <img
+              class="card-image"
+              src="https://picsum.photos/seed/city/900/600"
+              alt="Imagen de ejemplo 2"
+              loading="lazy"
+            />
+
+            <div class="opacity-0 absolute bottom-0 left-0 right-0 group-hover:opacity-100 bg-slate-900 text-white text-center transition-all duration-500 border shadow-[0_0_5px]">
+              <h3 class="font-bold text-xl">Ciudad</h3>
+              <p class="text-sm">Practica: texto aparece con group-hover y fondo con gradiente.</p>
+
+              <div class="card-actions">
+                <button
+                  class="btn"
+                  type="button"
+                  data-modal-open
+                  data-modal-title="Ciudad"
+                  data-modal-image="https://picsum.photos/seed/city/1200/800"
+                >
+                  Abrir modal
+                </button>
+
+                <button class="btn btn-secondary" type="button" data-like>
+                  Me gusta
+                </button>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <!-- CARD 3 -->
+        <article class="max-w-100 group relative" data-card>
+          <a class="card-link" href="#" aria-label="Abrir detalle de imagen 3">
+            <img
+              class="card-image"
+              src="https://picsum.photos/seed/mountain/900/600"
+              alt="Imagen de ejemplo 3"
+              loading="lazy"
+            />
+
+            <div class="opacity-0 absolute bottom-0 left-0 right-0 group-hover:opacity-100 bg-slate-900 text-white text-center transition-all duration-500 border shadow-[0_0_5px]">
+              <h3 class="font-bold text-xl">Montaña</h3>
+              <p class="text-sm">Transición del overlay + zoom leve de la imagen en hover.</p>
+
+              <div class="card-actions">
+                <button
+                  class="btn"
+                  type="button"
+                  data-modal-open
+                  data-modal-title="Montaña"
+                  data-modal-image="https://picsum.photos/seed/mountain/1200/800"
+                >
+                  Abrir modal
+                </button>
+
+                <button class="btn btn-secondary" type="button" data-like>
+                  Me gusta
+                </button>
+              </div>
+            </div>
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <!-- =========================
+     MODAL GLOBAL REUTILIZABLE
+     ========================= -->
+<div id="overlay" class="fixed inset-0 bg-black/50 flex items-center justify-center hidden" data-modal-overlay>
+  <div data-modal class="bg-white flex items-center justify-center transition-all duration-300 scale-95 opacity-0">
+    <img src="" alt="">
+    <button type="button" data-modal-close>
+      ✕
+    </button>
+
+    <h3 data-modal-title></h3>
+
+    <img data-modal-image alt="" src="https://picsum.photos/seed/mountain/1200/800" />
+
+    <p>Contenido dinámico del producto</p>
+  </div>
+</div>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
+

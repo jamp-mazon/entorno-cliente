@@ -1,0 +1,9 @@
+{
+  "productos": [
+    { "id": 201, "nombre": "Camiseta deportiva", "precio": 15.99 },
+    { "id": 202, "nombre": "Pantalón corto", "precio": 18.5 },
+    { "id": 203, "nombre": "Zapatillas running", "precio": 59.99 },
+    { "id": 204, "nombre": "Botella reutilizable", "precio": 9.99 },
+    { "id": 205, "nombre": "Mochila deportiva", "precio": 34.95 }
+  ]
+}

@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Demo CSS Animations (Keyframes)</title>
+  <style>
+    /* =========================
+       Base
+       ========================= */
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      background: #0b1220;
+      color: #e6edf7;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 28px 16px 60px;
+      display: grid;
+      gap: 22px;
+    }
+
+    .header {
+      display: grid;
+      gap: 8px;
+      padding: 18px 18px;
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.04);
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 26px;
+      letter-spacing: -0.02em;
+    }
+    .header p {
+      margin: 0;
+      color: rgba(230,237,247,0.78);
+      line-height: 1.5;
+    }
+
+    .panel {
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.04);
+      padding: 18px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .panel h2 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    /* =========================
+       “Botones” (radios + labels)
+       ========================= */
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .controls input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      color: rgba(230,237,247,0.95);
+      cursor: pointer;
+      user-select: none;
+      font-weight: 650;
+      transition: transform 120ms ease, background 200ms ease, border-color 200ms ease;
+    }
+
+    .btn:hover {
+      background: rgba(255,255,255,0.10);
+      border-color: rgba(255,255,255,0.22);
+      transform: translateY(-1px);
+    }
+
+    .btn:active {
+      transform: translateY(0px) scale(0.99);
+    }
+
+    /* Cuando un radio está seleccionado, “iluminamos” su label */
+    #anim-none:checked + label,
+    #anim-bounce:checked + label,
+    #anim-shake:checked + label,
+    #anim-pulse:checked + label,
+    #anim-flip:checked + label,
+    #anim-fade:checked + label {
+      background: rgba(255,255,255,0.16);
+      border-color: rgba(255,255,255,0.28);
+      color: #ffffff;
+    }
+
+    /* =========================
+       Preview
+       ========================= */
+    .preview-stage {
+      display: grid;
+      gap: 10px;
+    }
+
+    .preview {
+      height: 170px;
+      border-radius: 18px;
+      border: 2px dashed rgba(255,255,255,0.22);
+      background: rgba(10, 18, 33, 0.45);
+      display: grid;
+      place-items: center;
+      perspective: 900px; /* para ver mejor efectos 3D en flip */
+      overflow: hidden;
+    }
+
+    .preview-box {
+      width: min(420px, 92%);
+      height: 110px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.04));
+      display: grid;
+      place-items: center;
+      box-shadow: 0 18px 45px rgba(0,0,0,0.35);
+      transform-style: preserve-3d;
+    }
+
+    .preview-text {
+      letter-spacing: 0.25em;
+      font-weight: 900;
+      opacity: 0.95;
+    }
+
+    .hint {
+      margin: 0;
+      color: rgba(230,237,247,0.75);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* =========================
+       Keyframes (la “película”)
+       ========================= */
+    @keyframes bounce {
+      0%   { transform: translateY(0); }
+      40%  { transform: translateY(-18px); }
+      70%  { transform: translateY(0); }
+      85%  { transform: translateY(-8px); }
+      100% { transform: translateY(0); }
+    }
+
+    @keyframes shake {
+      0%   { transform: translateX(0); }
+      20%  { transform: translateX(-10px); }
+      40%  { transform: translateX(10px); }
+      60%  { transform: translateX(-7px); }
+      80%  { transform: translateX(7px); }
+      100% { transform: translateX(0); }
+    }
+
+    @keyframes pulse {
+      0%   { transform: scale(1); }
+      50%  { transform: scale(1.08); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes flip {
+      0%   { transform: perspective(700px) rotateY(0deg); }
+      50%  { transform: perspective(700px) rotateY(92deg); }
+      100% { transform: perspective(700px) rotateY(0deg); }
+    }
+
+    @keyframes fadeInUp {
+      0%   { opacity: 0; transform: translateY(14px); filter: blur(3px); }
+      100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+    }
+
+    /* =========================
+       Aplicación de animaciones (la “reproducción”)
+       Usamos radios: cuando uno está checked, aplicamos animation al .preview-box
+       ========================= */
+
+    /* Por defecto: sin animación */
+    .demo-area .preview-box { animation: none; }
+
+    #anim-bounce:checked ~ .preview-stage .preview .preview-box {
+      animation: bounce 650ms ease-out;
+    }
+
+    #anim-shake:checked ~ .preview-stage .preview .preview-box {
+      animation: shake 460ms ease-in-out;
+    }
+
+    #anim-pulse:checked ~ .preview-stage .preview .preview-box {
+      animation: pulse 900ms ease-in-out infinite;
+    }
+
+    #anim-flip:checked ~ .preview-stage .preview .preview-box {
+      animation: flip 780ms ease-in-out;
+      transform-style: preserve-3d;
+    }
+
+    #anim-fade:checked ~ .preview-stage .preview .preview-box {
+      animation: fadeInUp 520ms ease-out forwards; /* forwards = se queda en el final */
+    }
+
+    /* =========================
+       Demo transition (comparación)
+       ========================= */
+    .transition-demo {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: 1fr;
+    }
+
+    .card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+      height: 180px;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+    }
+
+    .card-inner {
+      width: min(520px, 92%);
+      height: 120px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      display: grid;
+      place-items: center;
+
+      /* transition: cambia A->B cuando hay hover */
+      transition: transform 300ms ease, filter 300ms ease, opacity 300ms ease;
+    }
+
+    .card:hover .card-inner {
+      transform: translateY(-6px) scale(1.02);
+      filter: brightness(1.12);
+      opacity: 0.95;
+    }
+
+    .badge {
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.07);
+      color: rgba(230,237,247,0.90);
+    }
+
+    /* Accesibilidad: respeta reduce motion */
+    @media (prefers-reduced-motion: reduce) {
+      .btn, .card-inner { transition: none !important; }
+      .preview-box { animation: none !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>Demo: Animaciones CSS con Keyframes</h1>
+      <p>
+        Selecciona una animación y verás cómo se aplica al bloque <strong>PREVIEW</strong>.
+        Esto funciona con <code>@keyframes</code> + <code>animation</code>.
+      </p>
+    </header>
+
+    <section class="panel demo-area" aria-labelledby="animations-title">
+      <h2 id="animations-title">1) Animaciones (keyframes → animation)</h2>
+
+      <!-- Radios + labels (simulan botones) -->
+      <div class="controls" role="radiogroup" aria-label="Selector de animación">
+        <input type="radio" name="animation" id="anim-none" checked />
+        <label class="btn" for="anim-none">Reset</label>
+
+        <input type="radio" name="animation" id="anim-bounce" />
+        <label class="btn" for="anim-bounce">Bounce</label>
+
+        <input type="radio" name="animation" id="anim-shake" />
+        <label class="btn" for="anim-shake">Shake</label>
+
+        <input type="radio" name="animation" id="anim-pulse" />
+        <label class="btn" for="anim-pulse">Pulse (infinite)</label>
+
+        <input type="radio" name="animation" id="anim-flip" />
+        <label class="btn" for="anim-flip">Flip (3D)</label>
+
+        <input type="radio" name="animation" id="anim-fade" />
+        <label class="btn" for="anim-fade">Fade In Up (forwards)</label>
+      </div>
+
+      <div class="preview-stage">
+        <p class="hint">
+          Lo importante: <strong>@keyframes</strong> define los “fotogramas” y
+          <strong>animation</strong> define cómo se reproduce (duración, curva, repeticiones, fill-mode…).
+        </p>
+
+        <div class="preview" aria-label="Zona de previsualización">
+          <div class="preview-box" aria-label="Elemento animado">
+            <span class="preview-text">PREVIEW</span>
+          </div>
+        </div>
+
+        <p class="hint">
+          Prueba a cambiar valores en CSS:
+          <code>650ms</code>, <code>ease-out</code>, <code>infinite</code>, <code>forwards</code>.
+        </p>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="transition-title">
+      <h2 id="transition-title">2) Mini-demo de TRANSITION (para comparar)</h2>
+      <p class="hint">
+        <strong>Transition</strong> no usa keyframes. Solo anima cuando cambias de estado (hover):
+        va de A → B.
+      </p>
+
+      <div class="transition-demo">
+        <div class="card" tabindex="0" aria-label="Card con transition al hover">
+          <div class="card-inner">
+            <div style="display:grid; gap:10px; place-items:center;">
+              <span class="badge">Esto es TRANSITION (hover)</span>
+              <span style="opacity:.9; font-weight:800; letter-spacing:.12em;">PASA EL RATÓN</span>
+            </div>
+          </div>
+        </div>
+        <p class="hint">
+          En tu ejercicio del overlay (group-hover) casi todo lo harás con <strong>transition</strong>.
+          Para efectos “tipo temblor / rebote”, usa <strong>animation + keyframes</strong>.
+        </p>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

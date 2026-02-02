@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Práctica: Transiciones, Modales y Animaciones</title>
+
+  <!-- Opción A (CSS): crea estilos en styles.css -->
+  <!-- <link rel="stylesheet" href="./estilos.css" /> -->
+
+  <!-- Opción B (Tailwind): comenta el CSS y mete tu build de Tailwind o CDN.
+       Si usas CDN, recuerda que no tendrás variantes arbitrarias igual que en build.
+  -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-slate-800 text-white">
+  <header class="sticky top-0 z-50 h-20 flex flex-col justify-center items-center p-5">
+    <h1 class="text-2xl font-bold">Práctica: Transiciones • Modales • Animaciones</h1>
+    <p class="page-subtitle">
+      Objetivo: que tú metas Tailwind/CSS para hover overlays, transiciones suaves, modal animado y keyframes.
+    </p>
+  </header>
+
+  <main class="page-content">
+
+    <!-- =========================
+         1) GALERÍA: group-hover overlay
+         ========================= -->
+    <section class="p-10" aria-labelledby="gallery-title">
+      <div class="section-head">
+        <h2 id="gallery-title" class="section-title">1) Transiciones + overlay con group-hover</h2>
+        <p class="section-desc">
+          Haz que al pasar el ratón por la card: aparezca el texto (opacity/translate/blur) y la imagen cambie
+          (scale/brightness).
+        </p>
+      </div>
+
+      <div class="mt-10 grid grid-cols-[300px_300px_300px] gap-20 justify-center">
+        <!-- CARD 1 -->
+        <article class=" group relative w-300 transition-all  hover:bg-slate-900 hover:scale-95" data-card>
+          <a class="card-link" href="#" aria-label="Abrir detalle de imagen 1">
+            <img class="w-full h-full object-cover rounded-lg" src="https://picsum.photos/seed/forest/900/600"
+              alt="Imagen de ejemplo 1" loading="lazy" />
+
+            <!-- Overlay (debería ocupar TODO el article) -->
+            <div
+              class="absolute bottom-0 left-0 right-0 border rounded-b-lg shadow-[0_0_10px_] p-5 bg-slate-800 opacity-0 transition-all duration-300 group-hover:opacity-100">
+              <h3 class="card-title">Bosque</h3>
+              <p class="card-text">Overlay completo con transición (opacity + translate + blur).</p>
+            </div>
+            <div class="mt-4 flex gap-4 justify-center">
+              <button class="bg-yellow-500 p-2 rounded-md font-bold hover:bg-yellow-600" type="button" data-modal-open data-modal-title="Bosque"
+                data-modal-image="https://picsum.photos/seed/forest/1200/800">
+                Abrir modal
+              </button>
+
+              <button class="bg-slate-700/70 p-2 border rounded-md" type="button" data-like>
+                Me gusta
+              </button>
+            </div>
+          </a>
+        </article>
+
+        <!-- CARD 2 -->
+                <article class=" group relative w-300 transition-all  hover:bg-slate-900 hover:scale-95" data-card>
+          <a class="card-link" href="#" aria-label="Abrir detalle de imagen 1">
+            <img class="w-full h-full object-cover rounded-lg" src="https://picsum.photos/seed/tokyo/900/600"
+              alt="Imagen de ejemplo 1" loading="lazy" />
+
+            <!-- Overlay (debería ocupar TODO el article) -->
+            <div
+              class="absolute bottom-0 left-0 right-0 border rounded-b-lg shadow-[0_0_10px_] p-5 bg-slate-800 opacity-0 transition-all duration-300 group-hover:opacity-100">
+              <h3 class="card-title">Bosque</h3>
+              <p class="card-text">Overlay completo con transición (opacity + translate + blur).</p>
+            </div>
+            <div class="mt-4 flex gap-4 justify-center">
+              <button class="bg-yellow-500 p-2 rounded-md font-bold hover:bg-yellow-600" type="button" data-modal-open data-modal-title="Bosque"
+                data-modal-image="https://picsum.photos/seed/forest/1200/800">
+                Abrir modal
+              </button>
+
+              <button class="bg-slate-700/70 p-2 border rounded-md" type="button" data-like>
+                Me gusta
+              </button>
+            </div>
+          </a>
+        </article>
+
+        <!-- CARD 3 -->
+                <article class=" group relative w-300 transition-all  hover:bg-slate-900 hover:scale-95" data-card>
+          <a class="card-link" href="#" aria-label="Abrir detalle de imagen 1">
+            <img class="w-full h-full object-cover rounded-lg" src="https://picsum.photos/seed/paris/900/600"
+              alt="Imagen de ejemplo 1" loading="lazy" />
+
+            <!-- Overlay (debería ocupar TODO el article) -->
+            <div
+              class="absolute bottom-0 left-0 right-0 border rounded-b-lg shadow-[0_0_10px_] p-5 bg-slate-800 opacity-0 transition-all duration-300 group-hover:opacity-100">
+              <h3 class="card-title">Bosque</h3>
+              <p class="card-text">Overlay completo con transición (opacity + translate + blur).</p>
+            </div>
+            <div class="mt-4 flex gap-4 justify-center">
+              <button class="bg-yellow-500 p-2 rounded-md font-bold hover:bg-yellow-600" type="button" data-modal-open data-modal-title="Bosque"
+                data-modal-image="https://picsum.photos/seed/forest/1200/800">
+                Abrir modal
+              </button>
+
+              <button class="bg-slate-700/70 p-2 border rounded-md" type="button" data-like>
+                Me gusta
+              </button>
+            </div>
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <!-- =========================
+         2) MODAL
+         ========================= -->
+    <!-- <section class="mt-10" aria-labelledby="modal-title">
+      <div class="">
+        <h2 id="modal-title" class="section-title">2) Modal (HTML + JS)</h2>
+        <p class="section-desc">
+          Tú haces la transición: fade del overlay + scale/translate del panel.
+          El JS ya te añade/quita clases y maneja accesibilidad básica.
+        </p>
+      </div> -->
+
+      <!-- Botón extra para abrir modal "genérico" -->
+      <!-- <button class="btn" type="button" data-modal-open data-modal-title="Modal genérico"
+        data-modal-image="https://picsum.photos/seed/random/1200/800">
+        Abrir modal genérico
+      </button>
+    </section> -->
+
+    <!-- =========================
+         3) ANIMACIONES
+         ========================= -->
+    <section class="mt-10 " aria-labelledby="anim-title">
+      <div class="section-head">
+        <h2 id="anim-title" class="text-2xl font-bold">3) Animaciones (keyframes + triggers)</h2>
+        <p class="text-slate-300">
+          Botones que disparan clases de animación. Tú creas los keyframes y clases en CSS/Tailwind.
+        </p>
+      </div>
+
+      <div class="animation-area">
+        <div class="flex gap-4 p-5" role="group" aria-label="Controles de animación">
+          <button class="bg-yellow-500 rounded-sm p-2 font-bold animate-bounce" type="button" data-animate="bounce">Bounce</button>
+          <button class="bg-green-500 rounded-sm p-2 font-bold animate-spin" type="button" data-animate="shake">Spin</button>
+          <button class="bg-red-500 rounded-sm p-2 font-bold animate-pulse" type="button" data-animate="pulse">Pulse</button>
+          <button class="bg-purple-500 rounded-sm p-2 font-bold animate-ping" type="button" data-animate="flip">Ping</button>
+          <button class="bg-pink-500 rounded-sm p-2 font-bold" type="button" data-animate="reset">Reset</button>
+        </div>
+
+        <!-- Este elemento es el “preview” que animarás -->
+        <div class="animation-preview" aria-label="Elemento de vista previa">
+          <span class="animation-preview-text">ANÍMAME</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================
+       MODAL MARKUP (al final del body)
+       ========================= -->
+  <div class="modal-root" data-modal-root aria-hidden="true">
+    <div class="modal-overlay" data-modal-close></div>
+
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-heading"
+      aria-describedby="modal-description" tabindex="-1" data-modal-panel>
+      <div class="modal-header">
+        <h3 id="modal-heading" class="modal-title">Título del modal</h3>
+        <button class="icon-btn" type="button" aria-label="Cerrar modal" data-modal-close>
+          ✕
+        </button>
+      </div>
+
+      <p id="modal-description" class="modal-description">
+        Aquí puedes practicar transiciones del contenido: fade-in, slide, blur, etc.
+      </p>
+
+      <img class="modal-image" data-modal-image alt="Imagen del modal" />
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" data-modal-close>Cerrar</button>
+        <button class="btn" type="button" data-confirm>Confirmar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+
+</html>

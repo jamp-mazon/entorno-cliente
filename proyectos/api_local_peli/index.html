@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MiniTienda + Buscador de Películas</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen p-4">
+
+  <!-- ===========================
+       SECCIÓN PRODUCTOS
+  =========================== -->
+  <section class="mb-8">
+    <h2 class="text-2xl font-bold mb-2">Productos</h2>
+    <input type="text" id="inputProducto" placeholder="Buscar producto..." class="border p-2 rounded mb-2 w-full" />
+    
+    <div id="listaProductos" class="space-y-2 mb-2"></div>
+    
+    <div>Total: <span id="totalProductos">0.00</span> €</div>
+
+    <h3 class="text-xl font-bold mt-4">Favoritos Productos</h3>
+    <div id="favoritosProductos" class="space-y-2"></div>
+  </section>
+
+  <!-- ===========================
+       SECCIÓN PELÍCULAS
+  =========================== -->
+  <section>
+    <h2 class="text-2xl font-bold mb-2">Buscador de Películas</h2>
+    <div class="flex gap-2 mb-2">
+      <input type="text" id="inputPelicula" placeholder="Ej: Matrix, Inception..." class="flex-1 border p-2 rounded" />
+      <button id="btnBuscar" class="bg-blue-600 text-white px-4 py-2 rounded">Buscar</button>
+    </div>
+
+    <div id="resultados" class="space-y-2 mb-2"></div>
+
+    <h3 class="text-xl font-bold mt-4">Favoritos Películas</h3>
+    <div id="favoritosPeliculas" class="space-y-2"></div>
+    <div>Total favoritos: <span id="totalFavoritos">0</span></div>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>

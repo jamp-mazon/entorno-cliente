@@ -1,0 +1,158 @@
+/* =========================
+   ESTILOS BASE (mínimos)
+   Tú rellenas todo lo “bonito”
+   ========================= */
+
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, sans-serif; }
+
+/* Layout */
+.page-header { padding: 24px; }
+.page-content { padding: 24px; display: grid; gap: 32px; }
+
+.section { display: grid; gap: 16px; }
+.section-head { display: grid; gap: 8px; }
+
+.gallery-grid {
+  display: grid;
+  gap: 16px;
+
+  /* EJERCICIO: hazlo responsive (1 col móvil, 2-3 cols desktop) */
+}
+
+/* Card */
+.card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+
+  /* EJERCICIO: sombra, borde, etc. */
+}
+
+.card-link { display: block; text-decoration: none; color: inherit; }
+
+.card-image {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+
+  /* EJERCICIO: transición y efecto hover (scale/brightness/blur) */
+}
+
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  padding: 16px;
+  display: grid;
+  align-content: end;
+  gap: 8px;
+
+  /* EJERCICIO:
+     - overlay “oculto” por defecto (opacity:0; transform: translateY(...))
+     - al hover del .card (group-hover) → se muestra suave
+     - añade fondo (gradiente / blur / rgba)
+  */
+}
+
+.card-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+/* Botones (mínimos) */
+.btn {
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  background: white;
+  cursor: pointer;
+}
+
+.btn-secondary { opacity: 0.8; }
+
+.icon-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  background: white;
+  cursor: pointer;
+}
+
+/* =========================
+   MODAL
+   ========================= */
+
+.modal-root {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+
+  /* EJERCICIO: ocultarlo visualmente cuando NO está open (display none / opacity 0 / pointer-events) */
+  opacity: 0;
+  pointer-events: none;
+}
+
+.modal-root.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+
+  /* EJERCICIO: fondo oscuro con transición (fade) */
+}
+
+.modal-panel {
+  position: relative;
+  width: min(900px, 100%);
+  border-radius: 16px;
+  background: white;
+  padding: 16px;
+  outline: none;
+
+  /* EJERCICIO:
+     - transición del panel (scale/translate)
+     - cuando .modal-root.is-open → entra suave
+  */
+}
+
+.modal-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.modal-image { width: 100%; height: 340px; object-fit: cover; border-radius: 12px; margin-top: 12px; }
+.modal-footer { display: flex; justify-content: flex-end; gap: 10px; margin-top: 12px; }
+
+/* Bloquear scroll cuando modal abierto (opcional) */
+html.modal-open, html.modal-open body {
+  overflow: hidden;
+}
+
+/* =========================
+   ANIMACIONES
+   ========================= */
+
+.animation-area { display: grid; gap: 16px; }
+.animation-controls { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.animation-preview {
+  height: 160px;
+  border: 2px dashed #ddd;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+
+  /* EJERCICIO: pon un fondo suave, sombra, etc. */
+}
+
+.animation-preview-text { font-weight: 700; letter-spacing: 0.2em; }
+
+/* EJERCICIO:
+   Crea keyframes y clases:
+   .anim-bounce { animation: bounce 600ms ease; }
+   .anim-shake  { animation: shake 500ms ease; }
+   .anim-pulse  { animation: pulse 700ms ease; }
+   .anim-flip   { animation: flip 700ms ease; }
+
+   y sus @keyframes correspondientes.
+*/
+

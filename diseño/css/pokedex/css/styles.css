@@ -1,0 +1,133 @@
+/*
+ * PROYECTO POKÉDEX - ARCHIVO DEL ALUMNADO
+ *
+ * PISTAS:
+ * - Organiza tus estilos por bloques (header, main, pokedex, tarjetas, etc.).
+ * - Empieza por cosas básicas: tipografía, colores, márgenes, fondo...
+ * - Más adelante puedes añadir maquetación con flexbox o grid (según hayamos visto en clase).
+ */
+
+/* PISTA: estilo general de la página */
+body {
+    /* PISTA: elige una fuente sencilla (por ejemplo: Arial, sans-serif) */
+    /* PISTA: pon un color de fondo suave y un color de texto legible */
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: antiquewhite;
+    margin: 0;
+}
+
+/* PISTA: estilos para el header (zona superior) */
+.header {
+    /* PISTA: centra el texto y pon algo de relleno (padding) */
+    padding: 20px;
+    background-color: darkred;
+    color: white;
+
+}
+
+.header > * {
+    width: 70%;
+    max-width: 1100px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.subtitle {
+    /* PISTA: puedes hacer que el subtítulo tenga un tamaño algo más pequeño y un color diferente */
+}
+.controls{
+    margin-top: 30px;
+    display: flex;
+    gap:100px;
+}
+.search{
+    display: flex;
+    flex-direction: column;
+    font-size: large;
+    font-weight: bold;
+    gap: 5px;
+}
+.searchInput{
+    width: 250px;
+    height: 30px;
+    border-radius: 5px;
+    border-style: none;
+
+}
+.filters{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.filter-btn{
+    width: 75px;
+    height: 30px;
+    border-radius: 5px;
+    border-style: none;
+    font-weight: bolder;
+    cursor: pointer;
+
+}
+/* PISTA: contenedor principal */
+.main {
+    /* PISTA: limita el ancho de la página y céntrala con margin */
+    width: 70%;
+    max-width: 1100px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+/* PISTA: contenedor donde irán las tarjetas de Pokémon */
+.pokedex {
+    /* PISTA:
+     * - Aquí puedes usar display: flex; o display: grid; para crear una rejilla.
+     * - Añade separación (gap) entre tarjetas.
+     */
+     margin-top: 20px;
+     display: flex;
+     flex-wrap: wrap;
+     gap: 20px;
+}     
+
+/* PISTA: estilo de cada tarjeta de Pokémon */
+.pokemon-card {
+    /* PISTA:
+     * - Pon un fondo blanco o claro.
+     * - Añade un borde suave y sombra ligera.
+     * - Añade padding dentro de la tarjeta.
+     */
+     
+     background-color: aliceblue;
+     border-radius: 5px;
+}
+
+.pokemon-card img {
+    /* PISTA: haz que la imagen no se salga de la tarjeta (width: 100%; height: auto;) */
+    width: 200px;
+    height: 200px;
+}
+
+.pokemon-card h2 {
+    /* PISTA: estilo para el nombre del Pokémon */
+    padding: 10px;
+    font-size:xx-large;
+}
+
+.pokemon-card p {
+    /* PISTA: estilo para el texto secundario (tipo, número, etc.) */
+    padding-left: 10px;
+}
+
+/* Ajustes para pantallas más anchas */
+@media (max-width: 900px) {   /* tablet pequeña */
+  /* reglas */
+  .controls{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+}
+.pokedex{
+    margin-left: 70px;
+}
+}

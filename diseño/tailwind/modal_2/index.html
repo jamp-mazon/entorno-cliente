@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Modal con Tailwind</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body class="bg-slate-800 text-white  flex justify-center">
+    <!-- Botón abrir modal -->
+    <button id="openModal" class="bg-yellow-500 p-2 w-40 rounded-lg">Abrir modal</button>
+
+    <!-- Overlay -->
+    <div id="overlay" class="fixed inset-0 bg-black/50 flex justify-center items-center hidden">
+      <!-- Modal -->
+      <div id="modal" class="bg-white p-5 text-black w-100 h-100 rounded-md transition-all duration-300 scale-90 opacity-0">
+        <h2>Modal de ejemplo</h2>
+        <p>Este modal debe diseñarse completamente con Tailwind.</p>
+
+        <button id="closeModal" class="p-2 bg-red-800 items-center rounded-md">X</button>
+      </div>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+</html>
