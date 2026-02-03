@@ -1,0 +1,369 @@
+/* =====================================================
+   BASE COMÚN (NO SE MODIFICA)
+   ===================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #f1f5f9;
+  --text: #0f172a;
+  --muted: #475569;
+  --border: rgba(15, 23, 42, 0.1);
+
+  --primary: #2563eb;
+  --primary-dark: #1d4ed8;
+
+  --shadow-sm: 0 8px 16px rgba(2, 6, 23, 0.06);
+  --shadow-md: 0 18px 40px rgba(2, 6, 23, 0.16);
+}
+
+body {
+  margin: 0;
+  font-family:
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Arial,
+    sans-serif;
+  line-height: 1.5;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.container {
+  width: min(1100px, 100% - 2rem);
+  margin: 0 auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* =====================================================
+   HEADER (FLEX) — A COMPLETAR
+   ===================================================== */
+
+/*
+  OBJETIVO:
+  - colocar marca, menú y botón en una fila
+  - alinear verticalmente
+  - separar los elementos
+*/
+.header{
+  background-color:white;
+  height: 70px;
+  align-items: center;
+}
+.header__inner {
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+
+  /* A COMPLETAR */
+}
+
+.brand {
+  display: flex;
+  gap: 5px;
+  /* A COMPLETAR */
+}
+.brand__logo{
+  margin-top: 5px;
+  background-color:blue ;
+  padding: 5px;
+  height: 40px;
+  border-radius: 10px;
+  align-items: center;
+  color: white;
+  font-weight:bold;
+}
+.brand__kicker{
+  color:  darkgray;
+}
+.brand__title{
+  font-weight: bolder;
+}
+.nav {
+  /* A COMPLETAR */
+
+}
+
+/* =====================================================
+   MENÚ — SUBRAYADO CON TRANSICIÓN
+   ===================================================== */
+
+.nav__link {
+  position: relative;
+  padding: 0.25rem 0;
+  font-size: 0.95rem;
+  color: #334155;
+}
+
+/*
+  OBJETIVO:
+  - crear una línea decorativa bajo el enlace
+  - no visible inicialmente
+  - aparece al pasar el ratón
+  - el cambio debe ser suave
+*/
+.nav__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 0px;
+  height: 1px;
+  background-color: #1d4ed8;
+  bottom: -4px;
+  transition: width 0.25s ease;
+  /* A COMPLETAR */
+}
+
+.nav__link:hover {
+  text-shadow: 0 0 15px black;
+  /* A COMPLETAR */
+}
+
+.nav__link:hover::after {
+  /* A COMPLETAR */
+  width: 100%;
+}
+
+/* =====================================================
+   BOTONES — TRANSICIÓN BÁSICA
+   ===================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  padding: 0.55rem 0.9rem;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.95rem;
+
+  border: 1px solid transparent;
+
+  /* Transición simple */
+  transition: 0.25s;
+}
+
+.btn--primary {
+  background: var(--primary);
+  color: #fff;
+}
+
+/*
+  OBJETIVO:
+  - al pasar el ratón:
+    · el botón se mueve ligeramente hacia arriba
+    · aumenta la sombra
+*/
+.btn--primary:hover {
+  /* A COMPLETAR */
+  transform: translateY(-2px);
+  box-shadow: #1d4ed8;
+}
+
+.btn--ghost {
+  background: transparent;
+  border-color: rgba(15, 23, 42, 0.18);
+  color: var(--text);
+}
+
+.btn--ghost:hover {
+  /* A COMPLETAR */
+}
+.section-head__title{
+  font-size: x-large;
+  font-weight: 900;
+}
+/*
+  OBJETIVO:
+  - el foco con teclado debe verse claramente
+*/
+.btn:focus,
+.nav__link:focus {
+  /* A COMPLETAR */
+  outline-color: black;
+}
+
+/* =====================================================
+   GRID DE TARJETAS — A COMPLETAR
+   ===================================================== */
+
+/*
+  OBJETIVO:
+  - 1 columna en móvil
+  - 2 columnas a partir de 640px
+  - 3 columnas a partir de 1024px
+*/
+.cards {
+  /* A COMPLETAR */
+  display: grid;
+  grid-template-columns: 300px;
+  justify-content: center;
+  gap: 10px;
+}
+
+@media (min-width: 640px) {
+  .cards {
+    /* A COMPLETAR */
+    grid-template-columns: 300px 300px;
+    gap: 15px;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    padding: 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .cards {
+    /* A COMPLETAR */
+    grid-template-columns: 300px 300px 300px;
+    gap:20px
+  }
+}
+
+/* =====================================================
+   TARJETAS — HOVER + OVERLAY
+   ===================================================== */
+
+.card {
+  position: relative;
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+
+  transition: 0.25s ease;
+}
+
+/*
+  OBJETIVO:
+  - al pasar el ratón:
+    · la tarjeta se eleva ligeramente
+    · aumenta la sombra
+*/
+.card:hover {
+  /* A COMPLETAR */
+  transform: translateY(-4px);
+}
+
+.card__overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(15, 23, 42, 0.55);
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition: 0.25s;
+}
+
+/*
+  OBJETIVO:
+  - el overlay aparece al pasar el ratón por la tarjeta
+  - usando opacidad
+*/
+.card:hover .card__overlay {
+  /* A COMPLETAR */
+  color: white;
+  font-weight: bold;
+  opacity: 1;
+  
+}
+.card__media{
+  width:full;
+  height: 150px;
+  background-color: #1d4ed8;
+}
+.card__media2{
+  width:full;
+  height: 150px;
+  background-color: #1dd84c;
+}
+.card__media3{
+  width:full;
+  height:150px;
+  background-color: #d8e709;
+}
+.card__media4{
+  width:full;
+  height:150px;
+  background-color: #1dd84c;
+}
+.card__body{
+  padding: 10px;
+}
+.card__tag{
+  color: #1d4ed8;
+  font-weight: bold;
+}
+.card__title{
+  font-size:x-large;
+  font-weight: bold;
+}
+.badge{
+  background-color: rgb(231, 231, 231);
+  padding: 5px;
+  height: 40px;
+  border-radius: 20px;
+  text-align: center;
+}
+
+/*
+  OBJETIVO:
+  - alinear badge y botón en una fila
+*/
+.card__footer {
+  /* A COMPLETAR */
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  justify-items: center;
+}
+
+/* =====================================================
+   FOOTER (FLEX) — A COMPLETAR
+   ===================================================== */
+
+.footer{
+  background-color: #0f172a;
+}   
+.footer__inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  color: white;
+}  
+  /* A COMPLETAR */
+@media (min-width: 640px) {
+  .footer__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  color: white;
+}
+}
+
+@media (min-width: 1024px) {
+  .footer__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  color: white;
+}
+}

@@ -1,0 +1,704 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Examen DIW · Tailwind</title>
+
+    <!-- Tailwind CDN -->
+     <script src="browser@4.js"></script>
+  </head>
+
+  <!--
+    TAILWIND AÑADIR AQUÍ (Body – estructura general de la página):
+    - ocupar como mínimo toda la altura de la pantalla
+    - color de fondo general  
+    - color de texto general
+  -->
+  <body class=" min-w-full bg-slate-200 text-black">
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+
+    <!--
+      TAILWIND AÑADIR AQUÍ (Header – estructura y efecto visual):
+      - efecto glassmorphism visto en clase:
+        · fondo semitransparente
+        · desenfoque del fondo //backdrop blue
+        · borde o sombra sutil
+      - comportamiento sticky en la parte superior
+      - separación vertical
+    -->
+    <header class="fixed top-0 z-50 transition-all backdrop-blur bg-white/80 w-full h-14">
+      <!--
+        TAILWIND AÑADIR AQUÍ (Estructura interna del header):
+        - ancho máximo del contenido
+        - centrar el header horizontalmente
+        - distribuir los elementos en una fila:
+          · logo y título a la izquierda
+          · navegación en el centro
+          · botón a la derecha
+        - alinear los elementos verticalmente
+      -->
+      <div class="flex justify-around mx-auto justify-items-center text-center p-3">
+        <!-- Logo + título -->
+        <!--
+          TAILWIND AÑADIR AQUÍ (Distribución del logo y el texto):
+          - colocar logo y texto en la misma fila
+          - separación entre ambos
+        -->
+        <div class="flex gap-2">
+          <!--
+            TAILWIND AÑADIR AQUÍ (Logo):
+            - tamaño fijo (alto y ancho)
+            - centrar el texto dentro
+            - fondo y color de texto
+            - bordes redondeados
+          -->
+          <div class="w-10 h-7 rounded-sm font-bold text-white bg-blue-600 flex text-center justify-center">DIW</div>
+
+          <!--
+            TAILWIND AÑADIR AQUÍ (Título):
+            - tamaño de texto
+            - peso de la fuente
+          -->
+          <span class="font-bold">Examen Tailwind</span>
+        </div>
+
+        <!-- Navegación -->
+        <!--
+          TAILWIND AÑADIR AQUÍ (Navegación – estructura responsive):
+          - ocultar en móvil
+          - mostrar a partir de pantallas medianas
+          - colocar enlaces en fila
+          - separación entre enlaces
+        -->
+        <nav class="sm:hidden md:flex gap-4">
+          <a href="#" class="hover:text-slate-800">Inicio</a>
+          <a href="#" class="hover:text-slate-800">Tarjetas</a>
+          <a href="#" class="hover:text-slate-800">Contacto</a>
+        </nav>
+
+        <!-- Botón -->
+        <!--
+          TAILWIND AÑADIR AQUÍ (Botón):
+          - padding
+          - fondo y color de texto
+          - bordes redondeados
+          - hover y transición
+          - tamaño de texto
+        -->
+        <button type="button" class="bg-blue-600 rounded h-8 w-18 text-white hover:bg-blue-700 cursor-pointer">Acceder</button>
+      </div>
+    </header>
+
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
+
+    <!--
+      TAILWIND AÑADIR AQUÍ (Main – estructura):
+      - separación vertical respecto al header y el footer
+    -->
+    <main class="mt-20 mb-20">
+      <!--
+        TAILWIND AÑADIR AQUÍ (Contenedor principal):
+        - ancho máximo
+        - centrar el contenido horizontalmente
+        - padding lateral
+      -->
+      <div class="ml-5 md:ml-20 lg:ml-35 flex flex-col">
+        <!--
+          TAILWIND AÑADIR AQUÍ (Título principal):
+          - jerarquía tipográfica
+        -->
+        <h1 class="text-2xl font-bold">Catálogo de tarjetas</h1>
+
+        <!--
+          TAILWIND AÑADIR AQUÍ (Texto secundario):
+          - color y tamaño de texto
+          - separación respecto al título
+        -->
+        <p class="mt-2 mb-5">
+          Pulsa “Ver más” para abrir el modal con el contenido ampliado.
+        </p>
+
+        <!-- =====================================================
+             GRID DE TARJETAS
+             ===================================================== -->
+
+        <!--
+          TAILWIND AÑADIR AQUÍ (Distribución de las tarjetas):
+          - usar grid o flex (a tu elección)
+          - 1 tarjeta por fila en móvil
+          - 2 tarjetas por fila en pantallas medianas
+          - 3 tarjetas por fila en pantallas grandes
+          - separación entre tarjetas
+        -->
+        <div id="gridTarjetas" class="grid grid-cols-[300px] gap-5 justify-around md:grid-cols-[300px_300px] lg:grid-cols-[300px_300px_300px]">
+          <!-- =====================================================
+               TARJETA 1
+               ===================================================== -->
+
+          <!--
+            TAILWIND AÑADIR AQUÍ (Tarjeta – estructura):
+            - fondo
+            - borde o sombra
+            - bordes redondeados
+            - overflow si es necesario
+          -->
+          <article class="bg-white rounded-md">
+            <!--
+              TAILWIND AÑADIR AQUÍ (Bloque visual superior):
+              - bloque decorativo
+              - altura fija
+              - color o degradado
+            -->
+            <div class="bg-blue-600 w-full h-30 rounded-t-md"></div>
+
+            <!--
+              TAILWIND AÑADIR AQUÍ (Contenido de la tarjeta):
+              - padding interno
+              - separación vertical entre los elementos
+            -->
+            <div class="p-3">
+              <!--
+                TAILWIND AÑADIR AQUÍ (Categoría):
+                - texto pequeño
+                - mayúsculas
+                - color diferenciador
+              -->
+              <p class="uppercase text-blue-600 font-bold">Categoría</p>
+
+              <!--
+                TAILWIND AÑADIR AQUÍ (Título de la tarjeta):
+                - tamaño y peso de fuente
+                - separación superior
+              -->
+              <h2 class="font-bold text-xl">Tarjeta 1</h2>
+
+              <!--
+                TAILWIND AÑADIR AQUÍ (Descripción):
+                - tamaño de texto
+                - separación superior
+              -->
+              <p class="text-sm mt-3 mb-3">Resumen corto del contenido.</p>
+
+              <!--
+                TAILWIND AÑADIR AQUÍ (Fila inferior de la tarjeta):
+                - colocar badge y botón en la misma fila
+                - separarlos horizontalmente
+                - alinearlos verticalmente
+              -->
+              <div class="flex justify-between">
+                <!--
+                  TAILWIND AÑADIR AQUÍ (Badge):
+                  - estilo de etiqueta
+                  - fondo suave
+                  - padding pequeño
+                  - texto pequeño
+                -->
+                <span class="bg-slate-200 rounded-full p-2 text-sm">Nivel medio</span>
+
+                <!--
+                  IMPORTANTE:
+                  - class="btn-abrir" NO TOCAR
+                  - value="1" NO TOCAR
+                  TAILWIND AÑADIR AQUÍ:
+                  - estilos del botón
+                  - hover y transición
+                -->
+                <button class="btn-abrir bg-blue-700 text-white rounded-md p-2" value="1" type="button">
+                  Ver más
+                </button>
+              </div>
+            </div>
+            
+
+            <!-- CONTENIDO OCULTO PARA EL MODAL (NO TOCAR ID) -->
+            <div id="contenido-1" class="hidden">
+              <h3>Tarjeta 1 · Contenido completo</h3>
+              <p>Este contenido se mostrará dentro del modal reutilizable.</p>
+            </div>
+          </article>
+
+          <!-- =====================================================
+               TARJETAS 2 A 6
+               ===================================================== -->
+
+          <!--
+            INSTRUCCIONES:
+            - Copia y pega la estructura de la tarjeta 1
+            - Cambia:
+              · título
+              · texto
+              · value (2, 3, 4, 5 y 6)
+              · id del contenido (contenido-2, contenido-3, etc.)
+          -->
+
+          <article class="bg-white rounded-md">
+            <!--
+              TAILWIND AÑADIR AQUÍ (Bloque visual superior):
+              - bloque decorativo
+              - altura fija
+              - color o degradado
+            -->
+            <div class="bg-red-600 w-full h-30 rounded-t-md"></div>
+
+            <!--
+              TAILWIND AÑADIR AQUÍ (Contenido de la tarjeta):
+              - padding interno
+              - separación vertical entre los elementos
+            -->
+            <div class="p-3">
+              <!--
+                TAILWIND AÑADIR AQUÍ (Categoría):
+                - texto pequeño
+                - mayúsculas
+                - color diferenciador
+              -->
+              <p class="uppercase text-red-600 font-bold">Categoría</p>
+
+              <!--
+                TAILWIND AÑADIR AQUÍ (Título de la tarjeta):
+                - tamaño y peso de fuente
+                - separación superior
+              -->
+              <h2 class="font-bold text-xl">Tarjeta 1</h2>
+
+              <!--
+                TAILWIND AÑADIR AQUÍ (Descripción):
+                - tamaño de texto
+                - separación superior
+              -->
+              <p class="text-sm mt-3 mb-3">Resumen corto del contenido.</p>
+
+              <!--
+                TAILWIND AÑADIR AQUÍ (Fila inferior de la tarjeta):
+                - colocar badge y botón en la misma fila
+                - separarlos horizontalmente
+                - alinearlos verticalmente
+              -->
+              <div class="flex justify-between">
+                <!--
+                  TAILWIND AÑADIR AQUÍ (Badge):
+                  - estilo de etiqueta
+                  - fondo suave
+                  - padding pequeño
+                  - texto pequeño
+                -->
+                <span class="bg-slate-200 rounded-full p-2 text-sm">Nivel medio</span>
+
+                <!--
+                  IMPORTANTE:
+                  - class="btn-abrir" NO TOCAR
+                  - value="1" NO TOCAR
+                  TAILWIND AÑADIR AQUÍ:
+                  - estilos del botón
+                  - hover y transición
+                -->
+                <button class="btn-abrir bg-blue-700 text-white rounded-md p-2" value="2" type="button">
+                  Ver más
+                </button>
+              </div>
+            </div>
+            
+
+            <!-- CONTENIDO OCULTO PARA EL MODAL (NO TOCAR ID) -->
+            <div id="contenido-1" class="hidden">
+              <h3>Tarjeta 1 · Contenido completo</h3>
+              <p>Este contenido se mostrará dentro del modal reutilizable.</p>
+            </div>
+          </article>
+          <article class="bg-white rounded-md">
+            <!--
+              TAILWIND AÑADIR AQUÍ (Bloque visual superior):
+              - bloque decorativo
+              - altura fija
+              - color o degradado
+            -->
+            <div class="bg-yellow-300 w-full h-30 rounded-t-md"></div>
+
+            <!--
+              TAILWIND AÑADIR AQUÍ (Contenido de la tarjeta):
+              - padding interno
+              - separación vertical entre los elementos
+            -->
+            <div class="p-3">
+              <!--
+                TAILWIND AÑADIR AQUÍ (Categoría):
+                - texto pequeño
+                - mayúsculas
+                - color diferenciador
+              -->
+              <p class="uppercase text-yellow-300 font-bold">Categoría</p>
+
+              <!--
+                TAILWIND AÑADIR AQUÍ (Título de la tarjeta):
+                - tamaño y peso de fuente
+                - separación superior
+              -->
+              <h2 class="font-bold text-xl">Tarjeta 1</h2>
+
+              <!--
+                TAILWIND AÑADIR AQUÍ (Descripción):
+                - tamaño de texto
+                - separación superior
+              -->
+              <p class="text-sm mt-3 mb-3">Resumen corto del contenido.</p>
+
+              <!--
+                TAILWIND AÑADIR AQUÍ (Fila inferior de la tarjeta):
+                - colocar badge y botón en la misma fila
+                - separarlos horizontalmente
+                - alinearlos verticalmente
+              -->
+              <div class="flex justify-between">
+                <!--
+                  TAILWIND AÑADIR AQUÍ (Badge):
+                  - estilo de etiqueta
+                  - fondo suave
+                  - padding pequeño
+                  - texto pequeño
+                -->
+                <span class="bg-slate-200 rounded-full p-2 text-sm">Nivel medio</span>
+
+                <!--
+                  IMPORTANTE:
+                  - class="btn-abrir" NO TOCAR
+                  - value="1" NO TOCAR
+                  TAILWIND AÑADIR AQUÍ:
+                  - estilos del botón
+                  - hover y transición
+                -->
+                <button class="btn-abrir bg-blue-700 text-white rounded-md p-2" value="3" type="button">
+                  Ver más
+                </button>
+              </div>
+            </div>
+            
+
+            <!-- CONTENIDO OCULTO PARA EL MODAL (NO TOCAR ID) -->
+            <div id="contenido-1" class="hidden">
+              <h3>Tarjeta 1 · Contenido completo</h3>
+              <p>Este contenido se mostrará dentro del modal reutilizable.</p>
+            </div>
+          </article>
+          <article class="bg-white rounded-md">
+            <!--
+              TAILWIND AÑADIR AQUÍ (Bloque visual superior):
+              - bloque decorativo
+              - altura fija
+              - color o degradado
+            -->
+            <div class="bg-purple-600 w-full h-30 rounded-t-md"></div>
+
+            <!--
+              TAILWIND AÑADIR AQUÍ (Contenido de la tarjeta):
+              - padding interno
+              - separación vertical entre los elementos
+            -->
+            <div class="p-3">
+              <!--
+                TAILWIND AÑADIR AQUÍ (Categoría):
+                - texto pequeño
+                - mayúsculas
+                - color diferenciador
+              -->
+              <p class="uppercase text-purple-600 font-bold">Categoría</p>
+
+              <!--
+                TAILWIND AÑADIR AQUÍ (Título de la tarjeta):
+                - tamaño y peso de fuente
+                - separación superior
+              -->
+              <h2 class="font-bold text-xl">Tarjeta 1</h2>
+
+              <!--
+                TAILWIND AÑADIR AQUÍ (Descripción):
+                - tamaño de texto
+                - separación superior
+              -->
+              <p class="text-sm mt-3 mb-3">Resumen corto del contenido.</p>
+
+              <!--
+                TAILWIND AÑADIR AQUÍ (Fila inferior de la tarjeta):
+                - colocar badge y botón en la misma fila
+                - separarlos horizontalmente
+                - alinearlos verticalmente
+              -->
+              <div class="flex justify-between">
+                <!--
+                  TAILWIND AÑADIR AQUÍ (Badge):
+                  - estilo de etiqueta
+                  - fondo suave
+                  - padding pequeño
+                  - texto pequeño
+                -->
+                <span class="bg-slate-200 rounded-full p-2 text-sm">Nivel medio</span>
+
+                <!--
+                  IMPORTANTE:
+                  - class="btn-abrir" NO TOCAR
+                  - value="1" NO TOCAR
+                  TAILWIND AÑADIR AQUÍ:
+                  - estilos del botón
+                  - hover y transición
+                -->
+                <button class="btn-abrir bg-blue-700 text-white rounded-md p-2" value="4" type="button">
+                  Ver más
+                </button>
+              </div>
+            </div>
+            
+
+            <!-- CONTENIDO OCULTO PARA EL MODAL (NO TOCAR ID) -->
+            <div id="contenido-1" class="hidden">
+              <h3>Tarjeta 1 · Contenido completo</h3>
+              <p>Este contenido se mostrará dentro del modal reutilizable.</p>
+            </div>
+          </article>
+
+          <article class="bg-white rounded-md">
+            <!--
+              TAILWIND AÑADIR AQUÍ (Bloque visual superior):
+              - bloque decorativo
+              - altura fija
+              - color o degradado
+            -->
+            <div class="bg-slate-600 w-full h-30 rounded-t-md"></div>
+
+            <!--
+              TAILWIND AÑADIR AQUÍ (Contenido de la tarjeta):
+              - padding interno
+              - separación vertical entre los elementos
+            -->
+            <div class="p-3">
+              <!--
+                TAILWIND AÑADIR AQUÍ (Categoría):
+                - texto pequeño
+                - mayúsculas
+                - color diferenciador
+              -->
+              <p class="uppercase text-slate-600 font-bold">Categoría</p>
+
+              <!--
+                TAILWIND AÑADIR AQUÍ (Título de la tarjeta):
+                - tamaño y peso de fuente
+                - separación superior
+              -->
+              <h2 class="font-bold text-xl">Tarjeta 1</h2>
+
+              <!--
+                TAILWIND AÑADIR AQUÍ (Descripción):
+                - tamaño de texto
+                - separación superior
+              -->
+              <p class="text-sm mt-3 mb-3">Resumen corto del contenido.</p>
+
+              <!--
+                TAILWIND AÑADIR AQUÍ (Fila inferior de la tarjeta):
+                - colocar badge y botón en la misma fila
+                - separarlos horizontalmente
+                - alinearlos verticalmente
+              -->
+              <div class="flex justify-between">
+                <!--
+                  TAILWIND AÑADIR AQUÍ (Badge):
+                  - estilo de etiqueta
+                  - fondo suave
+                  - padding pequeño
+                  - texto pequeño
+                -->
+                <span class="bg-slate-200 rounded-full p-2 text-sm">Nivel medio</span>
+
+                <!--
+                  IMPORTANTE:
+                  - class="btn-abrir" NO TOCAR
+                  - value="1" NO TOCAR
+                  TAILWIND AÑADIR AQUÍ:
+                  - estilos del botón
+                  - hover y transición
+                -->
+                <button class="btn-abrir bg-blue-700 text-white rounded-md p-2" value="5" type="button">
+                  Ver más
+                </button>
+              </div>
+            </div>
+            
+
+            <!-- CONTENIDO OCULTO PARA EL MODAL (NO TOCAR ID) -->
+            <div id="contenido-1" class="hidden">
+              <h3>Tarjeta 1 · Contenido completo</h3>
+              <p>Este contenido se mostrará dentro del modal reutilizable.</p>
+            </div>
+          </article>
+          <article class="bg-white rounded-md">
+            <!--
+              TAILWIND AÑADIR AQUÍ (Bloque visual superior):
+              - bloque decorativo
+              - altura fija
+              - color o degradado
+            -->
+            <div class="bg-amber-600 w-full h-30 rounded-t-md"></div>
+
+            <!--
+              TAILWIND AÑADIR AQUÍ (Contenido de la tarjeta):
+              - padding interno
+              - separación vertical entre los elementos
+            -->
+            <div class="p-3">
+              <!--
+                TAILWIND AÑADIR AQUÍ (Categoría):
+                - texto pequeño
+                - mayúsculas
+                - color diferenciador
+              -->
+              <p class="uppercase text-amber-600 font-bold">Categoría</p>
+
+              <!--
+                TAILWIND AÑADIR AQUÍ (Título de la tarjeta):
+                - tamaño y peso de fuente
+                - separación superior
+              -->
+              <h2 class="font-bold text-xl">Tarjeta 1</h2>
+
+              <!--
+                TAILWIND AÑADIR AQUÍ (Descripción):
+                - tamaño de texto
+                - separación superior
+              -->
+              <p class="text-sm mt-3 mb-3">Resumen corto del contenido.</p>
+
+              <!--
+                TAILWIND AÑADIR AQUÍ (Fila inferior de la tarjeta):
+                - colocar badge y botón en la misma fila
+                - separarlos horizontalmente
+                - alinearlos verticalmente
+              -->
+              <div class="flex justify-between">
+                <!--
+                  TAILWIND AÑADIR AQUÍ (Badge):
+                  - estilo de etiqueta
+                  - fondo suave
+                  - padding pequeño
+                  - texto pequeño
+                -->
+                <span class="bg-slate-200 rounded-full p-2 text-sm">Nivel medio</span>
+
+                <!--
+                  IMPORTANTE:
+                  - class="btn-abrir" NO TOCAR
+                  - value="1" NO TOCAR
+                  TAILWIND AÑADIR AQUÍ:
+                  - estilos del botón
+                  - hover y transición
+                -->
+                <button class="btn-abrir bg-blue-700 text-white rounded-md p-2" value="6" type="button">
+                  Ver más
+                </button>
+              </div>
+            </div>
+            
+
+            <!-- CONTENIDO OCULTO PARA EL MODAL (NO TOCAR ID) -->
+            <div id="contenido-1" class="hidden">
+              <h3>Tarjeta 1 · Contenido completo</h3>
+              <p>Este contenido se mostrará dentro del modal reutilizable.</p>
+            </div>
+          </article>                                        
+          <article class=""></article>
+          <article class=""></article>
+          <article class=""></article>
+          <article class=""></article>
+        </div>
+      </div>
+    </main>
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <!--
+      TAILWIND AÑADIR AQUÍ (Footer – estructura):
+      - fondo oscuro
+      - color de texto con contraste
+      - separación vertical
+    -->
+    <footer class="bg-slate-900 text-white ">
+      <!--
+        TAILWIND AÑADIR AQUÍ (Distribución del footer):
+        - ancho máximo
+        - centrar el contenido
+        - distribuir el contenido en varias columnas en pantallas grandes
+        - separación entre bloques
+      -->
+      <div class="max-w-full grid grid-rows-1 sm:justify-items-center text-center gap-4 lg:grid-cols-3 p-5 lg:justify-around lg:justify-items-center">
+        <div>
+          <h3 class="">Examen DIW</h3>
+          <p class="">Práctica de Tailwind CSS.</p>
+        </div>
+
+        <div>
+          <h3 class="">Contenidos</h3>
+          <ul class="">
+            <li>Header</li>
+            <li>Tarjetas</li>
+            <li>Modal</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="">Autor</h3>
+          <p class="">Módulo DIW</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- =====================================================
+         MODAL + OVERLAY (NO TOCAR ESTRUCTURA / IDs)
+         ===================================================== -->
+
+    <!--
+      IMPORTANTE:
+      - El JavaScript abre y cierra el modal añadiendo y quitando clases.
+      - NO cambies los IDs:
+        overlay, modal, modalBody, cerrarModal
+    -->
+    <div id="overlay" class="fixed inset-0 bg-black/50 flex justify-center items-center hidden">
+      <!--
+        TAILWIND AÑADIR AQUÍ (Overlay):
+        - posición fija cubriendo toda la pantalla
+        - fondo oscuro semitransparente
+        - centrar el modal horizontal y verticalmente
+      -->
+      <div id="modal" class="bg-white transition-all h-50 w-100 rounded-md p-10 flex flex-col justify-center items-center">
+        <!--
+          TAILWIND AÑADIR AQUÍ (Modal):
+          - fondo claro
+          - padding
+          - bordes redondeados
+          - ancho máximo
+          - animación de entrada y salida:
+            · opacidad
+            · escala
+          IMPORTANTE:
+          - debe empezar invisible para que la animación funcione
+        -->
+        <div id="modalBody"></div>
+
+        <!--
+          TAILWIND AÑADIR AQUÍ (Botón cerrar):
+          - alinearlo a la derecha
+          - estilos del botón
+          - hover y transición
+        -->
+        <div class="">
+          <button id="cerrarModal" type="button" class="bg-red-600 ml-70 mt-8  rounded-md p-2 text-white font-bold">Cerrar</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+</html>
