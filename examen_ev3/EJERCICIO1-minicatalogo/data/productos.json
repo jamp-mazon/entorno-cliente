@@ -1,0 +1,10 @@
+{
+  "productos": [
+    { "id": "p1", "nombre": "Mancuernas 10kg", "precio": 29.99 },
+    { "id": "p2", "nombre": "Esterilla yoga", "precio": 14.5 },
+    { "id": "p3", "nombre": "Comba velocidad", "precio": 9.95 },
+    { "id": "p4", "nombre": "Kettlebell 12kg", "precio": 34.9 },
+    { "id": "p5", "nombre": "Banda elástica", "precio": 6.75 },
+    { "id": "p6", "nombre": "Rueda abdominal", "precio": 11.9 }
+  ]
+}

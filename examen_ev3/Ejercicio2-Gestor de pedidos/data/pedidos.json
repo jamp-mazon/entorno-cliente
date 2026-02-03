@@ -1,0 +1,56 @@
+{
+  "productos": [
+    { "id": "p1", "nombre": "Mancuernas 10kg", "precio": 29.99 },
+    { "id": "p2", "nombre": "Esterilla yoga", "precio": 14.5 },
+    { "id": "p3", "nombre": "Comba velocidad", "precio": 9.95 },
+    { "id": "p4", "nombre": "Kettlebell 12kg", "precio": 34.9 },
+    { "id": "p5", "nombre": "Banda elástica", "precio": 6.75 },
+    { "id": "p6", "nombre": "Rueda abdominal", "precio": 11.9 }
+  ],
+  "pedidos": [
+    {
+      "id": "1001",
+      "cliente": "Ana",
+      "fecha": "2026-01-10",
+      "lineas": [
+        { "productoId": "p2", "cantidad": 2 },
+        { "productoId": "p5", "cantidad": 1 }
+      ]
+    },
+    {
+      "id": "1002",
+      "cliente": "Luis",
+      "fecha": "2026-01-12",
+      "lineas": [
+        { "productoId": "p1", "cantidad": 1 },
+        { "productoId": "p3", "cantidad": 2 }
+      ]
+    },
+    {
+      "id": "1003",
+      "cliente": "Ana",
+      "fecha": "2026-01-15",
+      "lineas": [
+        { "productoId": "p4", "cantidad": 1 },
+        { "productoId": "p6", "cantidad": 1 }
+      ]
+    },
+    {
+      "id": "1004",
+      "cliente": "Marta",
+      "fecha": "2026-01-18",
+      "lineas": [
+        { "productoId": "p5", "cantidad": 3 },
+        { "productoId": "p3", "cantidad": 1 }
+      ]
+    },
+    {
+      "id": "1005",
+      "cliente": "Carlos",
+      "fecha": "2026-01-20",
+      "lineas": [
+        { "productoId": "p1", "cantidad": 2 }
+      ]
+    }
+  ]
+}
