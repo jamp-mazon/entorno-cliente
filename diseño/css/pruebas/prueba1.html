@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    /* button{
+        transition: transform 300ms ease-in-out, box-shadow 300ms ease-in-out;
+    }
+    button:hover{
+        transform: translateY(10px) scale(0.15);
+        box-shadow: 0 12px 30px rgba(0, 1, 0, 0.15);
+    } */
+    .contenedor{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+    body{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        justify-items: center;
+    }
+        button{
+            background-color: darkred;
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+            border: solid 0px ;
+            cursor: pointer;
+        }    
+</style>
+<body>
+    <div class="contenedor">
+    <button>Mi boton</button>
+    <button class="btn2">BOTON 2</button>
+    <style>
+        .btn2{
+            transition: transform 300ms ease-in box-shadow 300ms ease-out ;
+        }
+        .btn2:hover{
+            transform:translateY(-2px) scale(1.25);
+        }
+    </style>
+    <button class="btn3">BOTON 3</button>
+    <style>
+        .btn3{
+            background-color: darkblue;
+            transition: tranform 1s ease-out box-shadow 300ms ease;
+        }
+        .btn3:hover{
+            transform:translateY(12px) scaleX(1.50);
+        }
+    </style>
+    <button class="btn4">BOTON 4</button>
+
+    <button class="btn5">BOTON 5</button>
+    <button class="btn6">BOTON 6</button>
+    </div>
+</body>
+</html>
